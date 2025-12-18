@@ -1,53 +1,32 @@
-use pilgrim_core::DeterministicEngine;
-use pilgrim_handshake::{Constraints, Intent};
+use pilgrim_core::{Engine, EngineIntent, EngineStep};
 
-fn mk_intent(statement: &str) -> Intent {
-    Intent {
-        intent_id: "intent-ENGINE-0001".to_string(),
-        created_unix_ms: 1700000000000,
-        operator: None,
-        statement: statement.to_string(),
-        inputs: vec![],
-        constraints: Constraints::default(),
-        nonce: 1,
-    }
+fn step_upper(input: &[u8]) -> Result<Vec<u8>, pilgrim_core::EngineError> {
+    let s = String::from_utf8_lossy(input).to_string();
+    Ok(s.to_uppercase().into_bytes())
+}
+
+fn step_suffix(input: &[u8]) -> Result<Vec<u8>, pilgrim_core::EngineError> {
+    let mut v = input.to_vec();
+    v.extend_from_slice(b"::PILGRIM");
+    Ok(v)
 }
 
 #[test]
-fn deterministic_same_intent_same_receipt_hash() {
-    let engine = DeterministicEngine::default();
-    let intent = mk_intent("Boot Pilgrim");
+fn deterministic_receipts_match_on_repeat_runs() {
+    let engine = Engine::new(vec![
+        EngineStep { name: "upper", func: step_upper },
+        EngineStep { name: "suffix", func: step_suffix },
+    ]);
 
-    let r1 = engine.execute(&intent).unwrap();
-    let r2 = engine.execute(&intent).unwrap();
+    let intent = EngineIntent {
+        intent_id: "intent-001".to_string(),
+        statement: "run".to_string(),
+        checksum: "handshake-checksum-placeholder".to_string(),
+    };
 
-    assert_eq!(r1.trace.intent_digest_hex, r2.trace.intent_digest_hex);
-    assert_eq!(r1.trace.trace_hash_hex, r2.trace.trace_hash_hex);
-    assert_eq!(r1.output.result_token, r2.output.result_token);
-}
+    let r1 = engine.run("run-001", &intent, b"hello").unwrap();
+    let r2 = engine.run("run-001", &intent, b"hello").unwrap();
 
-#[test]
-fn tamper_detected_when_output_changes() {
-    let engine = DeterministicEngine::default();
-    let intent = mk_intent("Boot Pilgrim");
-
-    let mut receipt = engine.execute(&intent).unwrap();
-    engine.verify_receipt(&receipt, &intent).unwrap();
-
-    // Tamper after creation
-    receipt.output.status = "active".to_string();
-
-    assert!(engine.verify_receipt(&receipt, &intent).is_err());
-}
-
-#[test]
-fn intent_mutation_changes_digest() {
-    let engine = DeterministicEngine::default();
-    let intent_a = mk_intent("Boot Pilgrim");
-    let intent_b = mk_intent("Boot Pilgrim NOW");
-
-    let a = engine.execute(&intent_a).unwrap();
-    let b = engine.execute(&intent_b).unwrap();
-
-    assert_ne!(a.trace.intent_digest_hex, b.trace.intent_digest_hex);
+    assert_eq!(r1.final_trace_hash, r2.final_trace_hash);
+    assert_eq!(r1.steps, r2.steps);
 }

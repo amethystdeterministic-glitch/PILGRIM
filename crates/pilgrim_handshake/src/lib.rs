@@ -236,3 +236,5 @@ struct ResponseToHash {
     payload_json: Option<String>,
     logs_json: Option<String>,
 }
+
+mod bridge_api;
