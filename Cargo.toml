@@ -1,6 +1,8 @@
-[package]
-name = "amethyst_pilgrim_core"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = [
+    "crates/pilgrim_core",
+    "crates/pilgrim_handshake",
+    "crates/pilgrim_bridge",
+]
 
-[dependencies]
+resolver = "2"
