@@ -1,31 +1,64 @@
-use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
-pub struct TraceEvent {
-    pub step_index: u64,
-    pub step_name: String,
-    pub input_hash: String,
-    pub output_hash: String,
-    pub prev_trace_hash: String,
+#[derive(Debug, Clone)]
+pub struct Trace {
+    run_id: String,
+    intent_statement: String,
+    steps: Vec<TraceStep>,
 }
 
-pub fn hash_bytes(bytes: &[u8]) -> String {
+#[derive(Debug, Clone)]
+pub struct TraceStep {
+    pub name: String,
+    pub checksum_hex: String,
+    pub len: usize,
+}
+
+impl Trace {
+    pub fn new(run_id: &str, intent_statement: &str) -> Self {
+        Self {
+            run_id: run_id.to_string(),
+            intent_statement: intent_statement.to_string(),
+            steps: Vec::new(),
+        }
+    }
+
+    pub fn push_step(&mut self, name: &str, payload: &[u8]) {
+        let checksum_hex = sha256_hex(payload);
+        self.steps.push(TraceStep {
+            name: name.to_string(),
+            checksum_hex,
+            len: payload.len(),
+        });
+    }
+
+    pub fn steps_len(&self) -> usize {
+        self.steps.len()
+    }
+
+    pub fn finalize_hash(&self) -> String {
+        // Deterministic hash of: run_id, intent_statement, and step metadata in order.
+        let mut hasher = Sha256::new();
+        hasher.update(self.run_id.as_bytes());
+        hasher.update(b"\n");
+        hasher.update(self.intent_statement.as_bytes());
+        hasher.update(b"\n");
+
+        for step in &self.steps {
+            hasher.update(step.name.as_bytes());
+            hasher.update(b":");
+            hasher.update(step.checksum_hex.as_bytes());
+            hasher.update(b":");
+            hasher.update(step.len.to_string().as_bytes());
+            hasher.update(b"\n");
+        }
+
+        hex::encode(hasher.finalize())
+    }
+}
+
+fn sha256_hex(data: &[u8]) -> String {
     let mut h = Sha256::new();
-    h.update(bytes);
-    hex::encode(h.finalize())
-}
-
-pub fn hash_json<T: Serialize>(value: &T) -> String {
-    let bytes = serde_json::to_vec(value).expect("json serialize cannot fail");
-    hash_bytes(&bytes)
-}
-
-pub fn fold_trace(prev: &str, event: &TraceEvent) -> String {
-    // deterministic: hash(prev || canonical_event_json)
-    let mut h = Sha256::new();
-    h.update(prev.as_bytes());
-    let bytes = serde_json::to_vec(event).expect("json serialize cannot fail");
-    h.update(&bytes);
+    h.update(data);
     hex::encode(h.finalize())
 }

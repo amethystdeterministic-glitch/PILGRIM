@@ -1,79 +1,83 @@
-use crate::{fold_trace, hash_bytes, hash_json, receipt::{RunReceipt, StepReceipt}, trace::TraceEvent};
-use serde::{Deserialize, Serialize};
-use thiserror::Error;
+use crate::{Constraints, ConstraintsError, Receipt, Trace};
 
-#[derive(Debug, Error)]
+#[derive(Debug, Clone)]
+pub struct PilgrimEngine {
+    constraints: Constraints,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum EngineError {
-    #[error("step failed: {0}")]
-    StepFailed(String),
+    Constraints(ConstraintsError),
+    // Extend later: Storage, Bridge, Crypto, etc.
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
-pub struct EngineIntent {
-    pub intent_id: String,
-    pub statement: String,
-    pub checksum: String, // passed in from handshake layer
+impl From<ConstraintsError> for EngineError {
+    fn from(e: ConstraintsError) -> Self {
+        EngineError::Constraints(e)
+    }
 }
 
 #[derive(Debug, Clone)]
-pub struct EngineStep {
-    pub name: &'static str,
-    pub func: fn(&[u8]) -> Result<Vec<u8>, EngineError>,
+pub struct RunResult {
+    pub receipt: Receipt,
+    pub final_trace_hash: String,
+    pub steps: u64,
 }
 
-#[derive(Debug, Clone)]
-pub struct Engine {
-    pub steps: Vec<EngineStep>,
+impl PilgrimEngine {
+    pub fn new(constraints: Constraints) -> Self {
+        Self { constraints }
+    }
+
+    pub fn constraints(&self) -> &Constraints {
+        &self.constraints
+    }
+
+    /// Deterministic run: same inputs => same receipt + trace hash.
+    ///
+    /// NOTE: Runtime limits are enforced via *provided* elapsed_ms (deterministic).
+    /// We do NOT call wall-clock time inside the deterministic engine.
+    pub fn run(
+        &self,
+        run_id: &str,
+        intent_statement: &str,
+        input: &[u8],
+        simulated_elapsed_ms: u64,
+    ) -> Result<RunResult, EngineError> {
+        // Enforce runtime constraint deterministically
+        self.constraints.assert_runtime_allowed(simulated_elapsed_ms)?;
+
+        let mut trace = Trace::new(run_id, intent_statement);
+
+        // Step 0: ingest input
+        self.constraints.assert_step_allowed(0)?;
+        trace.push_step("ingest_input", input);
+
+        // Step 1: deterministic transform (placeholder, but deterministic)
+        self.constraints.assert_step_allowed(1)?;
+        let transformed = deterministic_transform(input);
+        trace.push_step("transform", &transformed);
+
+        // Step 2: finalize
+        self.constraints.assert_step_allowed(2)?;
+        let final_hash = trace.finalize_hash();
+
+        let receipt = Receipt::new(run_id, intent_statement, &final_hash, trace.steps_len() as u64);
+
+        Ok(RunResult {
+            receipt,
+            final_trace_hash: final_hash,
+            steps: trace.steps_len() as u64,
+        })
+    }
 }
 
-impl Engine {
-    pub fn new(steps: Vec<EngineStep>) -> Self {
-        Self { steps }
+fn deterministic_transform(input: &[u8]) -> Vec<u8> {
+    // Simple deterministic transform: XOR each byte with 0x5A and append length.
+    let mut out = Vec::with_capacity(input.len() + 8);
+    for b in input {
+        out.push(b ^ 0x5A);
     }
-
-    pub fn run(&self, run_id: &str, intent: &EngineIntent, input: &[u8]) -> Result<RunReceipt, EngineError> {
-        let mut prev_trace = "GENESIS".to_string();
-        let mut receipts: Vec<StepReceipt> = Vec::new();
-
-        let mut current = input.to_vec();
-        for (i, step) in self.steps.iter().enumerate() {
-            let input_hash = hash_bytes(&current);
-            let out = (step.func)(&current).map_err(|e| EngineError::StepFailed(format!("{}: {}", step.name, e)))?;
-            let output_hash = hash_bytes(&out);
-
-            let event = TraceEvent {
-                step_index: i as u64,
-                step_name: step.name.to_string(),
-                input_hash: input_hash.clone(),
-                output_hash: output_hash.clone(),
-                prev_trace_hash: prev_trace.clone(),
-            };
-
-            let trace_hash = fold_trace(&prev_trace, &event);
-            prev_trace = trace_hash.clone();
-
-            receipts.push(StepReceipt {
-                step_index: i as u64,
-                step_name: step.name.to_string(),
-                input_hash,
-                output_hash,
-                trace_hash,
-            });
-
-            current = out;
-        }
-
-        // final trace hash is prev_trace after all steps
-        let run_receipt = RunReceipt {
-            run_id: run_id.to_string(),
-            intent_checksum: intent.checksum.clone(),
-            final_trace_hash: prev_trace,
-            steps: receipts,
-        };
-
-        // extra determinism sanity: run receipt must hash consistently
-        let _receipt_hash = hash_json(&run_receipt);
-
-        Ok(run_receipt)
-    }
+    out.extend_from_slice(&(input.len() as u64).to_le_bytes());
+    out
 }
