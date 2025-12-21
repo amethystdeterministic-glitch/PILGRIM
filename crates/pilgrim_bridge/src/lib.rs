@@ -22,7 +22,7 @@ pub struct VerifyResponse {
 /// - verifies integrity
 /// - returns a sha256 over the canonical/sealed bytes
 pub fn verify_intent(req: VerifyRequest) -> VerifyResponse {
-    let mut env = RequestEnvelope::new(req.intent);
+    let env = RequestEnvelope::new(req.intent);
 
     // If your handshake crate implements verify(), we use it.
     // If verify() fails, we return error with ok=false.

@@ -1,4 +1,3 @@
-use std::io::Read;
 
 use tiny_http::{Header, Response, Server};
 use serde_json::json;
