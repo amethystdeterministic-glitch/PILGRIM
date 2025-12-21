@@ -1,7 +1,10 @@
-#[derive(Clone, Debug)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PianoFrame {
     pub key: u8,
     pub velocity: u8,
+    pub timestamp: u64,
 }
 
 pub trait PianoEngine {

@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
+use crate::piano::interface::PianoFrame;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ConsoleContract {
-    pub name: String,
-    pub version: String,
+    pub frame: PianoFrame,
 }
