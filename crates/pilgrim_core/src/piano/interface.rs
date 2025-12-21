@@ -1,8 +1,7 @@
-#[derive(Debug, Clone)]
+#[derive(Clone, Debug)]
 pub struct PianoFrame {
     pub key: u8,
     pub velocity: u8,
-    pub timestamp: u64,
 }
 
 pub trait PianoEngine {
