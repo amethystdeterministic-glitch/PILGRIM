@@ -1,21 +1,23 @@
-use crate::piano::interface::{PianoEngine, PianoFrame};
+use super::interface::{PianoEngine, PianoFrame};
 
 pub struct MockPianoEngine {
-    events: usize,
+    events: Vec<PianoFrame>,
 }
 
 impl MockPianoEngine {
     pub fn new() -> Self {
-        Self { events: 0 }
+        Self {
+            events: Vec::new(),
+        }
     }
 }
 
 impl PianoEngine for MockPianoEngine {
-    fn ingest(&mut self, _frame: PianoFrame) {
-        self.events += 1;
+    fn ingest(&mut self, frame: PianoFrame) {
+        self.events.push(frame);
     }
 
     fn score(&self) -> f64 {
-        self.events as f64
+        self.events.len() as f64
     }
 }
