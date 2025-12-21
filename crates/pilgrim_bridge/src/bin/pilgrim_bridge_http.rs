@@ -1,73 +1,51 @@
-use pilgrim_bridge::{verify_intent, VerifyRequest};
-use tiny_http::{Header, Method, Response, Server};
+use std::io::Read;
 
-fn json_header() -> Header {
-    Header::from_bytes(
-        &b"Content-Type"[..],
-        &b"application/json; charset=utf-8"[..],
-    )
-    .unwrap()
-}
+use tiny_http::{Header, Response, Server};
+use serde_json::json;
+
+use pilgrim_core::engine::PilgrimEngine;
+use pilgrim_core::constraints::Constraints;
 
 fn main() {
-    let addr = "127.0.0.1:8777";
-    let server = Server::http(addr).expect("failed to bind");
+    let server =
+        Server::http("127.0.0.1:8080").expect("Failed to bind HTTP server");
 
-    eprintln!("Pilgrim Bridge listening on http://{addr}");
-    eprintln!("Routes:");
-    eprintln!("  GET  /health");
-    eprintln!("  POST /verify");
+    println!("🟣 Pilgrim Bridge listening on http://127.0.0.1:8080");
+
+    let engine = PilgrimEngine::new(Constraints::default());
+
+    let content_type =
+        Header::from_bytes(&b"Content-Type"[..], &b"application/json"[..])
+            .expect("Invalid header");
 
     for mut request in server.incoming_requests() {
-        let method = request.method().clone();
-        let url = request.url().to_string();
+        let mut body = Vec::new();
+        request
+            .as_reader()
+            .read_to_end(&mut body)
+            .expect("Failed to read request body");
 
-        if method == Method::Get && url == "/health" {
-            let body = r#"{"ok":true,"service":"pilgrim_bridge","version":"0.1.0"}"#;
-            let resp = Response::from_string(body).with_header(json_header());
-            let _ = request.respond(resp);
-            continue;
-        }
+        let run = engine
+            .run(
+                "http-run",
+                "deterministic-http",
+                &body,
+                0, // simulated elapsed ms
+            )
+            .expect("Engine run failed");
 
-        if method == Method::Post && url == "/verify" {
-            let mut body = String::new();
-            if let Err(_) = request.as_reader().read_to_string(&mut body) {
-                let resp = Response::from_string(
-                    r#"{"ok":false,"error":"failed to read body"}"#,
-                )
-                .with_header(json_header())
-                .with_status_code(400);
-                let _ = request.respond(resp);
-                continue;
+        let response_body = json!({
+            "ok": true,
+            "receipt": {
+                "final_trace_hash": run.final_trace_hash,
+                "steps": run.steps
             }
+        })
+        .to_string();
 
-            match serde_json::from_str::<VerifyRequest>(&body) {
-                Ok(req) => {
-                    let result = verify_intent(req);
-                    let status = if result.ok { 200 } else { 422 };
-                    let out = serde_json::to_string_pretty(&result).unwrap();
-                    let resp = Response::from_string(out)
-                        .with_header(json_header())
-                        .with_status_code(status);
-                    let _ = request.respond(resp);
-                }
-                Err(e) => {
-                    let resp = Response::from_string(format!(
-                        r#"{{"ok":false,"error":"invalid json: {}"}}"#,
-                        e
-                    ))
-                    .with_header(json_header())
-                    .with_status_code(400);
-                    let _ = request.respond(resp);
-                }
-            }
-            continue;
-        }
+        let response =
+            Response::from_string(response_body).with_header(content_type.clone());
 
-        let resp = Response::from_string(r#"{"ok":false,"error":"not found"}"#)
-            .with_header(json_header())
-            .with_status_code(404);
-        let _ = request.respond(resp);
+        let _ = request.respond(response);
     }
 }
-
