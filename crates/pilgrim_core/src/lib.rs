@@ -1,3 +1,5 @@
+pub mod piano;
+pub mod console;
 pub mod engine;
 pub mod receipt;
 pub mod trace;
