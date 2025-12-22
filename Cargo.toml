@@ -1,8 +1,10 @@
 [workspace]
 members = [
+    "crates/aegis",
     "crates/pilgrim_core",
-    "crates/pilgrim_handshake",
     "crates/pilgrim_bridge",
+    "crates/pilgrim_handshake",
+    "crates/identity"
 ]
 
 resolver = "2"

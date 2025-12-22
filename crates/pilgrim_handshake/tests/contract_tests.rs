@@ -8,8 +8,14 @@ fn request_envelope_roundtrip_verifies() {
         operator: Some("Amethyst Cymru".to_string()),
         statement: "Prove determinism of envelope checksum.".to_string(),
         inputs: vec![
-            Datum { key: "alpha".to_string(), value: "1".to_string() },
-            Datum { key: "beta".to_string(), value: "2".to_string() },
+            Datum {
+                key: "alpha".to_string(),
+                value: "1".to_string(),
+            },
+            Datum {
+                key: "beta".to_string(),
+                value: "2".to_string(),
+            },
         ],
         constraints: Constraints::default(),
         nonce: 7,

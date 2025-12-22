@@ -1,5 +1,3 @@
-// crates/pilgrim_core/src/console/mod.rs
-
 pub mod contracts;
 
 use crate::piano::interface::{PianoEngine, PianoFrame};
@@ -22,8 +20,8 @@ impl<E: PianoEngine> Console<E> {
         self.piano.ingest(frame);
     }
 
-    pub fn advance(&mut self, stage: ContractStage) {
-        self.contract.advance(stage);
+    pub fn advance(&mut self, next: ContractStage) {
+        self.contract.advance(next);
     }
 
     pub fn stage(&self) -> ContractStage {

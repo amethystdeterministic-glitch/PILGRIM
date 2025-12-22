@@ -1,4 +1,4 @@
-use pilgrim_core::{PilgrimEngine, Constraints};
+use pilgrim_core::{Constraints, PilgrimEngine};
 
 #[test]
 fn deterministic_receipts_match_on_repeat_runs() {

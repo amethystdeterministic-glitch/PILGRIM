@@ -45,7 +45,8 @@ impl PilgrimEngine {
         simulated_elapsed_ms: u64,
     ) -> Result<RunResult, EngineError> {
         // Enforce runtime constraint deterministically
-        self.constraints.assert_runtime_allowed(simulated_elapsed_ms)?;
+        self.constraints
+            .assert_runtime_allowed(simulated_elapsed_ms)?;
 
         let mut trace = Trace::new(run_id, intent_statement);
 
@@ -62,7 +63,12 @@ impl PilgrimEngine {
         self.constraints.assert_step_allowed(2)?;
         let final_hash = trace.finalize_hash();
 
-        let receipt = Receipt::new(run_id, intent_statement, &final_hash, trace.steps_len() as u64);
+        let receipt = Receipt::new(
+            run_id,
+            intent_statement,
+            &final_hash,
+            trace.steps_len() as u64,
+        );
 
         Ok(RunResult {
             receipt,

@@ -1,4 +1,4 @@
-use pilgrim_core::{PilgrimEngine, Constraints};
+use pilgrim_core::{Constraints, PilgrimEngine};
 
 #[test]
 fn step_limit_blocks_execution() {

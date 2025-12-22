@@ -19,11 +19,8 @@ impl RequestEnvelope {
     /// Canonical bytes used for sealing and verification.
     /// Must be stable across platforms.
     pub fn seal_bytes(&self) -> Vec<u8> {
-        serde_json::to_vec(&(
-            self.protocol.clone(),
-            &self.intent,
-        ))
-        .expect("serialization cannot fail")
+        serde_json::to_vec(&(self.protocol.clone(), &self.intent))
+            .expect("serialization cannot fail")
     }
 
     /// Alias for bridge / FFI consumers.
