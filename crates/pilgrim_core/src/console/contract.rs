@@ -1,23 +1,40 @@
-use crate::piano::interface::{PianoEngine, PianoFrame};
+use crate::piano::interface::PianoFrame;
 
-pub struct ConsoleContract<E: PianoEngine> {
-    piano: E,
+#[derive(Debug, Clone)]
+pub enum ContractState {
+    Init,
+    Validate,
+    Build,
+    Review,
+    Lock,
+    Export,
+    Complete,
 }
 
-impl<E: PianoEngine> ConsoleContract<E> {
-    pub fn new(piano: E) -> Self {
-        Self { piano }
+pub struct PianoContract {
+    state: ContractState,
+}
+
+impl PianoContract {
+    pub fn new() -> Self {
+        Self {
+            state: ContractState::Init,
+        }
     }
 
-    pub fn ingest_frame(&mut self, frame: PianoFrame) {
-        self.piano.ingest(frame);
+    pub fn apply_frame(&mut self, frame: &PianoFrame) {
+        self.state = match (self.state.clone(), frame.key) {
+            (ContractState::Init, 0) => ContractState::Validate,
+            (ContractState::Validate, 1) => ContractState::Build,
+            (ContractState::Build, 2) => ContractState::Review,
+            (ContractState::Review, 3) => ContractState::Lock,
+            (ContractState::Lock, 4) => ContractState::Export,
+            (ContractState::Export, 5) => ContractState::Complete,
+            (s, _) => s,
+        };
     }
 
-    pub fn score(&self) -> f64 {
-        self.piano.score()
-    }
-
-    pub fn reset(&mut self) {
-        self.piano.reset();
+    pub fn state(&self) -> &ContractState {
+        &self.state
     }
 }
