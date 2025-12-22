@@ -9,11 +9,15 @@ impl<E: PianoEngine> ConsoleContract<E> {
         Self { piano }
     }
 
-    pub fn send_frame(&mut self, frame: PianoFrame) {
+    pub fn ingest_frame(&mut self, frame: PianoFrame) {
         self.piano.ingest(frame);
     }
 
     pub fn score(&self) -> f64 {
         self.piano.score()
+    }
+
+    pub fn reset(&mut self) {
+        self.piano.reset();
     }
 }
