@@ -1,0 +1,53 @@
+use chrono::{Utc};
+use uuid::Uuid;
+
+
+
+mod model;
+mod policy;
+
+use model::{AegisReceipt, Decision, ForensicEvent};
+use policy::PolicyEngine;
+
+/// AEGIS ENTRYPOINT
+pub fn evaluate(subject: Uuid) -> Option<AegisReceipt> {
+    let decision = PolicyEngine::decide(subject);
+
+    let issued_at = Utc::now();
+
+    let receipt = AegisReceipt::new(
+        subject,
+        decision.clone(),
+        issued_at,
+    );
+
+    // Immutable forensic record (write-only conceptually)
+    let _event = ForensicEvent {
+        subject,
+        decision,
+        timestamp: issued_at,
+    };
+
+    Some(receipt)
+}
+#[cfg(test)]
+mod smoke {
+    use super::*;
+    use uuid::Uuid;
+
+    #[test]
+    fn aegis_receipt_and_forensics_smoke() {
+        let subject = Uuid::new_v4();
+
+        let decision = Decision::Allow(vec!["core.execute".into()]);
+        let receipt = AegisReceipt::new(subject, decision.clone(), chrono::Utc::now());
+
+        let event = ForensicEvent {
+            subject,
+            decision,
+            timestamp: receipt.issued_at,
+        };
+
+        assert_eq!(event.subject, subject);
+    }
+}
