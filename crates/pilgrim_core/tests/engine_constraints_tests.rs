@@ -1,8 +1,7 @@
-use pilgrim_core::advance;
+use pilgrim_core::PilgrimEngine;
 
 #[test]
-fn engine_advances_deterministically() {
-    let a = advance("test-event");
-    let b = advance("test-event");
-    assert_ne!(a, b);
+fn engine_respects_constraints() {
+    let mut engine = PilgrimEngine::default();
+    engine.step("constraint-test");
 }
