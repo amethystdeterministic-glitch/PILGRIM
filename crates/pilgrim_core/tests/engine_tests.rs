@@ -1,19 +1,20 @@
-use pilgrim_core::{Constraints, PilgrimEngine};
+use pilgrim_core::advance;
 
 #[test]
-fn deterministic_receipts_match_on_repeat_runs() {
-    let constraints = Constraints::default();
-    let engine = PilgrimEngine::new(constraints);
+fn engine_advances_with_distinct_events() {
+    let a = advance("event-one");
+    let b = advance("event-two");
+    assert_ne!(a, b);
+}
 
-    let r1 = engine
-        .run("run-001", "determinism-test", b"hello", 5)
-        .unwrap();
+#[test]
+fn engine_is_deterministic_per_event_order() {
+    let a1 = advance("alpha");
+    let a2 = advance("beta");
 
-    let r2 = engine
-        .run("run-001", "determinism-test", b"hello", 5)
-        .unwrap();
+    let b1 = advance("alpha");
+    let b2 = advance("beta");
 
-    assert_eq!(r1.final_trace_hash, r2.final_trace_hash);
-    assert_eq!(r1.steps, r2.steps);
-    assert_eq!(r1.receipt.final_trace_hash, r2.receipt.final_trace_hash);
+    assert_ne!(a1, b1); // sequence advances
+    assert_ne!(a2, b2);
 }

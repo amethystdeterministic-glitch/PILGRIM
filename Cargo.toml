@@ -1,10 +1,11 @@
 [workspace]
 members = [
-    "crates/aegis",
     "crates/pilgrim_core",
-    "crates/pilgrim_bridge",
     "crates/pilgrim_handshake",
-    "crates/identity"
+    "crates/pilgrim_bridge",
+    "crates/amethyst_aegis",
+    "crates/amethyst_invariants",
+    "piano"
 ]
 
 resolver = "2"
