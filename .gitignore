@@ -1,1 +1,11 @@
+# Experimental / internal engines
+piano/
+scripts/
+
+# Build artifacts
+target/
+**/target/
+
+# OS noise
+.DS_Store
 /target
