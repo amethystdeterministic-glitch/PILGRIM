@@ -1,0 +1,12 @@
+[package]
+name = "amethyst_aegis"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "amethyst_aegis"
+path = "src/lib.rs"
+
+[dependencies]
+chrono = { version = "0.4", features = ["clock"] }
+uuid = { version = "1", features = ["v4"] }
