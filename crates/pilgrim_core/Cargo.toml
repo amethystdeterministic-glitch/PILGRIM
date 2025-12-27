@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 once_cell = "1.21"
 piano = { path = "../../piano" }
+amethyst_invariants = { path = "../amethyst_invariants" }
+serde = { version = "1", features = ["derive"] }

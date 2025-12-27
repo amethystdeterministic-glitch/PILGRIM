@@ -3,9 +3,10 @@ members = [
     "crates/pilgrim_core",
     "crates/pilgrim_handshake",
     "crates/pilgrim_bridge",
+"crates/pilgrim_sentinel",
     "crates/amethyst_aegis",
     "crates/amethyst_invariants",
     "piano"
-]
+, "crates/amethyst_piano"]
 
 resolver = "2"
