@@ -1,0 +1,10 @@
+[package]
+name = "pilgrim_console_demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pilgrim_console = { path = "../pilgrim_console" }
+pilgrim_identity = { path = "../pilgrim_identity" }
+pilgrim_mandate = { path = "../pilgrim_mandate" }
+pilgrim_gift = { path = "../pilgrim_gift" }

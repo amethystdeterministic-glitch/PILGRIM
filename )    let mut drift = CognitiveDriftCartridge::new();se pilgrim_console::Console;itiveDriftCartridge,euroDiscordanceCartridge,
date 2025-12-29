@@ -1,0 +1,38 @@
+
+    console.run(&proof, &mut drift, 10)?;
+    println!("{}", drift.last().unwrap().message);
+
+    console.run(&proof, &mut drift, 11)?;
+    println!("{}", drift.last().unwrap().message);
+
+    console.run(&proof, &mut drift, 13)?;
+    println!("{}", drift.last().unwrap().message);
+
+    // ============================================================
+    // 2) Neuro Discordance — AlgA vs AlgB
+    // ============================================================
+    println!("\n--- 2) NEURO DISCORDANCE ---");
+    let mut discord = NeuroDiscordanceCartridge::new();
+
+    console.run(&proof, &mut discord, 30)?;
+    println!("{}", discord.last().unwrap().message);
+
+    console.run(&proof, &mut discord, 31)?;
+    println!("{}", discord.last().unwrap().message);
+
+    // ============================================================
+    // 3) Threshold Ambiguity — 49 vs 50
+    // ============================================================
+    println!("\n--- 3) THRESHOLD LOCK ---");
+    let mut threshold = ThresholdAmbiguityCartridge::new();
+
+    console.run(&proof, &mut threshold, 49)?;
+    println!("{}", threshold.last().unwrap().message);
+
+    console.run(&proof, &mut threshold, 50)?;
+    println!("{}", threshold.last().unwrap().message);
+
+    println!("\n✅ Gift demo complete — deterministic execution verified.");
+
+    Ok(())
+}

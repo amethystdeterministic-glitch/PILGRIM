@@ -1,8 +1,3 @@
-// Core engine
-mod engine;
+pub mod cartridge;
 
-// Contracts
-pub mod contract;
-
-// Public API
-pub use engine::PilgrimEngine;
+pub use cartridge::{Cartridge, CartridgeOutput};

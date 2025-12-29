@@ -1,25 +1,20 @@
-use pilgrim_core::PilgrimEngine;
+use pilgrim_core::cartridge::{Cartridge, CartridgeOutput};
 
-#[derive(Default)]
-pub struct PilgrimBridge {
-    engine: PilgrimEngine,
-}
+/// Bridge is an adapter layer. For now it demonstrates that
+/// bridge crates depend ONLY on the canonical cartridge contract.
+pub struct PilgrimBridge;
 
 impl PilgrimBridge {
     pub fn new() -> Self {
-        Self {
-            engine: PilgrimEngine::default(),
-        }
+        Self
     }
 
-    /// Advance engine and return deterministic state
-    pub fn advance(&mut self, event: &str) -> u64 {
-        self.engine.step(event);
-        self.engine.ticks()
-    }
-
-    /// Deterministic snapshot
-    pub fn snapshot(&self) -> u64 {
-        self.engine.ticks()
+    /// Run any cartridge through the bridge (future: routing, IO, transport).
+    pub fn run_cartridge(
+        &mut self,
+        cartridge: &mut dyn Cartridge,
+        tick: u64,
+    ) -> CartridgeOutput {
+        cartridge.run(tick)
     }
 }

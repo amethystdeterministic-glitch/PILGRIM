@@ -1,0 +1,143 @@
+use pilgrim_identity::{Identity, IdentityProof};
+use pilgrim_mandate::{Mandate, MandateError};
+use pilgrim_sentinel::{
+    DriftLedger, InvariantClass, InvariantSpec, Sentinel, SentinelError, SentinelToken,
+};
+use serde::Serialize;
+
+// ---------------- Cartridge ----------------
+pub trait Cartridge {
+    fn id(&self) -> &'static str;
+    fn execute(&mut self, input: u8) -> Result<CartridgeOutput, String>;
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct CartridgeOutput {
+    pub message: String,
+    pub key: u8,
+}
+
+// ---------------- Receipt ----------------
+#[derive(Debug, Clone)]
+pub struct Receipt {
+    pub subject_id: String,
+    pub cartridge_id: &'static str,
+}
+
+// ---------------- Console ----------------
+pub struct Console {
+    pub identity: Identity,
+    pub mandate: Mandate,
+    pub ledger: DriftLedger,
+}
+
+impl Console {
+    pub fn new(identity: Identity, mandate: Mandate) -> Self {
+        Self {
+            identity,
+            mandate,
+            ledger: DriftLedger::new(),
+        }
+    }
+
+    pub fn run<C: Cartridge>(
+        &mut self,
+        proof: &IdentityProof,
+        cartridge: &mut C,
+        input: u8,
+    ) -> Result<Receipt, ConsoleError> {
+        // 1) Identity verification (normalize to String so we never mismatch types)
+        self.identity
+            .verify(proof)
+            .map_err(|e| ConsoleError::Identity(e.to_string()))?;
+
+        // 2) Mandate enforcement
+        self.mandate
+            .enforce(&self.identity, cartridge.id())
+            .map_err(ConsoleError::Mandate)?;
+
+        // 3) Sentinel BEFORE (associated function in your repo)
+        let token: SentinelToken =
+            Sentinel::before(&input, "console_input").map_err(ConsoleError::Sentinel)?;
+
+        // 4) Execute cartridge
+        let output = cartridge
+            .execute(input)
+            .map_err(ConsoleError::Execution)?;
+
+        // 5) Sentinel AFTER (associated function in your repo)
+        let spec = InvariantSpec {
+            id: "console_execution", // NOTE: &str (no to_string)
+            class: InvariantClass::Transition,
+        };
+
+        Sentinel::after(&token, &output, "console_output", &spec, &mut self.ledger)
+            .map_err(ConsoleError::Sentinel)?;
+
+        Ok(Receipt {
+            subject_id: self.identity.subject_id.clone(),
+            cartridge_id: cartridge.id(),
+        })
+    }
+}
+
+// ---------------- Errors ----------------
+#[derive(Debug)]
+pub enum ConsoleError {
+    Identity(String),
+    Mandate(MandateError),
+    Sentinel(SentinelError),
+    Execution(String),
+}
+
+impl std::fmt::Display for ConsoleError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ConsoleError::Identity(e) => write!(f, "IDENTITY: {}", e),
+            ConsoleError::Mandate(e) => write!(f, "MANDATE: {}", e),
+            ConsoleError::Sentinel(e) => write!(f, "SENTINEL: {:?}", e),
+            ConsoleError::Execution(e) => write!(f, "EXECUTION: {}", e),
+        }
+    }
+}
+
+impl std::error::Error for ConsoleError {}
+
+// ---------------- Tests ----------------
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use pilgrim_mandate::MandateRule;
+
+    struct DemoCartridge;
+
+    impl Cartridge for DemoCartridge {
+        fn id(&self) -> &'static str {
+            "demo_v1"
+        }
+
+        fn execute(&mut self, input: u8) -> Result<CartridgeOutput, String> {
+            Ok(CartridgeOutput {
+                message: format!("processed {}", input),
+                key: input,
+            })
+        }
+    }
+
+    #[test]
+    fn console_happy_path() {
+        let identity = Identity::new("ernesto_lopez", b"demo-pubkey-bytes").unwrap();
+        let proof = identity.prove("hello-world");
+
+        let mandate = Mandate::new(vec![MandateRule {
+            subject_id: "ernesto_lopez".into(),
+            cartridge_id: "demo_v1".into(),
+        }]);
+
+        let mut console = Console::new(identity, mandate);
+        let mut cart = DemoCartridge;
+
+        let receipt = console.run(&proof, &mut cart, 42).unwrap();
+        assert_eq!(receipt.cartridge_id, "demo_v1");
+    }
+}

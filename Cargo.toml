@@ -1,12 +1,18 @@
 [workspace]
 members = [
-    "crates/pilgrim_core",
-    "crates/pilgrim_handshake",
-    "crates/pilgrim_bridge",
-"crates/pilgrim_sentinel",
-    "crates/amethyst_aegis",
-    "crates/amethyst_invariants",
-    "piano"
-, "crates/amethyst_piano"]
+"crates/pilgrim_memory_seal",
+  "crates/pilgrim_core",
+  "crates/pilgrim_handshake",
+  "crates/pilgrim_bridge",
+  "crates/pilgrim_sentinel",
+  "crates/pilgrim_identity",
+  "crates/pilgrim_mandate",
+  "crates/pilgrim_console",
+  "crates/pilgrim_gift",
+  "crates/pilgrim_console_demo",
+
+  # NEW — next cartridge crate
+  "crates/pilgrim_memory_seal",
+]
 
 resolver = "2"
