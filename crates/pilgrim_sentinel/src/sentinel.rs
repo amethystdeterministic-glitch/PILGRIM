@@ -1,5 +1,6 @@
-use crate::invariants::InvariantSpec;
-use crate::ledger::{DriftEvent, DriftLedger};
+use crate::invariants::{InvariantClass, InvariantSpec};
+use crate::ledger::DriftLedger;
+use pilgrim_dre::enforce;
 use serde::Serialize;
 
 #[derive(Debug)]
@@ -7,14 +8,10 @@ pub struct SentinelToken {
     pub hash: &'static str,
 }
 
-#[derive(Debug)]
-pub enum SentinelError {
-    InvariantViolation(DriftEvent),
-}
-
 pub struct Sentinel;
 
 impl Sentinel {
+    /// Capture pre-execution state fingerprint
     pub fn before<T: Serialize>(
         _state: &T,
         hash: &'static str,
@@ -22,32 +19,38 @@ impl Sentinel {
         SentinelToken { hash }
     }
 
+    /// Deterministic Runtime Enforcement
+    /// FAILS CLOSED — NO RECOVERY PATH
     pub fn after<T: Serialize>(
         before: &SentinelToken,
-        after_state: &T,
+        _after_state: &T,
         domain: &'static str,
         spec: &InvariantSpec,
         ledger: &mut DriftLedger,
-    ) -> Result<SentinelToken, SentinelError> {
+    ) -> SentinelToken {
         let after_hash = core::any::type_name::<T>();
 
-        if before.hash == after_hash {
-            return Ok(SentinelToken { hash: before.hash });
+        // 🔒 D.R.E. — silent runtime mutation is forbidden
+        if before.hash != after_hash {
+            // Record violation FIRST (immutable receipt)
+            ledger.record(
+                domain,
+                spec.id,
+                match spec.class {
+                    InvariantClass::Schema => "schema",
+                    InvariantClass::Value => "value",
+                    InvariantClass::Transition => "transition",
+                    InvariantClass::Temporal => "temporal",
+                },
+                before.hash,
+                after_hash,
+            );
+
+            // HARD STOP — deterministic halt
+            // This NEVER returns
+            enforce(false);
         }
 
-        let event = ledger.record(
-            domain,
-            spec.id,
-            match spec.class {
-                crate::invariants::InvariantClass::Schema => "schema",
-                crate::invariants::InvariantClass::Value => "value",
-                crate::invariants::InvariantClass::Transition => "transition",
-                crate::invariants::InvariantClass::Temporal => "temporal",
-            },
-            before.hash,
-            after_hash,
-        );
-
-        Err(SentinelError::InvariantViolation(event))
+        SentinelToken { hash: before.hash }
     }
 }
