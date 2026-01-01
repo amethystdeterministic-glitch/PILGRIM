@@ -12,7 +12,7 @@ members = [
   "crates/pilgrim_console_demo",
 
   # NEW — next cartridge crate
-  "crates/pilgrim_memory_seal",
+  "crates/pilgrim_memory_seal", "crates/pilgrim_dre", "crates/dre_demo",
 ]
 
 resolver = "2"
