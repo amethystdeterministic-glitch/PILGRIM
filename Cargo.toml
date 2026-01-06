@@ -1,0 +1,16 @@
+[package]
+name = "pilgrim-core"
+version = "0.1.0"
+edition = "2021"
+license = "Proprietary"
+description = "Pilgrim Core – deterministic enforcement engine for Amethyst"
+
+[lib]
+name = "pilgrim_core"
+crate-type = ["rlib"]
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]
