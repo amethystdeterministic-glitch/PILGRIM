@@ -14,3 +14,6 @@ default = ["std"]
 std = []
 
 [dependencies]
+ed25519-dalek = { version = "2", default-features = false }
+hkdf = "0.12"
+sha2 = "0.10"
