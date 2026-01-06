@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+
+members = [
+  "core/pilgrim-core",
+  "services/zite",
+  "services/auth",
+  "services/billing",
+  "products/amethyst-browser/rust", "services/gateway",
+]
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
