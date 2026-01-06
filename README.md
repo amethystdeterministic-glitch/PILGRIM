@@ -1,5 +1,24 @@
 # PILGRIM
 
+## Project Status
+
+**Status:** Stable / Frozen Core  
+**Current Release:** v1.0-frozen  
+**Last Verified:** January 2026
+
+PILGRIM Core is a deterministic execution engine designed for provable,
+auditable and reproducible computation.
+
+The core is intentionally frozen at v1.0 to serve as a stable,
+verifiable foundation.
+
+Active development continues in higher-level systems (including
+Amethyst Browser and future Amethyst cOS components), which
+consume PILGRIM as a licensed engine rather than modifying it directly.
+
+No breaking changes are planned for the core without a formal
+versioned release.
+
 PILGRIM is a deterministic enforcement engine designed to make rule violations mechanically impossible.
 
 It replaces trust-based, policy-enforced systems with execution governed by invariant physics: if a rule is violated, execution halts.
