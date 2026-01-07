@@ -1,34 +1,15 @@
-[package]
-name = "pilgrim-core"
-version = "0.1.0"
-edition = "2021"
-license = "Proprietary"
-description = "Pilgrim Core — deterministic enforcement engine"
-
-[lib]
-name = "pilgrim_core"
-crate-type = ["rlib"]
-
-[features]
-default = ["std"]
-std = []
-
-[dependencies]
-ed25519-dalek = { version = "2", default-features = false }
-hkdf = "0.12"
-sha2 = "0.10"
-
 [workspace]
 resolver = "2"
+
 members = [
-    "core/pilgrim-core",
-    "services/zite",
-    "services/auth",
-    "services/billing",
-    "services/gateway",
-    "products/amethyst-browser/rust"
+  "core/pilgrim-core",
+  "services/zite",
+  "services/auth",
+  "services/billing",
+  "services/gateway",
+  "products/amethyst-browser/rust"
 ]
 
 [workspace.package]
 edition = "2021"
-license = "Apache-2.0"
+license = "Proprietary"

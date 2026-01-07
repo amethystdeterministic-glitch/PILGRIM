@@ -1,1 +1,1 @@
-/data/data/com.termux/files/home/amethyst/target/debug/libzite.rlib: /data/data/com.termux/files/home/amethyst/services/zite/src/lib.rs
+/data/data/com.termux/files/home/amethyst/target/debug/libzite.rlib: /data/data/com.termux/files/home/amethyst/core/pilgrim-core/src/identity/mod.rs /data/data/com.termux/files/home/amethyst/core/pilgrim-core/src/lib.rs /data/data/com.termux/files/home/amethyst/services/zite/src/lib.rs

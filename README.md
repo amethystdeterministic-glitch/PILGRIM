@@ -1,67 +1,43 @@
-# PILGRIM
+AMETHYST DETERMINISTIC LTD
+DETERMINISTIC ENFORCEMENT STACK
+STATUS: VALIDATED
 
-## Project Status
+SYSTEM STATE
+------------
+VALIDATED
 
-**Status:** Stable / Frozen Core  
-**Current Release:** v1.0-frozen  
-**Last Verified:** January 2026
+CORE CONFIRMATION
+-----------------
+- Core services built
+- Core services compiled
+- Core services executed
+- Deterministic responses returned
+- Identity propagation verified
+- No further local demonstrations required
 
-PILGRIM Core is a deterministic execution engine designed for provable,
-auditable and reproducible computation.
+ARCHITECTURE (LOCKED)
+--------------------
+Authority: Amethyst Deterministic Ltd
+Core Engine: Pilgrim Core
+Access Surface: ZITE
+Gateway: Deterministic Gateway
 
-The core is intentionally frozen at v1.0 to serve as a stable,
-verifiable foundation.
+ENFORCEMENT PRINCIPLES
+---------------------
+- Deterministic only
+- No inference
+- No tracking
+- No cookies
+- No profiling
+- No learning
 
-Active development continues in higher-level systems (including
-Amethyst Browser and future Amethyst cOS components), which
-consume PILGRIM as a licensed engine rather than modifying it directly.
+SCOPE
+-----
+- No UI at this stage
+- No Android app at this stage
+- Enforcement layer only
 
-No breaking changes are planned for the core without a formal
-versioned release.
-
-PILGRIM is a deterministic enforcement engine designed to make rule violations mechanically impossible.
-
-It replaces trust-based, policy-enforced systems with execution governed by invariant physics: if a rule is violated, execution halts.
-
----
-
-## Scope
-
-This repository contains the Pilgrim Core engine only.
-
-It does not include browsers, user interfaces, platforms, or applications.
-
----
-
-## Design Principles
-
-- Deterministic execution
-- Explicit invariant enforcement
-- No heuristics
-- No overrides
-- No trust assumptions
-- Reproducibility by construction
-
----
-
-## Status
-
-This repository includes a frozen reference release:
-
-- **v1.0-frozen** — canonical baseline for audit and verification
-
-Future work will occur only under explicitly versioned releases.
-
----
-
-## Platform Relationship
-
-PILGRIM is a licensable engine.
-
-Higher-level systems such as **Amethyst Browser**, **ZITE**, **Pulse**, and **Amethyst cOS HUE** are built on top of PILGRIM and are not part of this repository.
-
----
-
-## License
-
-See `LICENSE`.
+DECLARATION
+-----------
+This stage is COMPLETE.
+All future work builds on this foundation.
