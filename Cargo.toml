@@ -8,7 +8,7 @@ members = [
   "services/billing",
   "services/gateway",
   "products/amethyst-browser/rust"
-]
+, "forge"]
 
 [workspace.package]
 edition = "2021"
