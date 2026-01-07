@@ -56,3 +56,18 @@ Thumbs.db
 *.jks
 *.p12
 android/gradle.zip
+# === Rust ===
+/target/
+**/target/
+
+# === Android / Gradle ===
+android/gradle.zip
+android/.gradle/
+**/.gradle/
+local.properties
+*.apk
+*.aab
+
+# === Tooling / caches ===
+.DS_Store
+*.log
