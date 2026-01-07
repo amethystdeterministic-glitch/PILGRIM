@@ -1,0 +1,3 @@
+rootProject.name = "AmethystBrowser"
+include(":app")rootProject.name = "amethyst-android"
+include(":app")

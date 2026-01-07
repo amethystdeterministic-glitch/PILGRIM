@@ -1,78 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Amethyst Deterministic — Status</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Amethyst Deterministic Status</title>
   <style>
-    body {
-      background: #0b0f14;
-      color: #e6e6e6;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 0;
-      padding: 24px;
-    }
-    .card {
-      max-width: 640px;
-      margin: 0 auto;
-      border: 1px solid #2a2f3a;
-      padding: 24px;
-      border-radius: 12px;
-      background: #111622;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 1.4rem;
-      letter-spacing: 0.5px;
-    }
-    .ok {
-      color: #4ade80;
-      font-weight: 600;
-    }
-    pre {
-      background: #0b0f14;
-      padding: 16px;
-      border-radius: 8px;
-      overflow-x: auto;
-      border: 1px solid #1f2430;
-    }
-    .footer {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      opacity: 0.7;
-    }
+    body { background:#0b0f14; color:#e6e6e6; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; padding:24px; }
+    .card { border:1px solid #2a2f36; padding:20px; max-width:720px; border-radius:12px; }
+    .ok { color:#6bff8a; }
+    .label { color:#7aa2ff; }
+    .muted { color:#9aa4b2; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    .row { margin: 10px 0; }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>AMETHYST DETERMINISTIC LTD</h1>
-
-    <p class="ok">STATUS: VALIDATED</p>
-
-    <p>
-      Deterministic Enforcement Stack is online.
-      This interface is a read-only authority surface.
-    </p>
-
-    <pre id="status">Loading…</pre>
-
-    <div class="footer">
-      No UI logic. No tracking. No cookies. No inference.<br>
-      Authority only.
-    </div>
+    <div class="row"><span class="label">AUTHORITY</span>: <strong>AMETHYST DETERMINISTIC LTD</strong></div>
+    <div class="row"><span class="label">STACK</span>: Deterministic Enforcement</div>
+    <div class="row"><span class="ok">STATUS: VALIDATED</span></div>
+    <div class="row muted">UI is display-only. Backend is authoritative.</div>
+    <hr style="border:none;border-top:1px solid #2a2f36;margin:16px 0;">
+    <pre id="output">Loading…</pre>
   </div>
 
-  <script>
-    fetch("http://127.0.0.1:4000/status-json")
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById("status").textContent =
-          JSON.stringify(data, null, 2);
-      })
-      .catch(err => {
-        document.getElementById("status").textContent =
-          "Backend not reachable (expected in Termux sandbox).";
-      });
-  </script>
+<script>
+const output = document.getElementById("output");
+
+// Try Gateway first, then Zite
+const endpoints = [
+  "http://127.0.0.1:4000/status-json",
+  "http://127.0.0.1:3000/status-json",
+  "http://127.0.0.1:3000/status.json"
+];
+
+async function fetchFirst() {
+  for (const url of endpoints) {
+    try {
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const d = await r.json();
+      output.textContent =
+        "Authority: " + (d.authority ?? "unknown") + "\n" +
+        "System: " + (d.system ?? d.service ?? "unknown") + "\n" +
+        "Version: " + (d.version ?? "unknown") + "\n" +
+        "State: " + (d.state ?? d.status ?? "unknown") + "\n" +
+        "Deterministic: " + (d.deterministic ?? "unknown") + "\n";
+      return;
+    } catch (e) {}
+  }
+  output.textContent =
+    "Status surface unavailable.\n" +
+    "Run one of:\n" +
+    "  cargo run -p zite\n" +
+    "  cargo run -p gateway\n";
+}
+
+fetchFirst();
+</script>
 </body>
 </html>
