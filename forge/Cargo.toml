@@ -5,3 +5,7 @@ edition = "2021"
 
 [dependencies]
 pilgrim-core = { path = "../core/pilgrim-core" }
+
+ed25519-dalek = "1.0.1"
+rand = "0.7"
+base64 = "0.21"
