@@ -1,1 +1,12 @@
 android/gradle.zip
+
+# Forge generated output
+/generated/
+/target/
+
+# Android build artifacts / bundles
+android/gradle.zip
+*.apk
+*.aab
+/target
+**/target

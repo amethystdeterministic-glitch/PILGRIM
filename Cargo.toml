@@ -1,15 +1,8 @@
 [workspace]
-resolver = "2"
-
 members = [
+  "forge",
   "core/pilgrim-core",
-  "services/zite",
-  "services/auth",
-  "services/billing",
-  "services/gateway",
-  "products/amethyst-browser/rust"
-, "forge"]
+  "tools/verifier"
+]
 
-[workspace.package]
-edition = "2021"
-license = "Proprietary"
+resolver = "2"
