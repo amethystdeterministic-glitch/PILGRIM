@@ -6,37 +6,59 @@ use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
 
 use ed25519_dalek::{Signature, SigningKey, Signer};
-
 use rand::rngs::OsRng;
 use rand::RngCore;
 
 use serde_json::json;
 use sha2::{Digest, Sha256};
-
 use walkdir::WalkDir;
 
 fn main() {
     println!("[FORGE] Initialising...");
 
-    let project_dir = Path::new("generated/amethyst-demo");
-    fs::create_dir_all(project_dir).expect("Failed to create output folder");
+    // ---------- PROJECT NAME ----------
+    let project_name = env::args()
+        .nth(1)
+        .unwrap_or_else(|| "amethyst-demo".to_string());
 
-    // 🔒 Deterministic project hash
-    let hash = compute_project_hash(project_dir);
+    let project_dir = Path::new("generated").join(&project_name);
+    fs::create_dir_all(&project_dir).expect("Failed to create project directory");
 
-    // 🔑 Signing key
+    // ---------- RUNTIME POLICY ----------
+    let runtime_policy = json!({
+        "authority": "Pilgrim Core",
+        "runtime": {
+            "network": "restricted",
+            "storage": "sandboxed",
+            "execution": "deterministic",
+            "browser_engine": "webview",
+            "updates": "disabled"
+        }
+    });
+
+    let policy_path = project_dir.join("runtime.policy.json");
+    fs::write(
+        &policy_path,
+        serde_json::to_string_pretty(&runtime_policy).unwrap(),
+    )
+    .unwrap();
+
+    // ---------- HASH ----------
+    let hash = compute_project_hash(&project_dir);
+
+    // ---------- KEYS ----------
     let key_path = default_key_path();
     let signing_key = load_or_create_signing_key(&key_path);
     let verifying_key = signing_key.verifying_key();
 
-    // ✍️ Sign hash
+    // ---------- SIGN ----------
     let signature: Signature = signing_key.sign(hash.as_bytes());
 
     let proof = json!({
         "authority": "Pilgrim Core",
         "project": project_dir.to_string_lossy(),
         "hash": hash,
-        "public_key": STANDARD.encode(verifying_key.to_bytes()),
+        "public_key": STANDARD.encode(verifying_key.as_bytes()),
         "signature": STANDARD.encode(signature.to_bytes()),
         "status": "DETERMINISTIC"
     });
@@ -49,11 +71,12 @@ fn main() {
 
     println!("[FORGE] Gate: PASS");
     println!("[FORGE] Project generated");
+    println!("[FORGE] Runtime policy written → {}", policy_path.display());
     println!("[FORGE] Proof written → {}", proof_path.display());
     println!("[FORGE] Signature written → {}", sig_path.display());
 }
 
-/* ----------------------------- HASHING ----------------------------- */
+// ================= HASHING =================
 
 fn compute_project_hash(root: &Path) -> String {
     let mut files: Vec<PathBuf> = WalkDir::new(root)
@@ -75,7 +98,7 @@ fn compute_project_hash(root: &Path) -> String {
     let mut hasher = Sha256::new();
 
     for file in files {
-        let rel = file.strip_prefix(root).unwrap_or(&file);
+        let rel = file.strip_prefix(root).unwrap();
         hasher.update(rel.to_string_lossy().as_bytes());
         hasher.update(&[0u8]);
 
@@ -87,10 +110,10 @@ fn compute_project_hash(root: &Path) -> String {
     hex::encode(hasher.finalize())
 }
 
-/* ----------------------------- KEYS ----------------------------- */
+// ================= KEYS =================
 
 fn default_key_path() -> PathBuf {
-    let home = env::var("HOME").unwrap_or_else(|_| ".".into());
+    let home = env::var("HOME").unwrap_or_else(|_| ".".to_string());
     PathBuf::from(home).join(".pilgrim").join("device_ed25519.key")
 }
 
@@ -109,7 +132,7 @@ fn load_or_create_signing_key(path: &Path) -> SigningKey {
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent).unwrap();
     }
-    fs::write(path, key_bytes).unwrap();
 
+    fs::write(path, key_bytes).unwrap();
     key
 }

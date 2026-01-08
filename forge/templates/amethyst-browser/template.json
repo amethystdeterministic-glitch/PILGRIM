@@ -1,0 +1,8 @@
+{
+  "name": "amethyst-browser",
+  "version": "0.1.0",
+  "type": "application",
+  "description": "Amethyst Browser - deterministic sovereign browser core",
+  "language": "rust",
+  "entry": "src/main.rs"
+}
