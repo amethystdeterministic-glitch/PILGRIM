@@ -16,42 +16,22 @@ use walkdir::WalkDir;
 fn main() {
     println!("[FORGE] Initialising...");
 
-    // ---------- PROJECT NAME ----------
     let project_name = env::args()
         .nth(1)
-        .unwrap_or_else(|| "amethyst-demo".to_string());
+        .unwrap_or_else(|| "amethyst-browser-android".to_string());
 
     let project_dir = Path::new("generated").join(&project_name);
     fs::create_dir_all(&project_dir).expect("Failed to create project directory");
 
-    // ---------- RUNTIME POLICY ----------
-    let runtime_policy = json!({
-        "authority": "Pilgrim Core",
-        "runtime": {
-            "network": "restricted",
-            "storage": "sandboxed",
-            "execution": "deterministic",
-            "browser_engine": "webview",
-            "updates": "disabled"
-        }
-    });
-
-    let policy_path = project_dir.join("runtime.policy.json");
-    fs::write(
-        &policy_path,
-        serde_json::to_string_pretty(&runtime_policy).unwrap(),
-    )
-    .unwrap();
-
-    // ---------- HASH ----------
+    // -------- Hash project deterministically
     let hash = compute_project_hash(&project_dir);
 
-    // ---------- KEYS ----------
-    let key_path = default_key_path();
+    // -------- Load or create SINGLE canonical signing key
+    let key_path = canonical_key_path();
     let signing_key = load_or_create_signing_key(&key_path);
     let verifying_key = signing_key.verifying_key();
 
-    // ---------- SIGN ----------
+    // -------- Sign hash
     let signature: Signature = signing_key.sign(hash.as_bytes());
 
     let proof = json!({
@@ -69,14 +49,24 @@ fn main() {
     fs::write(&proof_path, serde_json::to_string_pretty(&proof).unwrap()).unwrap();
     fs::write(&sig_path, signature.to_bytes()).unwrap();
 
+    // -------- Runtime policy (if present)
+    let policy_path = project_dir.join("runtime.policy.json");
+    if policy_path.exists() {
+        let policy_hash = sha256_file(&policy_path);
+        fs::write(project_dir.join("runtime.policy.sha256"), policy_hash).unwrap();
+        println!("[FORGE] Runtime policy hash bound");
+        println!("[FORGE] Runtime policy written -> {}", policy_path.display());
+    }
+
     println!("[FORGE] Gate: PASS");
     println!("[FORGE] Project generated");
-    println!("[FORGE] Runtime policy written → {}", policy_path.display());
-    println!("[FORGE] Proof written → {}", proof_path.display());
-    println!("[FORGE] Signature written → {}", sig_path.display());
+    println!("[FORGE] Proof written -> {}", proof_path.display());
+    println!("[FORGE] Signature written -> {}", sig_path.display());
 }
 
-// ================= HASHING =================
+// =====================================================
+// HASHING
+// =====================================================
 
 fn compute_project_hash(root: &Path) -> String {
     let mut files: Vec<PathBuf> = WalkDir::new(root)
@@ -87,6 +77,7 @@ fn compute_project_hash(root: &Path) -> String {
             let p = e.path().to_string_lossy();
             !p.contains("proof.json")
                 && !p.contains("proof.sig")
+                && !p.contains("runtime.policy.sha256")
                 && !p.contains("/target/")
                 && !p.contains("/.git/")
         })
@@ -101,7 +92,6 @@ fn compute_project_hash(root: &Path) -> String {
         let rel = file.strip_prefix(root).unwrap();
         hasher.update(rel.to_string_lossy().as_bytes());
         hasher.update(&[0u8]);
-
         let data = fs::read(&file).unwrap();
         hasher.update(data);
         hasher.update(&[0u8]);
@@ -110,16 +100,27 @@ fn compute_project_hash(root: &Path) -> String {
     hex::encode(hasher.finalize())
 }
 
-// ================= KEYS =================
+fn sha256_file(path: &Path) -> String {
+    let data = fs::read(path).unwrap();
+    hex::encode(Sha256::digest(data))
+}
 
-fn default_key_path() -> PathBuf {
-    let home = env::var("HOME").unwrap_or_else(|_| ".".to_string());
-    PathBuf::from(home).join(".pilgrim").join("device_ed25519.key")
+// =====================================================
+// KEYS — SINGLE SOURCE OF TRUTH
+// =====================================================
+
+fn canonical_key_path() -> PathBuf {
+    PathBuf::from(env::var("HOME").unwrap())
+        .join(".pilgrim")
+        .join("device_ed25519.key")
 }
 
 fn load_or_create_signing_key(path: &Path) -> SigningKey {
-    if let Ok(bytes) = fs::read(path) {
-        let key_bytes: [u8; 32] = bytes.try_into().expect("Invalid key length");
+    if path.exists() {
+        let bytes = fs::read(path).expect("Failed to read signing key");
+        let key_bytes: [u8; 32] = bytes
+            .try_into()
+            .expect("Signing key must be exactly 32 bytes");
         return SigningKey::from_bytes(&key_bytes);
     }
 

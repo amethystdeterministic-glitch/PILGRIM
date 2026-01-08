@@ -3,6 +3,6 @@ members = [
   "forge",
   "core/pilgrim-core",
   "tools/verifier"
-]
+, "crates/apps/ghostpass-core", "crates/apps/zyte-core", "crates/apps/amethyst-browser"]
 
 resolver = "2"

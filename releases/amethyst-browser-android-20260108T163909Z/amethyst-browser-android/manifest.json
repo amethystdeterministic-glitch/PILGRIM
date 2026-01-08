@@ -1,0 +1,6 @@
+{
+  "name": "amethyst-browser",
+  "engine": "amethyst",
+  "deterministic": true,
+  "security": "pilgrim"
+}

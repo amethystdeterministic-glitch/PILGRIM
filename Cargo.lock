@@ -3,10 +3,27 @@
 version = 4
 
 [[package]]
+name = "amethyst-browser"
+version = "0.1.0"
+dependencies = [
+ "base64 0.22.1",
+ "ghostpass-core",
+ "serde",
+ "serde_json",
+ "zyte-core",
+]
+
+[[package]]
 name = "base64"
 version = "0.21.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
+
+[[package]]
+name = "base64"
+version = "0.22.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "base64ct"
@@ -135,7 +152,7 @@ checksum = "28dea519a9695b9977216879a3ebfddf92f1c08c05d984f8996aecd6ecdc811d"
 name = "forge"
 version = "0.1.0"
 dependencies = [
- "base64",
+ "base64 0.21.7",
  "ed25519-dalek",
  "hex",
  "pilgrim-core",
@@ -168,6 +185,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ghostpass-core"
+version = "0.1.0"
+dependencies = [
+ "base64 0.21.7",
+ "ed25519-dalek",
+ "hex",
+ "rand",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -195,7 +225,7 @@ checksum = "f52b00d39961fc5b2736ea853c9cc86238e165017a493d1d5c8eac6bdc4cc273"
 name = "pilgrim-core"
 version = "0.1.0"
 dependencies = [
- "base64",
+ "base64 0.21.7",
  "ed25519-dalek",
  "hex",
  "serde",
@@ -207,7 +237,7 @@ dependencies = [
 name = "pilgrim-verifier"
 version = "0.1.0"
 dependencies = [
- "base64",
+ "base64 0.21.7",
  "ed25519-dalek",
  "hex",
  "serde",
@@ -486,3 +516,14 @@ name = "zmij"
 version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2fc5a66a20078bf1251bde995aa2fdcc4b800c70b5d92dd2c62abc5c60f679f8"
+
+[[package]]
+name = "zyte-core"
+version = "0.1.0"
+dependencies = [
+ "hex",
+ "serde",
+ "serde_json",
+ "sha2",
+ "walkdir",
+]

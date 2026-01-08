@@ -1,15 +1,13 @@
 use std::env;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
 
 use ed25519_dalek::{Signature, VerifyingKey, Verifier};
-
 use serde_json::Value;
 use sha2::{Digest, Sha256};
-
 use walkdir::WalkDir;
 
 fn main() {
@@ -20,8 +18,7 @@ fn main() {
     }
 
     let proof_path = Path::new(&args[1]);
-    let proof_data = fs::read_to_string(proof_path).expect("Failed to read proof");
-
+    let proof_data = fs::read_to_string(proof_path).expect("Unable to read proof.json");
     let proof: Value = serde_json::from_str(&proof_data).expect("Invalid JSON");
 
     let project_path = Path::new(
@@ -50,12 +47,22 @@ fn main() {
         )
         .expect("Invalid base64 signature");
 
-    let public_key =
-        VerifyingKey::from_bytes(&public_key_bytes.try_into().unwrap())
+    let verifying_key =
+        VerifyingKey::from_bytes(public_key_bytes.as_slice().try_into().unwrap())
             .expect("Invalid public key");
 
     let signature =
-        Signature::from_bytes(&signature_bytes.try_into().unwrap());
+        Signature::from_bytes(signature_bytes.as_slice().try_into().unwrap());
+
+    let policy_path = project_path.join("runtime.policy.json");
+    if policy_path.exists() {
+        let policy_hash = sha256_file(&policy_path);
+        println!("[VERIFIER] Runtime policy present");
+        println!(
+            "[VERIFIER] runtime.policy.json sha256: {}",
+            policy_hash
+        );
+    }
 
     let actual_hash = compute_project_hash(project_path);
 
@@ -67,7 +74,7 @@ fn main() {
         std::process::exit(1);
     }
 
-    public_key
+    verifying_key
         .verify(actual_hash.as_bytes(), &signature)
         .expect("Signature verification failed");
 
@@ -75,10 +82,8 @@ fn main() {
     println!("[VERIFIER] Deterministic proof verified");
 }
 
-/* ----------------------------- HASHING ----------------------------- */
-
 fn compute_project_hash(root: &Path) -> String {
-    let mut files: Vec<_> = WalkDir::new(root)
+    let mut files: Vec<PathBuf> = WalkDir::new(root)
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.file_type().is_file())
@@ -86,6 +91,7 @@ fn compute_project_hash(root: &Path) -> String {
             let p = e.path().to_string_lossy();
             !p.contains("proof.json")
                 && !p.contains("proof.sig")
+                && !p.contains("runtime.policy.sha256")
                 && !p.contains("/target/")
                 && !p.contains("/.git/")
         })
@@ -97,14 +103,18 @@ fn compute_project_hash(root: &Path) -> String {
     let mut hasher = Sha256::new();
 
     for file in files {
-        let rel = file.strip_prefix(root).unwrap_or(&file);
+        let rel = file.strip_prefix(root).unwrap();
         hasher.update(rel.to_string_lossy().as_bytes());
         hasher.update(&[0u8]);
-
         let data = fs::read(&file).unwrap();
         hasher.update(data);
         hasher.update(&[0u8]);
     }
 
     hex::encode(hasher.finalize())
+}
+
+fn sha256_file(path: &Path) -> String {
+    let data = fs::read(path).unwrap();
+    hex::encode(Sha256::digest(data))
 }

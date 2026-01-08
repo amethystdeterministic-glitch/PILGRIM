@@ -1,0 +1,4 @@
+name=amethyst-browser
+template_version=0.1.0
+forge_version=0.1.0
+output_root=generated/amethyst-browser

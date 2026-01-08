@@ -1,0 +1,15 @@
+060978ec5211b2d66714a3032f7cbf2993b241b649942212787c914229baaf9f  ./amethyst-browser-android/runtime.policy.json
+0a1c4b8458ac6f3fec729443d5d3ef97a4b04af7897ccf4d991f4344548a5e44  ./amethyst-browser-android/src/browser.rs
+0f5b1181f9c7c55d345b45b4b72eae40a3c1f57cf52397db9b4dffb1b0c20f81  ./git_commit.txt
+10507d4df85098ad1823fcfefe20ca5a373133a33660e22ae5592713db157989  ./amethyst-browser-android/src/security.rs
+35807fdb597e54dc4c67f8c3cb3209ddd59455856ee70519cfbaabf8d01b3bf6  ./amethyst-browser-android/proof.json
+3cfc0275e0f48d8de9877f78ac6f84fa53ef2878dd24765b74e45971fd093ab5  ./amethyst-browser-android/runtime.policy.sha256
+41cf710847b3f5ab71e5b23396f559bdf9927740dab097bda8c25126520820b9  ./amethyst-browser-android/proof.sig
+56dac7379888302188d1f3797648901b4fc4ca42d48bd51df4d522d0bcc8bbc0  ./amethyst-browser-android/src/main.rs
+68562225f93d0e4e6571867ff6188c0b400bf0725c6f89aadfff904dddadd085  ./forge.Cargo.toml
+93ae17ee64837010d295f3802d8d4b76d7b7aaf69ed7acd1f136b5f8a7ba3ad8  ./amethyst-browser-android/README.md
+aa918ec1079d0b95e751d02c3600dd14edb7194d0be8ad53490765156058cf76  ./amethyst-browser-android/manifest.json
+ae56da985ea2ddfaafee5455c2472ed0095f74c0113d7b97b6aa5c4524b097a5  ./git_version.txt
+bd0a2c4cac29b93907b5197606d4c2a61ebc3f310a754a5c5ba86aa4e4a1b6d8  ./amethyst-browser-android/assets/placeholder.txt
+d52e813629565922f20e1141a9991b3ab223d0ec1eef0e1c288f58ad4fbf1ef4  ./pilgrim-core.Cargo.toml
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./MANIFEST.sha256
