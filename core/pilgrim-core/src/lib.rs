@@ -1,3 +1,7 @@
-#![cfg_attr(not(feature = "std"), no_std)]
+// Pilgrim Core – minimal authority surface
 
-pub mod identity;
+pub fn allow_forge() -> bool {
+    // Deterministic policy gate
+    // For now: explicitly allow Forge execution
+    true
+}
