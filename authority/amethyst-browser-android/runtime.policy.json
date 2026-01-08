@@ -1,0 +1,10 @@
+{
+  "authority": "Pilgrim Core",
+  "runtime": {
+    "browser_engine": "webview",
+    "execution": "deterministic",
+    "network": "restricted",
+    "storage": "sandboxed",
+    "updates": "disabled"
+  }
+}
