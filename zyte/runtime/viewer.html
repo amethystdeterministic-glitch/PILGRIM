@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Amethyst Deterministic</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #000;
+      color: #fff;
+      font-family: monospace;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .panel {
+      background: #111;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .label {
+      color: #b48cff;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+    .meta {
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Amethyst Deterministic</h1>
+
+<div class="panel">
+  <div class="label">Deterministic Proof (v1)</div>
+  <pre id="proof">Loading proof…</pre>
+  <div class="meta" id="proofMeta"></div>
+</div>
+
+<div class="panel">
+  <div class="label">Zyte Payload (read-only)</div>
+  <pre id="payload">Loading payload…</pre>
+</div>
+
+<script>
+(async () => {
+  const now = new Date().toISOString();
+
+  try {
+    const proofRes = await fetch("/api/proof/current");
+    const proof = await proofRes.json();
+    document.getElementById("proof").textContent =
+      JSON.stringify(proof, null, 2);
+    document.getElementById("proofMeta").textContent =
+      "Viewer observed at " + now;
+  } catch (e) {
+    document.getElementById("proof").textContent =
+      "PROOF FETCH FAILED: " + e.message;
+  }
+
+  try {
+    const zyteRes = await fetch("/api/zyte/current");
+    const zyte = await zyteRes.json();
+    document.getElementById("payload").textContent =
+      JSON.stringify(zyte, null, 2);
+  } catch (e) {
+    document.getElementById("payload").textContent =
+      "ZYTE FETCH FAILED: " + e.message;
+  }
+})();
+</script>
+
+</body>
+</html>
