@@ -1,0 +1,8 @@
+ZYTE BUILDER v1 — END STATE
+
+- Append-only event log
+- Versioned Zytes
+- GET list / single
+- POST create
+- Deterministic HTML renderer
+- UI-ready consumption

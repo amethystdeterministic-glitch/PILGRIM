@@ -1,0 +1,112 @@
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #111111;
+  --color-muted: #777777;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+#app { display: flex; flex-direction: column; min-height: 100vh; }
+
+#header {
+  padding: var(--space-md);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#brand { font-weight: 600; }
+
+#address-bar {
+  margin-top: var(--space-xs);
+  font-size: 0.9em;
+  color: var(--color-muted);
+}
+
+#main { flex: 1; padding: var(--space-md); }
+
+#home h1 { font-size: 1.3em; margin-bottom: var(--space-sm); }
+
+#home-frame {
+  border: 1px solid #e0e0e0;
+  padding: var(--space-sm);
+}
+
+#home-iframe {
+  width: 100%;
+  height: 260px;
+  border: 0;
+}
+
+#speed-dial { margin-top: var(--space-lg); }
+
+#speed-dial h2 { font-size: 1.1em; margin-bottom: var(--space-sm); }
+
+#speed-dial ul { list-style: none; }
+
+#speed-dial li {
+  padding: var(--space-sm);
+  border: 1px solid #e0e0e0;
+  margin-bottom: var(--space-sm);
+}
+
+#zyte-builder {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px solid #e0e0e0;
+}
+
+.panel { margin-top: var(--space-md); }
+
+#zyte-builder input,
+#zyte-builder textarea {
+  width: 100%;
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px solid #e0e0e0;
+}
+
+#zyte-builder textarea { min-height: 90px; }
+
+#zyte-builder button {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px solid #e0e0e0;
+  background: #f6f6f6;
+}
+
+#zyte-builder pre {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px dashed #cccccc;
+  overflow: auto;
+}
+
+#zyte-feed {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px dashed #cccccc;
+}
+
+#zyte-feed-content { margin-top: var(--space-md); }
+
+#zyte-feed[data-state="collapsed"] #zyte-feed-content { display: none; }
+
+#footer {
+  padding: var(--space-sm);
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--color-muted);
+  border-top: 1px solid #e0e0e0;
+}

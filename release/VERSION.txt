@@ -1,0 +1,3 @@
+Amethyst Zyte Builder
+Release: v1.0.0
+State: HARD FROZEN

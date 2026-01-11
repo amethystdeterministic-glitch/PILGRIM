@@ -1,0 +1,4 @@
+{
+  "max_body_bytes": 65536,
+  "rate_per_minute": 120
+}

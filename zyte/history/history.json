@@ -1,0 +1,28 @@
+{
+  "amethyst-home": [
+    {
+      "version": 1,
+      "hash": "80c854f0cba00e2931af53aa3fa077ed08c28c3e726da0294f6dd972ec2cb2b2",
+      "created_at": "2026-01-10T15:35:49.423Z"
+    },
+    {
+      "version": 2,
+      "hash": "26fbb7dad553dce8a282934101e14d5342cb672f1c02a586c499721514bb4d36",
+      "created_at": "2026-01-10T20:56:25.910Z"
+    }
+  ],
+  "amethyst-about": [
+    {
+      "version": 1,
+      "hash": "8a9e16faa2a7521213581856d595a9765ad7aae9751cd3c926494ceb4ff7b281",
+      "created_at": "2026-01-10T21:05:37.391Z"
+    }
+  ],
+  "amethyst-contact": [
+    {
+      "version": 1,
+      "hash": "47658555030f80da217e13c69ad8b681562fc0ed49176d08784ac205974d7bba",
+      "created_at": "2026-01-10T21:05:37.403Z"
+    }
+  ]
+}

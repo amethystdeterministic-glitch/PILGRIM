@@ -1,0 +1,7 @@
+{
+  "system": "amethyst",
+  "mode": "deterministic",
+  "actors": [
+    { "id": "system", "role": "root" }
+  ]
+}

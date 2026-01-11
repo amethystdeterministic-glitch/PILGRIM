@@ -1,0 +1,15 @@
+AMETHYST ZYTE BUILDER — v1.0.0
+
+Included:
+- Deterministic Zyte Builder (v11 core)
+- D.R.E. enforcement
+- Zox abstraction
+- Proof, history, bundle, signing
+- UI Builder + Feed
+- Ops: start/stop/backup/restore/health/tests
+- Hard freeze + checksum manifest
+
+Ports:
+- UI: 8080
+- API: 9090
+- Public Mirror: 8181

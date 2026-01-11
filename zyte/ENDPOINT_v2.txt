@@ -1,0 +1,7 @@
+ZYTE BUILDER v2 — END STATE
+
+- Immutable Zyte IDs
+- SHA-256 integrity hash
+- Append-only event log
+- Deterministic HTML rendering endpoint
+- Read/Write API with enforcement

@@ -1,0 +1,5 @@
+ZYTE BUILDER v5 — END STATE
+
+- Identity + ACL scaffolding
+- Export Zyte as JSON / Markdown
+- All prior endpoints preserved

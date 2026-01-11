@@ -1,0 +1,6 @@
+ZYTE BUILDER v10 — END STATE
+
+- Deterministic Runtime Enforcement (D.R.E.)
+- Policy-driven enforcement
+- Create/update guarded at runtime
+- Enforcement before mutation

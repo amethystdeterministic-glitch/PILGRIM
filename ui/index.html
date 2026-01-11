@@ -2,30 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amethyst Browser</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-  <div id="gate">
-    <div id="hex">
-      <svg viewBox="0 0 100 100" width="64">
-        <polygon points="50,5 93,27 93,73 50,95 7,73 7,27" fill="black"/>
-        <circle id="dot" cx="50" cy="65" r="6" fill="#7b5cff"/>
-      </svg>
-    </div>
-    <p>GhostPass authenticating…</p>
+
+<div id="app">
+
+<header id="header">
+  <div id="brand">Amethyst</div>
+  <div id="address-bar">home</div>
+</header>
+
+<main id="main">
+
+<section id="home">
+  <h1>Home</h1>
+  <div id="home-frame">
+    <iframe id="home-iframe" title="Amethyst Home" src="http://127.0.0.1:9090/render/amethyst-home"></iframe>
+  </div>
+</section>
+
+<section id="speed-dial">
+  <h2>Speed Dial</h2>
+  <ul>
+    <li data-target="home">Home</li>
+    <li data-target="zyte">Zyte</li>
+    <li data-target="zox">Zox</li>
+    <li data-target="proof">Proof</li>
+    <li data-target="settings">Settings</li>
+  </ul>
+</section>
+
+<section id="zyte-builder">
+  <h2>Zyte Builder</h2>
+
+  <div class="panel">
+    <h3>Create Zyte</h3>
+    <input id="zb-id" placeholder="id (immutable)" />
+    <input id="zb-title" placeholder="title" />
+    <textarea id="zb-content" placeholder="content"></textarea>
+    <button id="zb-create">Create</button>
+    <button id="zb-update">Update</button>
+    <pre id="zb-create-result"></pre>
   </div>
 
-  <div id="app" hidden>
-    <header>
-      <h1>Amethyst Deterministic Ltd</h1>
-      <small>ZYTE · T13 ENFORCED</small>
-    </header>
-    <main>
-      <pre id="proof"></pre>
-    </main>
+  <div class="panel">
+    <h3>Bind Zox</h3>
+    <input id="zox-id" placeholder="zox id" />
+    <input id="zox-zyte" placeholder="zyte id" />
+    <button id="zox-bind">Bind</button>
+    <pre id="zox-result"></pre>
   </div>
 
-<script src="main.js"></script>
+  <div class="panel">
+    <h3>Export</h3>
+    <input id="exp-id" placeholder="zyte id" />
+    <button id="exp-json">Export JSON</button>
+    <button id="exp-md">Export Markdown</button>
+    <pre id="exp-result"></pre>
+  </div>
+
+  <div class="panel">
+    <h3>Proof</h3>
+    <input id="proof-id" placeholder="zyte id" />
+    <button id="proof-get">Get Proof</button>
+    <pre id="proof-result"></pre>
+  </div>
+
+</section>
+
+<section id="zyte-feed" data-state="collapsed">
+  <h2>Zyte Feed</h2>
+  <p class="zyte-toggle">Tap to expand</p>
+  <div id="zyte-feed-content">
+    <ul><li>Loading…</li></ul>
+  </div>
+</section>
+
+</main>
+
+<footer id="footer">
+  <span>Amethyst Deterministic</span>
+</footer>
+
+</div>
+
+<script src="js/main.js"></script>
 </body>
 </html>

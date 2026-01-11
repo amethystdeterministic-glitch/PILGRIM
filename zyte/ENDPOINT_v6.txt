@@ -1,0 +1,6 @@
+ZYTE BUILDER v6 — END STATE
+
+- Update creates new version deterministically
+- Append-only event log preserved
+- History endpoint per Zyte ID
+- Proof tied to latest version hash

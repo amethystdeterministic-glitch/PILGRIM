@@ -1,0 +1,5 @@
+{
+  "issuer": "amethyst",
+  "algorithm": "sha256",
+  "secret": "LOCAL-DETERMINISTIC-KEY"
+}

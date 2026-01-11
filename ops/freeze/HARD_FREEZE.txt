@@ -1,0 +1,12 @@
+AMETHYST — HARD FREEZE
+
+State: immutable
+Edits: forbidden
+Allowed actions:
+- backup
+- restore
+- mirror
+- serve
+- verify
+
+Any code change requires a new versioned fork.

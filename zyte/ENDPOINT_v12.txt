@@ -1,0 +1,5 @@
+ZYTE BUILDER v12 — END STATE
+
+- Rate limiting per IP
+- Max request body enforced
+- All prior features preserved

@@ -1,0 +1,6 @@
+ZYTE BUILDER v4 — END STATE
+
+- Zox container abstraction
+- Zyte ↔ Zox binding
+- Deterministic Proof endpoint
+- Search + render preserved

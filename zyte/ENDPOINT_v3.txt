@@ -1,0 +1,6 @@
+ZYTE BUILDER v3 — END STATE
+
+- Token index + search endpoint
+- Deterministic indexing on create
+- Render + API intact
+- Zox-compatible foundation

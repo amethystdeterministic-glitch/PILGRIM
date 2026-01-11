@@ -1,0 +1,19 @@
+{
+  "name": "Zyte Builder",
+  "version": "v7",
+  "mode": "deterministic",
+  "components": [
+    "schema",
+    "engine",
+    "index",
+    "search",
+    "render",
+    "zox",
+    "proof",
+    "identity",
+    "export",
+    "history",
+    "api"
+  ],
+  "frozen_at": "NOW"
+}

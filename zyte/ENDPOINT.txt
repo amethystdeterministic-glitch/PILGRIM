@@ -1,0 +1,9 @@
+ZYTE BUILDER v0 — END STATE
+
+- Deterministic Zyte schema
+- File-backed storage
+- CLI create/list
+- Read-only HTTP API
+- UI consumes live Zyte feed
+- No UI surgery required
+- DetLine compliant

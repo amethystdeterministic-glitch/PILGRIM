@@ -1,0 +1,5 @@
+ZYTE BUILDER v9 — END STATE
+
+- Proof chain (hash-linked)
+- Bundle export (Zyte + Zox + Proof + History)
+- Bundle events recorded immutably

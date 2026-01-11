@@ -1,0 +1,5 @@
+ZYTE BUILDER — FROZEN
+
+State: deterministic
+Edits: prohibited
+Only version bumps allowed

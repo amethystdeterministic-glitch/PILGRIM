@@ -1,0 +1,16 @@
+{
+  "create": {
+    "required_fields": ["id", "title", "content"],
+    "immutable": ["id"]
+  },
+  "update": {
+    "immutable": ["id"],
+    "version_increment": true
+  },
+  "export": {
+    "allowed": true
+  },
+  "bundle": {
+    "allowed": true
+  }
+}

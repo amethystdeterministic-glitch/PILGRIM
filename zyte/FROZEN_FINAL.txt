@@ -1,0 +1,7 @@
+ZYTE BUILDER v11 — FINAL
+
+- Deterministic Runtime Enforcement active
+- Proofchain + Bundles signed
+- Verify-ready artifacts
+- UI integrated
+- Changes require version bump only
