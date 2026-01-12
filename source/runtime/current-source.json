@@ -2,5 +2,7 @@
   "schema": "amethyst.source.current.v1",
   "source_id": "source-current",
   "created_at_utc": null,
-  "notes": "Canonical Source current state. Zyte is legacy. SCRY must read Source-first and only bridge Zyte if Source is missing."
+  "notes": "Canonical Source current state. ZYTE is legacy. SCRY must read Source-first and only bridge ZYTE if Source is missing.",
+  "head_entry_hash": "0a8068aceaa9fa1f200d4fa9230e4942895ea82d13fb020388c430dd772fff50",
+  "ledger_path": "source/runtime/source-ledger.ndjson"
 }
