@@ -1,15 +1,56 @@
-import http from "http";
-import fs from "fs";
-import path from "path";
+#!/usr/bin/env node
+"use strict";
+
+/*
+ * SCRY Runtime Server (v1)
+ * Read-only canonical introspection surface.
+ *
+ * Serves:
+ *   - /health
+ *   - /source/current
+ *
+ * Source precedence:
+ *   1. source/runtime/current-source.json
+ *   2. zyte/runtime/current-zyte.json (legacy bridge)
+ */
+
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
 
 const PORT = process.env.SCRY_PORT || 9191;
-const ROOT = process.env.SCRY_ROOT || process.cwd();
+const ROOT = process.cwd();
 
-function safeRead(p) {
-  const rp = path.resolve(p);
-  if (!rp.startsWith(ROOT)) return null;
-  if (!fs.existsSync(rp)) return null;
-  return fs.readFileSync(rp, "utf-8");
+function readJsonSafe(p) {
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function readSourceCurrent() {
+  const sourcePath = path.join(ROOT, "source", "runtime", "current-source.json");
+  const zytePath = path.join(ROOT, "zyte", "runtime", "current-zyte.json");
+
+  if (fs.existsSync(sourcePath)) {
+    return {
+      schema: "amethyst.scry.source.v1",
+      mode: "canonical",
+      source: readJsonSafe(sourcePath)
+    };
+  }
+
+  if (fs.existsSync(zytePath)) {
+    return {
+      schema: "amethyst.scry.source.v1",
+      mode: "legacy-bridge",
+      source: readJsonSafe(zytePath),
+      bridge_from: "zyte/runtime/current-zyte.json"
+    };
+  }
+
+  return null;
 }
 
 const server = http.createServer((req, res) => {
@@ -19,23 +60,22 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.url === "/health") {
-    res.writeHead(200);
+    res.writeHead(200, { "Content-Type": "text/plain" });
     return res.end("OK");
   }
 
-  if (req.url.startsWith("/read?")) {
-    const target = new URL(req.url, "http://localhost").searchParams.get("path");
-    const data = safeRead(target);
-    if (!data) {
-      res.writeHead(404);
-      return res.end("NOT FOUND");
+  if (req.url === "/source/current") {
+    const payload = readSourceCurrent();
+    if (!payload) {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      return res.end("NO_SOURCE_AVAILABLE");
     }
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    return res.end(data);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify(payload, null, 2));
   }
 
-  res.writeHead(404);
-  res.end("UNKNOWN");
+  res.writeHead(404, { "Content-Type": "text/plain" });
+  res.end("UNKNOWN_ENDPOINT");
 });
 
 server.listen(PORT, () => {
