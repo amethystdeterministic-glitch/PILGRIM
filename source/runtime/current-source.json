@@ -1,0 +1,6 @@
+{
+  "schema": "amethyst.source.current.v1",
+  "source_id": "source-current",
+  "created_at_utc": null,
+  "notes": "Bridge artifact. Replaces prior Zyte current state in canonical naming. Runtime may still produce legacy Zyte outputs until full migration is complete."
+}
