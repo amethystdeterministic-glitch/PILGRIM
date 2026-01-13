@@ -1,0 +1,496 @@
+{
+  "schema": "amethyst.source.site.v1",
+  "version": "1.0.0",
+
+  "source": {
+    "identity": {
+      "name": "Amethyst Deterministic Ltd",
+      "tagline": "Deterministic proof for systems that must not drift.",
+      "description": "Amethyst Deterministic Ltd builds runtime-enforced systems that replace trust with proof. When a system changes, you can verify it. When a process happens, you can prove it.",
+      "brand": {
+        "mark": "hex",
+        "dot": {
+          "enabled": true,
+          "color": "amethyst",
+          "hex": "#6F2DBD"
+        }
+      }
+    },
+
+    "contact": {
+      "email": "amethyst.deterministic@gmail.com",
+      "response_time": "We usually respond within 1–2 business days."
+    },
+
+    "links": {
+      "primary_domain": "amethystdeterministic.com",
+      "social": {
+        "x": "",
+        "linkedin": "",
+        "github": ""
+      }
+    },
+
+    "guarantees": [
+      "Append-only ledger history (no silent rewrites)",
+      "Content-addressed state (what you see is what was proven)",
+      "Locally verifiable proofs (no forced cloud trust)",
+      "Runtime-enforced invariants (invalid transitions are blocked)",
+      "Deterministic audit trail (replayable and inspectable)"
+    ]
+  },
+
+  "site": {
+    "title": "Amethyst Deterministic Ltd",
+    "meta": {
+      "description": "Deterministic proof for systems that must not drift. Runtime-enforced guarantees, append-only ledgers, and verifiable history.",
+      "og_title": "Amethyst Deterministic Ltd",
+      "og_description": "Replace trust with proof. Deterministic guarantees for real-world systems."
+    },
+
+    "navigation": [
+      { "label": "Home", "href": "/" },
+      { "label": "Guards", "href": "/guards" },
+      { "label": "Pricing", "href": "/pricing" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+
+    "footer": {
+      "columns": [
+        {
+          "title": "Product",
+          "links": [
+            { "label": "Guards", "href": "/guards" },
+            { "label": "Pricing", "href": "/pricing" }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            { "label": "Contact", "href": "/contact" }
+          ]
+        },
+        {
+          "title": "Proof",
+          "links": [
+            { "label": "What is Deterministic Proof?", "href": "/proof" }
+          ]
+        }
+      ],
+      "legal": "© Amethyst Deterministic Ltd. All rights reserved."
+    },
+
+    "theme": {
+      "style": "professional",
+      "tone": "confident",
+      "background": "dark",
+      "accent": "amethyst"
+    }
+  },
+
+  "tiers": {
+    "community": {
+      "name": "Community",
+      "price": "Free",
+      "summary": "For builders, researchers, and early adopters.",
+      "highlights": [
+        "Read-only proofs and public demos",
+        "Community access and updates",
+        "Donation-supported development"
+      ],
+      "cta": { "label": "Donate", "href": "/pricing#donate" }
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "Request access",
+      "summary": "For teams implementing deterministic proof in production.",
+      "highlights": [
+        "Guard packages with setup support",
+        "Template sources for faster deployment",
+        "Operational guidance and integration patterns"
+      ],
+      "cta": { "label": "Request access", "href": "/contact?topic=pro" }
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Contact us",
+      "summary": "For regulated or high-stakes environments.",
+      "highlights": [
+        "Custom guard policy + invariants",
+        "Deployment hardening and review",
+        "Partner-ready evidence packages"
+      ],
+      "cta": { "label": "Contact us", "href": "/contact?topic=enterprise" }
+    }
+  },
+
+  "pages": {
+    "home": {
+      "path": "/",
+      "title": "Deterministic systems for high-stakes reality.",
+      "sections": [
+        {
+          "type": "hero",
+          "headline": "Replace trust with proof.",
+          "subheadline": "Amethyst Deterministic Ltd delivers runtime-enforced guarantees: append-only history, verifiable state, and deterministic audit trails.",
+          "primary_cta": { "label": "Explore Guards", "href": "/guards" },
+          "secondary_cta": { "label": "View Pricing", "href": "/pricing" },
+          "badge": "Deterministic Runtime Enforcement (D.R.E.)"
+        },
+        {
+          "type": "value_cards",
+          "title": "What you get",
+          "cards": [
+            {
+              "title": "No silent mutation",
+              "text": "If the state changes, it is recorded. If it’s recorded, it can be verified."
+            },
+            {
+              "title": "Replayable history",
+              "text": "A deterministic trail you can replay, inspect, and prove—without hand-waving."
+            },
+            {
+              "title": "Runtime enforcement",
+              "text": "Invalid transitions are blocked at the gate. The system cannot ‘drift’ unnoticed."
+            }
+          ]
+        },
+        {
+          "type": "feature_split",
+          "title": "Guards are product pages, not buzzwords.",
+          "left": {
+            "headline": "Each Guard solves one class of failure.",
+            "bullets": [
+              "Clear problem framing",
+              "Enforcement mechanism",
+              "Guarantees you can quote",
+              "Practical deployment path"
+            ]
+          },
+          "right": {
+            "headline": "Built for proof, not persuasion.",
+            "bullets": [
+              "Append-only ledger proofs",
+              "Content-addressed integrity",
+              "Locally verifiable outputs",
+              "Audit-ready evidence"
+            ]
+          }
+        },
+        {
+          "type": "guard_teaser",
+          "title": "Featured Guards",
+          "items": [
+            { "id": "ledger-guard", "href": "/guards/ledger-guard" },
+            { "id": "logic-guard", "href": "/guards/logic-guard" },
+            { "id": "meat-guard", "href": "/guards/meat-guard" }
+          ]
+        },
+        {
+          "type": "faq",
+          "title": "FAQ",
+          "items": [
+            {
+              "q": "Is this a blockchain product?",
+              "a": "No. The core idea is deterministic proof and enforced history. The system can use append-only ledgers without requiring a public chain."
+            },
+            {
+              "q": "What does “locally verifiable” mean?",
+              "a": "You can validate key claims on your own machine from the recorded history and content hashes—without needing to trust a third party."
+            },
+            {
+              "q": "Can this fit a specific industry?",
+              "a": "Yes. Guards are designed to map directly onto business reality—supply chains, compliance, systems integrity, and operational audit."
+            }
+          ]
+        },
+        {
+          "type": "closing_cta",
+          "headline": "Ready to align your system with reality?",
+          "subheadline": "If your process matters, your proof matters.",
+          "cta": { "label": "Contact us", "href": "/contact" }
+        }
+      ]
+    },
+
+    "guards_index": {
+      "path": "/guards",
+      "title": "Guards",
+      "sections": [
+        {
+          "type": "intro",
+          "headline": "Guards",
+          "subheadline": "Each Guard is a product: a defined failure class, an enforcement mechanism, and guarantees you can operationalize."
+        },
+        {
+          "type": "guard_grid",
+          "items": [
+            { "id": "ledger-guard", "href": "/guards/ledger-guard" },
+            { "id": "logic-guard", "href": "/guards/logic-guard" },
+            { "id": "meat-guard", "href": "/guards/meat-guard" }
+          ]
+        }
+      ]
+    },
+
+    "pricing": {
+      "path": "/pricing",
+      "title": "Pricing",
+      "sections": [
+        {
+          "type": "intro",
+          "headline": "Pricing",
+          "subheadline": "Start free. Move up only when you need stronger guarantees, support, or deployment hardening."
+        },
+        {
+          "type": "tier_cards",
+          "tiers": [ "community", "pro", "enterprise" ]
+        },
+        {
+          "type": "donate_block",
+          "id": "donate",
+          "headline": "Support development",
+          "text": "Community tier is free and donation-supported. If this work matters to you, your support accelerates shipping.",
+          "cta": { "label": "Donate", "href": "mailto:amethyst.deterministic@gmail.com?subject=Donation%20-%20Amethyst%20Deterministic%20Ltd" }
+        },
+        {
+          "type": "faq",
+          "title": "Pricing FAQ",
+          "items": [
+            {
+              "q": "What does Pro include?",
+              "a": "Pro is for teams integrating Guards into real workflows—includes practical templates and setup guidance."
+            },
+            {
+              "q": "What does Enterprise include?",
+              "a": "Enterprise adds policy tuning, review, and partner-ready evidence packaging for high-stakes environments."
+            }
+          ]
+        }
+      ]
+    },
+
+    "contact": {
+      "path": "/contact",
+      "title": "Contact",
+      "sections": [
+        {
+          "type": "intro",
+          "headline": "Contact us",
+          "subheadline": "Tell us what you’re building and what must be proven. We’ll recommend the right Guard path."
+        },
+        {
+          "type": "contact_card",
+          "email": "amethyst.deterministic@gmail.com",
+          "suggested_subjects": [
+            "Pro access request",
+            "Enterprise inquiry",
+            "Guard integration question",
+            "Partnership / research"
+          ],
+          "note": "Include your industry, your failure mode (what must not happen), and what evidence you need to produce."
+        }
+      ]
+    },
+
+    "proof": {
+      "path": "/proof",
+      "title": "What is Deterministic Proof?",
+      "sections": [
+        {
+          "type": "prose",
+          "headline": "Deterministic Proof",
+          "paragraphs": [
+            "Most systems rely on trust: policies, screenshots, declarations, and after-the-fact audits. That approach breaks when incentives shift, when pressure hits, or when humans misremember.",
+            "Deterministic Proof means the system itself produces an enforced history. It becomes difficult—or impossible—to claim something happened without the evidence trail that proves it.",
+            "The objective is simple: reduce uncertainty by design, and make integrity the default."
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Core properties",
+          "items": [
+            "Append-only history",
+            "Content-addressed state",
+            "Locally verifiable outputs",
+            "Runtime-enforced invariants",
+            "Replayable audit trails"
+          ]
+        },
+        {
+          "type": "closing_cta",
+          "headline": "If it matters, prove it.",
+          "subheadline": "Choose the Guard that matches your failure mode.",
+          "cta": { "label": "Explore Guards", "href": "/guards" }
+        }
+      ]
+    }
+  },
+
+  "guards": [
+    {
+      "id": "ledger-guard",
+      "name": "Ledger Guard",
+      "tagline": "Prevents historical ambiguity.",
+      "problem": "Records can be altered, backfilled, or selectively presented after the fact.",
+      "enforcement": "Append-only ledgering with deterministic entry hashes and replayable history.",
+      "guarantees": [
+        "No silent rewrite",
+        "Replayable audit trail",
+        "Proof of sequence"
+      ],
+      "best_for": [
+        "Compliance and audit trails",
+        "Chain-of-custody histories",
+        "Change tracking for critical states"
+      ],
+      "page": {
+        "path": "/guards/ledger-guard",
+        "hero": {
+          "headline": "Ledger Guard",
+          "subheadline": "When the history matters, ambiguity is the enemy. Ledger Guard enforces append-only reality."
+        },
+        "sections": [
+          {
+            "type": "problem_solution",
+            "problem": "If the record can be rewritten, the record can be weaponised.",
+            "solution": "Ledger Guard enforces an append-only evidence trail. Events become provable—not persuasive."
+          },
+          {
+            "type": "outcomes",
+            "title": "Outcomes",
+            "items": [
+              "Deterministic event history",
+              "Evidence you can replay",
+              "Reduced audit friction"
+            ]
+          },
+          {
+            "type": "guarantees",
+            "title": "Guarantees",
+            "items": [
+              "Append-only ledger",
+              "Deterministic entry hashing",
+              "Sequence proof and continuity"
+            ]
+          },
+          {
+            "type": "cta",
+            "headline": "Want Ledger Guard in your workflow?",
+            "cta": { "label": "Contact us", "href": "/contact?topic=ledger-guard" }
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "logic-guard",
+      "name": "Logic Guard",
+      "tagline": "Prevents invalid system state.",
+      "problem": "Systems drift into impossible states when rules are implied, scattered, or manually enforced.",
+      "enforcement": "Invariant enforcement at runtime: invalid transitions are blocked before they land.",
+      "guarantees": [
+        "No invalid transitions",
+        "Enforced invariants",
+        "Deterministic state evolution"
+      ],
+      "best_for": [
+        "Safety-critical workflows",
+        "Deterministic runtime constraints",
+        "Preventing process drift"
+      ],
+      "page": {
+        "path": "/guards/logic-guard",
+        "hero": {
+          "headline": "Logic Guard",
+          "subheadline": "If a system can drift into invalid state, it eventually will. Logic Guard blocks it at the gate."
+        },
+        "sections": [
+          {
+            "type": "problem_solution",
+            "problem": "Policy without enforcement is just a suggestion.",
+            "solution": "Logic Guard makes invariants executable. The system cannot proceed unless rules are satisfied."
+          },
+          {
+            "type": "outcomes",
+            "title": "Outcomes",
+            "items": [
+              "Reduced operational errors",
+              "Cleaner state machines",
+              "Stronger guarantees with less human load"
+            ]
+          },
+          {
+            "type": "guarantees",
+            "title": "Guarantees",
+            "items": [
+              "Invariant checks at runtime",
+              "Deterministic decision gates",
+              "Blocked invalid state transitions"
+            ]
+          },
+          {
+            "type": "cta",
+            "headline": "Want Logic Guard in your stack?",
+            "cta": { "label": "Contact us", "href": "/contact?topic=logic-guard" }
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "meat-guard",
+      "name": "Meat Guard",
+      "tagline": "Prevents food-chain uncertainty.",
+      "problem": "Supply chains rely on trust-based handoffs, fragmented records, and after-the-fact assurance.",
+      "enforcement": "Deterministic custody proof: enforceable event capture across custody, handling, and transformation.",
+      "guarantees": [
+        "No unverifiable handoffs",
+        "Chain-of-custody continuity",
+        "Proof-backed claims"
+      ],
+      "best_for": [
+        "Meat and perishable supply chains",
+        "Processing and handling verification",
+        "Partner-ready evidence trails"
+      ],
+      "page": {
+        "path": "/guards/meat-guard",
+        "hero": {
+          "headline": "Meat Guard",
+          "subheadline": "Food governance collapses when proof is retrospective. Meat Guard enforces custody reality."
+        },
+        "sections": [
+          {
+            "type": "problem_solution",
+            "problem": "When something goes wrong, everyone searches for paperwork. Paperwork is not proof.",
+            "solution": "Meat Guard builds an enforced trail of custody events that can be replayed and verified."
+          },
+          {
+            "type": "outcomes",
+            "title": "Outcomes",
+            "items": [
+              "Reduced dispute time",
+              "Partner trust through verifiable evidence",
+              "Clearer compliance posture"
+            ]
+          },
+          {
+            "type": "guarantees",
+            "title": "Guarantees",
+            "items": [
+              "Custody continuity",
+              "Deterministic event proofs",
+              "No unverifiable handoff points"
+            ]
+          },
+          {
+            "type": "cta",
+            "headline": "Want Meat Guard in your supply chain?",
+            "cta": { "label": "Contact us", "href": "/contact?topic=meat-guard" }
+          }
+        ]
+      }
+    }
+  ]
+}

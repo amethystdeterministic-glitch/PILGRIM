@@ -1,0 +1,7 @@
+.state-red { color: #b00020; }
+.state-yellow { color: #d4a000; }
+.state-green { color: #1b7f3a; }
+.state-dot {
+  font-size: 1.1em;
+  margin-right: 6px;
+}

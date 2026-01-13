@@ -3,6 +3,6 @@
   "source_id": "source-current",
   "created_at_utc": null,
   "notes": "Canonical Source current state. ZYTE is legacy. SCRY must read Source-first and only bridge ZYTE if Source is missing.",
-  "head_entry_hash": "0a8068aceaa9fa1f200d4fa9230e4942895ea82d13fb020388c430dd772fff50",
+  "head_entry_hash": "60187375daf388d595a829b1612384226dc3b1dd2e2307c03d4c07b8bdd15b40",
   "ledger_path": "source/runtime/source-ledger.ndjson"
 }
