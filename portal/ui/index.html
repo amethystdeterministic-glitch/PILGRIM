@@ -1,43 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Amethyst Portal</title>
   <link rel="stylesheet" href="/ui/state-style.css" />
 </head>
-
 <body>
 
-  <!-- AETHER GLOBAL : PHASE 1 -->
-  <div id="aether-bar">
-    <input
-      id="aether-input"
-      type="text"
-      placeholder="Aether — resolve, search, navigate"
-      disabled
-    />
-  </div>
-  <!-- /AETHER GLOBAL -->
+<nav>
+  <button data-route="source">SOURCE</button>
+  <button data-route="core">CORE</button>
+  <button data-route="pipeline">PIPELINE</button>
+</nav>
 
-  <header>
-    <h1>Amethyst Portal</h1>
-    <p>Word + Excel + Email + Chat — rebuilt so history can’t be altered</p>
+<main id="main"></main>
 
-    <nav>
-      <button data-route="source">SOURCE</button>
-      <button data-route="pipeline">PIPELINE</button>
-      <button data-route="guards">GUARDS</button>
-      <button data-route="settings">SETTINGS</button>
-    </nav>
-
-    <hr />
-  </header>
-
-  <main id="main"></main>
-
-  <!-- SCRIPT MUST BE LAST -->
-  <script src="/ui/portal.js"></script>
+<script src="/ui/portal.js"></script>
+<script src="/ui/core.js"></script>
 
 </body>
 </html>
