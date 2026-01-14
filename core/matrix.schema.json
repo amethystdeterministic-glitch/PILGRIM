@@ -1,0 +1,20 @@
+{
+  "id": "string",
+  "version": "semver",
+  "state": "draft|active|frozen",
+  "owner_identity": "identity_id",
+  "timestamp_created": "iso8601",
+  "timestamp_updated": "iso8601",
+  "timestamp_frozen": "iso8601|null",
+  "name": "string",
+  "columns": [
+    { "key": "string", "type": "number|string|boolean|date" }
+  ],
+  "rows": [
+    { "id": "string", "cells": { "key": "any" } }
+  ],
+  "history": [
+    { "version": "semver", "timestamp": "iso8601", "hash": "sha256" }
+  ],
+  "proof": { "hash": "sha256", "prev": "sha256|null" }
+}
