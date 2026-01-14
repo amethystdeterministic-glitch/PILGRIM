@@ -1,0 +1,27 @@
+{
+  "id": "string",
+  "version": "semver",
+  "state": "draft|sent|received|frozen",
+  "sender_identity": "identity_id",
+  "recipient_identities": ["identity_id"],
+  "external_addresses": ["email|string"],
+  "timestamp_created": "iso8601",
+  "timestamp_sent": "iso8601|null",
+  "timestamp_frozen": "iso8601|null",
+  "content": {
+    "subject": "string|null",
+    "body": "string",
+    "attachments": [
+      { "name": "string", "hash": "sha256", "size": "int" }
+    ]
+  },
+  "transport": {
+    "type": "internal|smtp|adapter",
+    "adapter": "post|mundo|external",
+    "metadata": {}
+  },
+  "proof": {
+    "hash": "sha256",
+    "prev": "sha256|null"
+  }
+}
