@@ -2,11 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Amethyst Portal</title>
   <link rel="stylesheet" href="/ui/state-style.css" />
 </head>
+
 <body>
+
+  <!-- AETHER GLOBAL : PHASE 1 -->
+  <div id="aether-bar">
+    <input
+      id="aether-input"
+      type="text"
+      placeholder="Aether — resolve, search, navigate"
+      disabled
+    />
+  </div>
+  <!-- /AETHER GLOBAL -->
+
   <header>
     <h1>Amethyst Portal</h1>
     <p>Word + Excel + Email + Chat — rebuilt so history can’t be altered</p>
@@ -23,7 +36,8 @@
 
   <main id="main"></main>
 
-  <!-- THIS is the fix -->
+  <!-- SCRIPT MUST BE LAST -->
   <script src="/ui/portal.js"></script>
+
 </body>
 </html>
