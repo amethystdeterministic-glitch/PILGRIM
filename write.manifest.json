@@ -1,0 +1,16 @@
+{
+  "module": "WRITE",
+  "version": "0.1.0",
+  "status": "yellow",
+  "capabilities": [
+    "create",
+    "update",
+    "freeze",
+    "index"
+  ],
+  "constraints": [
+    "immutable_when_frozen",
+    "identity_bound",
+    "deterministic_versioning"
+  ]
+}
