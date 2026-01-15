@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>AMETHYST PORTAL — LIVE TEST</title>
+  <style>
+    body {
+      background: black;
+      color: lime;
+      font-family: monospace;
+      padding: 40px;
+      font-size: 22px;
+    }
+    .big {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="big">🚨 AMETHYST PORTAL LIVE FILE 🚨</div>
+
+<div id="probe">Waiting…</div>
+
+<script>
+(async () => {
+  try {
+    const r = await fetch('http://127.0.0.1:9190/api/source/status');
+    const j = await r.json();
+    document.getElementById('probe').innerText =
+      'RUNTIME RESPONSE: ' + JSON.stringify(j);
+  } catch (e) {
+    document.getElementById('probe').innerText =
+      'FETCH FAILED';
+  }
+})();
+</script>
+
+</body>
+</html>
