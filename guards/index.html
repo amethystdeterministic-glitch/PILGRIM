@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · GUARDS</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,8 +12,12 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
-.card{background:#12162a;border:1px solid #222633;border-radius:10px;padding:16px;margin-bottom:12px}
+main{padding:24px;max-width:1100px;margin:0 auto}
+h3{margin:0 0 6px}
+.section{margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{border:1px solid #222633;border-radius:12px;padding:16px;background:#12162a}
+.badge{display:inline-block;font-size:11px;padding:3px 8px;border:1px solid #2a2f55;border-radius:999px;margin-bottom:8px;color:#9aa0ff}
 </style>
 </head>
 <body>
@@ -34,30 +38,46 @@ main{padding:24px}
 
 <main>
 <h2>Guards</h2>
-<p>Deterministic Runtime Enforcement modules. Visibility only.</p>
+<p>Deterministic Runtime Enforcement (D.R.E.) modules powered by the Pilgrim Deterministic Engine.</p>
 
+<div class="section">
 <h3>Pro Tier</h3>
-<div class="card">FamilyGuard — Family safety, attention, and finances.</div>
+<div class="grid">
+  <div class="card">
+    <div class="badge">PRO</div>
+    <h3>FamilyGuard</h3>
+    <p>Deterministic protection for family digital safety, attention, and finances.</p>
+  </div>
+</div>
+</div>
 
+<div class="section">
 <h3>Enterprise Tier</h3>
-<div class="card">Sentry</div>
-<div class="card">LogicGuard</div>
-<div class="card">LedgerGuard</div>
-<div class="card">TradeGuard</div>
-<div class="card">MeatGuard</div>
-<div class="card">CareGuard</div>
-<div class="card">ModelGuard</div>
-<div class="card">ContractGuard</div>
-<div class="card">OilGuard</div>
-<div class="card">FieldGuard</div>
-<div class="card">FairPlayGuard</div>
-<div class="card">BalanceGuard</div>
-<div class="card">GridGuard</div>
-<div class="card">ClaimGuard</div>
-<div class="card">VerdictGuard</div>
-<div class="card">CareFlowGuard</div>
-<div class="card">SkyGuard</div>
+<div class="grid">
+
+<div class="card"><div class="badge">ENTERPRISE</div><h3>Sentry</h3><p>Foundational cybersecurity and national security enforcement.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>LogicGuard</h3><p>Governance for AI and algorithmic decision systems.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>LedgerGuard</h3><p>Deterministic auditability for financial transactions and models.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>TradeGuard</h3><p>Integrity for global trade and supply chains.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>MeatGuard</h3><p>End-to-end provable safety for the meat supply chain.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>CareGuard</h3><p>Integrity for clinical trials and medical research.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>ModelGuard</h3><p>Governance for AI model training and deployment.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>ContractGuard</h3><p>Security and compliance for smart contracts.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>OilGuard</h3><p>Enforcement for hydrocarbons and energy operations.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>FieldGuard</h3><p>Agricultural intelligence and compliance assurance.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>FairPlayGuard</h3><p>Deterministic fairness for regulated online gambling.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>BalanceGuard</h3><p>Fairness and transparency for live game economies.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>GridGuard</h3><p>Stability and safety for national energy grids.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>ClaimGuard</h3><p>Integrity for insurance claim adjudication.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>VerdictGuard</h3><p>Governance for algorithm-assisted justice systems.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>CareFlowGuard</h3><p>Operational integrity for healthcare workflows.</p></div>
+<div class="card"><div class="badge">ENTERPRISE</div><h3>SkyGuard</h3><p>Assurance for national weather and climate forecasting.</p></div>
+
+</div>
+</div>
+
 </main>
 
+<script src="/ui/scry.js"></script>
 </body>
 </html>

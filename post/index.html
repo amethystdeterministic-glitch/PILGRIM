@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · POST</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,11 +12,41 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
-.panel{background:#12162a;border:1px solid #222633;border-radius:10px;padding:14px}
-input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #2a2f55;background:#0b0d12;color:#e6e8ee;font-family:ui-monospace,monospace}
-textarea{min-height:32vh;line-height:1.4}
-.btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:#1a2150;border:1px solid #2a2f55;color:#fff}
+main{padding:24px;max-width:900px;margin:0 auto}
+.meta{display:flex;gap:16px;color:#b7bbd6;font-size:13px}
+textarea{
+  width:100%;
+  min-height:40vh;
+  margin-top:16px;
+  padding:14px;
+  background:#0b0d12;
+  color:#e6e8ee;
+  border:1px solid #2a2f55;
+  border-radius:10px;
+  font-family:ui-monospace,monospace;
+  font-size:15px;
+  line-height:1.5;
+}
+textarea[readonly]{opacity:0.7}
+.controls{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+button{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #2a2f55;
+  background:#1a2150;
+  color:#fff;
+  cursor:pointer;
+}
+button.secondary{background:#12162a}
+button.danger{background:#3a1430}
+.status{margin-top:10px;font-size:13px}
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid #2a2f55;
+  background:#12162a;
+}
 </style>
 </head>
 <body>
@@ -37,15 +67,25 @@ textarea{min-height:32vh;line-height:1.4}
 
 <main>
 <h2>Post</h2>
-<p>Publish statements into the public record (mock).</p>
 
-<div class="panel">
-  <input placeholder="Title"/>
-  <br/><br/>
-  <textarea placeholder="Write your post…"></textarea>
-  <div class="btn">Commit (mock)</div>
+<div class="meta">
+  <div id="version"></div>
+  <div id="state"></div>
+  <div id="timestamps"></div>
 </div>
+
+<textarea id="editor"></textarea>
+
+<div class="controls">
+  <button id="freezeBtn">Freeze</button>
+  <button id="unfreezeBtn" class="secondary">New Version</button>
+  <button id="publishBtn" class="danger">Publish</button>
+</div>
+
+<div class="status" id="status"></div>
 </main>
 
+
+<script src="/ui/scry.js"></script>
 </body>
 </html>

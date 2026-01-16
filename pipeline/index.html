@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · PIPELINE</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,9 +12,13 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
-.card{background:#12162a;border:1px solid #222633;border-radius:10px;padding:16px;margin-bottom:12px}
-.card a{color:#fff;text-decoration:none}
+main{padding:24px;max-width:900px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{border:1px solid #222633;border-radius:12px;padding:16px;background:#12162a}
+.card h3{margin:0 0 6px}
+.card p{margin:0 0 10px;color:#cfd3ff}
+.card a{color:#9aa0ff;text-decoration:none;font-size:13px}
+.badge{display:inline-block;font-size:11px;padding:3px 8px;border:1px solid #2a2f55;border-radius:999px;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -35,14 +39,43 @@ main{padding:24px}
 
 <main>
 <h2>Pipeline</h2>
-<p>Application flow and orchestration.</p>
+<p>The active application surfaces of Amethyst.</p>
 
-<div class="card"><a href="/write/">WRITE →</a></div>
-<div class="card"><a href="/matrix/">MATRIX →</a></div>
-<div class="card"><a href="/post/">POST →</a></div>
-<div class="card"><a href="/mundo/">MUNDO →</a></div>
-<div class="card"><a href="/forge/">FORGE →</a></div>
+<div class="grid">
+  <div class="card">
+    <div class="badge">GOLD STANDARD</div>
+    <h3>Write</h3>
+    <p>Deterministic writing with draft → freeze → version.</p>
+    <a href="/write/">Open Write</a>
+  </div>
+
+  <div class="card">
+    <h3>Matrix</h3>
+    <p>Structured, block-based composition using the WRITE engine.</p>
+    <a href="/matrix/">Open Matrix</a>
+  </div>
+
+  <div class="card">
+    <h3>Post</h3>
+    <p>Freeze and publish immutable records.</p>
+    <a href="/post/">Open Post</a>
+  </div>
+
+  <div class="card">
+    <h3>Mundo</h3>
+    <p>Contextual world and state views.</p>
+    <a href="/mundo/">Open Mundo</a>
+  </div>
+
+  <div class="card">
+    <h3>Forge</h3>
+    <p>Composition and assembly surface.</p>
+    <a href="/forge/">Open Forge</a>
+  </div>
+</div>
+
 </main>
 
+<script src="/ui/scry.js"></script>
 </body>
 </html>

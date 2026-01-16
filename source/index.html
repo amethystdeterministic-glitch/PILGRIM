@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · SOURCE</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,7 +12,9 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
+main{padding:24px;max-width:900px;margin:0 auto}
+.section{border:1px solid #222633;border-radius:12px;padding:16px;margin-bottom:12px;background:#12162a}
+.section h3{margin:0 0 6px}
 </style>
 </head>
 <body>
@@ -33,8 +35,24 @@ main{padding:24px}
 
 <main>
 <h2>Source</h2>
-<p>Creation, composition, and origin tools.</p>
+
+<div class="section">
+  <h3>Deterministic Runtime Enforcement (D.R.E.)</h3>
+  <p>The foundational execution model underpinning all Amethyst systems.</p>
+</div>
+
+<div class="section">
+  <h3>Pilgrim Deterministic Engine</h3>
+  <p>The runtime responsible for enforcing invariants and producing Deterministic Proof™.</p>
+</div>
+
+<div class="section">
+  <h3>Deterministic Proof™</h3>
+  <p>Cryptographically and structurally provable records of execution and enforcement.</p>
+</div>
+
 </main>
 
+<script src="/ui/scry.js"></script>
 </body>
 </html>
