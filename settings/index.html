@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · SETTINGS</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,25 +12,79 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
+main{padding:24px;max-width:900px;margin:0 auto}
+.section{border:1px solid #222633;border-radius:12px;padding:18px;margin-bottom:14px;background:#12162a}
+.section h3{margin:0 0 8px}
+.kv{display:grid;grid-template-columns:220px 1fr;gap:8px;font-size:14px}
+.badge{display:inline-block;font-size:11px;padding:3px 8px;border:1px solid #2a2f55;border-radius:999px;color:#9aa0ff}
+.note{font-size:13px;color:#b7bbd6}
 </style>
 </head>
 <body>
+
 <header class="topbar">
   <div class="brand">Amethyst</div>
-  <div class="search"><input placeholder="Aether — SCRY, search, navigate, invoke…" /></div>
+  <div class="search">
+    <input placeholder="Aether — SCRY, search, navigate, invoke…" />
+  </div>
 </header>
+
 <nav>
   <a href="/source/">SOURCE</a>
   <a href="/pipeline/">PIPELINE</a>
   <a href="/guards/">GUARDS</a>
   <a href="/settings/">SETTINGS</a>
 </nav>
+
 <main>
 <h2>Settings</h2>
-<p>System and identity configuration.</p>
+<p>System status and configuration surface.</p>
+
+<div class="section">
+  <h3>Build</h3>
+  <div class="kv">
+    <div>Version</div><div><span class="badge">Amethyst HUE v0.4</span></div>
+    <div>Channel</div><div>Development / Deterministic</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Runtime Mode</h3>
+  <div class="kv">
+    <div>Execution</div><div>Static · Client-side</div>
+    <div>Mutability</div><div>Explicit (Draft → Freeze → Version)</div>
+    <div>Undefined Behavior</div><div>Disallowed</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Determinism</h3>
+  <div class="kv">
+    <div>Enforcement</div><div>Structural (D.R.E.)</div>
+    <div>Proof Output</div><div>Deterministic Proof™</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Storage</h3>
+  <div class="kv">
+    <div>Persistence</div><div>Local (browser storage)</div>
+    <div>Sync</div><div>Not enabled</div>
+    <div>Cloud Dependency</div><div>None</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Future Controls</h3>
+  <p class="note">
+    User-configurable settings, identity controls, and guard configuration
+    will appear here in future releases once deterministic guarantees can
+    be preserved end-to-end.
+  </p>
+</div>
+
 </main>
-<script src="/ui/scry.js"></script>
+
 <script src="/ui/scry.js"></script>
 </body>
 </html>

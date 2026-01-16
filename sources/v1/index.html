@@ -1,127 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Source</title>
+
+  <!-- SOURCE_V1_CANON -->
+  <meta name="amethyst:source" content="v1" />
+  <meta name="amethyst:role" content="source-page" />
+  <meta name="amethyst:deterministic" content="true" />
+  <!-- /SOURCE_V1_CANON -->
 
   <style>
     :root {
-      --bg: #0a0a0a;
-      --fg: #e6e6e6;
+      --bg: #0b0b0b;
+      --fg: #f2f2f2;
       --muted: #9a9a9a;
-      --accent: #9b5de5;
+      --accent: #9b6cff;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--fg);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
     }
 
     .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem 5rem;
+      max-width: 680px;
+      padding: 48px 24px 96px;
     }
 
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      margin-bottom: 3rem;
+    .brand {
+      font-size: 14px;
+      letter-spacing: 0.35em;
+      margin-bottom: 64px;
+      color: var(--fg);
+    }
+
+    .brand .o {
+      color: var(--accent);
     }
 
     h1 {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 500;
-      margin-bottom: 1.25rem;
+      font-size: 44px;
+      line-height: 1.15;
+      margin: 0 0 32px;
+      font-weight: 700;
     }
 
-    p { font-size: 1.05rem; margin-bottom: 1.5rem; }
-
-    .muted { color: var(--muted); }
-
-    section { margin-top: 3rem; }
-
     h2 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
+      font-size: 22px;
+      margin: 64px 0 16px;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    p.lead {
+      color: var(--fg);
+      font-size: 18px;
+      margin-bottom: 24px;
     }
 
     footer {
-      margin-top: 5rem;
-      font-size: 0.9rem;
+      margin-top: 96px;
+      font-size: 13px;
       color: var(--muted);
     }
-
-    footer .logo { margin-bottom: 1rem; }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <div class="logo"></div>
+  <div class="wrap">
 
-    <h1>A place where what you publish is what exists</h1>
+    <div class="brand">
+      S<span class="o">O</span>URCE
+    </div>
 
-    <p class="muted">
-      This page is served directly from its source.<br/>
-      There are no intermediaries, trackers, or rewriting layers.
+    <h1>This is your website</h1>
+
+    <p class="lead">
+      This is your website.
+      A real web page you own and control.
     </p>
 
-    <p>What you place here is what others see.</p>
+    <p>
+      You decide what it contains.
+      You decide when it changes.
+    </p>
 
-    <section>
-      <h2>What this is</h2>
-      <p class="muted">This is a Source.</p>
-      <p>
-        A Source is a single, owned page that exists exactly as authored.
-        No optimisation. No interpretation. No platform behaviour.
-      </p>
-      <p>It does not evolve unless you change it.</p>
-    </section>
+    <p>
+      What you publish here is what exists.
+      Nothing is rewritten, optimised, tracked, or interpreted.
+    </p>
 
-    <section>
-      <h2>Why it exists</h2>
-      <p>
-        Most systems sit between intent and outcome.
-        They transform, measure, and reinterpret what you create.
-      </p>
-      <p>A Source removes that layer.</p>
-      <p>It restores a direct line between authorship and presence.</p>
-    </section>
+    <p>
+      There is no platform layer.
+      No algorithm.
+      No behavioural logic.
+    </p>
 
-    <section>
-      <h2>What it changes</h2>
-      <p>Pages stop being products.</p>
-      <p>Publishing stops being performative.</p>
-      <p>Ownership becomes literal, not contractual.</p>
-      <p>You are not renting attention. You are placing something into existence.</p>
-    </section>
+    <h2>What this is</h2>
 
-    <section>
-      <h2>Who it’s for</h2>
-      <p>This is for people who want their work to remain intact.</p>
-      <p>Their words to stay unchanged.</p>
-      <p>Their presence to be calm and verifiable.</p>
-      <p class="muted">No optimisation required.</p>
-    </section>
+    <p class="lead">
+      This is a Source.
+    </p>
+
+    <p>
+      A Source is a single web page served exactly as authored.
+      What you write is what others see.
+    </p>
+
+    <p>
+      It does not evolve unless you change it.
+      There are no feeds, rankings, or engagement mechanics.
+    </p>
+
+    <h2>Who it’s for</h2>
+
+    <p>
+      This is for anyone who wants a place on the web that is genuinely theirs.
+    </p>
+
+    <p>
+      Personal pages.
+      Professional profiles.
+      Business sites.
+      Writing.
+      Notes.
+      Anything that should exist without interference.
+    </p>
+
+    <p>
+      Everyone gets one Source.
+      No obligation.
+      No design fees.
+      No hosting fees.
+      No watered-down version.
+    </p>
 
     <footer>
-      <div class="logo"></div>
-      <p>
-        Unfiltered HTML.<br/>
-        Served from its source.<br/>
-        No intermediaries.
-      </p>
+      Unfiltered HTML. Served from its source.<br />
+      © Amethyst Deterministic Ltd. Registered in England & Wales.
     </footer>
-  </main>
+
+  </div>
 </body>
 </html>

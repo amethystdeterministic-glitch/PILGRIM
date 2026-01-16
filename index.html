@@ -27,3 +27,92 @@
   <script src="./portal.js"></script>
 </body>
 </html>
+
+<!-- Amethyst Hex Mark (Authority Seal) -->
+<svg
+  class="amethyst-mark"
+  viewBox="0 0 512 512"
+  aria-hidden="true"
+>
+  <path
+    d="M256 32L64 144v224l192 112 192-112V144L256 32z"
+    fill="none"
+    stroke="white"
+    stroke-width="28"
+  />
+  <path
+    d="M256 96v320M128 176h128l128 80"
+    stroke="white"
+    stroke-width="28"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+
+
+<style>
+.amethyst-mark {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 26px;
+  height: 26px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+</style>
+
+
+<style>
+/* Authority fade-in */
+html {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+html.source-ready {
+  opacity: 1;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.classList.add("source-ready");
+});
+</script>
+
+
+<style>
+.amethyst-mark path {
+  stroke: rgba(155, 93, 229, 0.85);
+}
+</style>
+
+
+<style>
+@media (max-width: 600px) {
+  .amethyst-mark {
+    width: 22px;
+    height: 22px;
+    top: 12px;
+    right: 12px;
+    opacity: 0.4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .amethyst-mark {
+    width: 28px;
+    height: 28px;
+    opacity: 0.5;
+  }
+}
+</style>
+
+
+<!-- SOURCE_V1_CANON -->
+<meta name="amethyst:source" content="v1">
+<meta name="amethyst:role" content="source-page">
+<meta name="amethyst:deterministic" content="true">
+<!-- /SOURCE_V1_CANON -->
+

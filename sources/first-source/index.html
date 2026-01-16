@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amethyst Deterministic - Your First Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        :root {
+            --amethyst: #9b5de5;
+            --hot-pink: #f15bb5;
+            --lemon: #fee440;
+            --aqua: #00bbf9;
+            --spring: #00f5d4;
+            --black: #0a0a0a;
+        }
+        
+        body {
+            background: linear-gradient(45deg, var(--amethyst), var(--hot-pink), var(--lemon));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--black);
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+            border: 8px dashed var(--aqua);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--spring), var(--hot-pink), var(--lemon), var(--aqua));
+            z-index: -1;
+            border-radius: 40px;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            background: linear-gradient(to right, var(--amethyst), var(--hot-pink), var(--lemon));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+        
+        .subtitle {
+            font-size: 2rem;
+            color: var(--aqua);
+            margin-bottom: 30px;
+        }
+        
+        .crazy-border {
+            height: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--spring),
+                var(--spring) 10px,
+                var(--aqua) 10px,
+                var(--aqua) 20px
+            );
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .panel {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(
+                135deg,
+                rgba(155, 93, 229, 0.2),
+                rgba(241, 91, 181, 0.2)
+            );
+            padding: 30px;
+            border-radius: 25px;
+            border: 5px solid var(--lemon);
+        }
+        
+        h2 {
+            color: var(--amethyst);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            line-height: 1.6;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 5px dotted var(--hot-pink);
+            font-size: 1.2rem;
+            color: var(--amethyst);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AMETHYST DETERMINISTIC</h1>
+            <div class="subtitle">YOUR FIRST WEBSITE — UNUSUAL HTML TEST</div>
+            <div class="crazy-border"></div>
+            <p>This page was pasted directly as raw HTML.</p>
+        </header>
+
+        <div class="content">
+            <div class="panel">
+                <h2>What This Proves</h2>
+                <p>This is not a template. This is not a platform page.</p>
+                <p>It is raw HTML running as a real website.</p>
+            </div>
+            <div class="panel">
+                <h2>Why It Matters</h2>
+                <p>No ads. No tracking. No naming tricks.</p>
+                <p>The file you paste is the site you get.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Unfiltered HTML • Served from your Source • No intermediaries</p>
+        </footer>
+    </div>
+</body>
+</html>

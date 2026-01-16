@@ -1,0 +1,50 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  role="img"
+  aria-label="Amethyst Deterministic Hex Mark"
+>
+  <!-- Hex outline -->
+  <polygon
+    points="256 16 480 144 480 368 256 496 32 368 32 144"
+    fill="#FFFFFF"
+  />
+
+  <!-- Inner structure (black paths) -->
+  <path
+    d="M256 16 L256 496"
+    stroke="#000000"
+    stroke-width="48"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M256 256 L416 176"
+    stroke="#000000"
+    stroke-width="48"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M256 256 L96 176"
+    stroke="#000000"
+    stroke-width="48"
+    stroke-linecap="square"
+  />
+
+  <path
+    d="M256 256 L416 336"
+    stroke="#000000"
+    stroke-width="48"
+    stroke-linecap="square"
+  />
+
+  <!-- Purple fleck (intentional, canonical) -->
+  <rect
+    x="310"
+    y="300"
+    width="36"
+    height="36"
+    fill="#7B3FE4"
+  />
+</svg>

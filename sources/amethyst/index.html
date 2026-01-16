@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amethyst Deterministic Ltd</title>
+
+  <style>
+    :root {
+      --black: #0B0B0B;
+      --white: #FFFFFF;
+
+      --slate-900: #111111;
+      --slate-700: #1E1E1E;
+      --slate-500: #3A3A3A;
+      --slate-300: #8A8A8A;
+
+      --amethyst: #6B4EFF;
+      --amethyst-soft: rgba(107, 78, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 20px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+    }
+
+    .company {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .company span {
+      color: var(--amethyst);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero {
+      margin-bottom: 96px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--slate-300);
+      font-size: 1.15rem;
+    }
+
+    section {
+      margin-bottom: 96px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 48px;
+      height: 2px;
+      background: var(--amethyst);
+    }
+
+    .blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .block {
+      background: var(--slate-900);
+      padding: 28px;
+      border-radius: 10px;
+      border: 1px solid var(--slate-700);
+    }
+
+    .block h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .block p {
+      color: var(--slate-300);
+      font-size: 0.95rem;
+    }
+
+    .status {
+      background: var(--slate-900);
+      border-left: 3px solid var(--amethyst);
+      padding: 24px;
+      color: var(--slate-300);
+    }
+
+    footer {
+      margin-top: 120px;
+      padding-top: 32px;
+      border-top: 1px solid var(--slate-700);
+      color: var(--slate-500);
+      font-size: 0.85rem;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <!-- Replace src with your canon hexmark SVG -->
+      <img
+        src="/sources/amethyst/assets/logo/hexmark-purple-fleck.svg"
+        alt="Amethyst Hexmark"
+        class="logo"
+        onerror="this.style.display='none'"
+      />
+      <div class="company">AMETHYST <span>DETERMINISTIC</span></div>
+    </header>
+
+    <section class="hero">
+      <h1>When digital systems must tell the truth</h1>
+      <p>
+        Amethyst Deterministic builds infrastructure that ensures automated systems
+        behave exactly as intended — and can prove it, without explanation or interpretation.
+      </p>
+    </section>
+
+    <section>
+      <h2>What this is</h2>
+      <p style="max-width:720px; color:var(--slate-300);">
+        This is not a platform, a dashboard, or a service layer.
+        It is a set of deterministic rules enforced at runtime,
+        producing verifiable outcomes instead of assumptions.
+      </p>
+    </section>
+
+    <section>
+      <h2>What it’s used for</h2>
+      <div class="blocks">
+        <div class="block">
+          <h3>Verification</h3>
+          <p>
+            Proof that decisions occurred within defined boundaries,
+            recorded at the moment they happened.
+          </p>
+        </div>
+
+        <div class="block">
+          <h3>Enforcement</h3>
+          <p>
+            Constraints applied before actions complete,
+            preventing silent drift or retroactive correction.
+          </p>
+        </div>
+
+        <div class="block">
+          <h3>Audit clarity</h3>
+          <p>
+            Clear, inspectable records of system behaviour
+            that remove ambiguity from review and compliance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Status</h2>
+      <div class="status">
+        Version 1.<br />
+        Actively built.<br />
+        Early access environment.
+      </div>
+    </section>
+
+    <footer>
+      <p>Amethyst Deterministic Ltd</p>
+      <p>Registered in England & Wales</p>
+    </footer>
+
+  </div>
+</body>
+</html>
