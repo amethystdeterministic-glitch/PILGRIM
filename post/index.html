@@ -13,6 +13,10 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
 main{padding:24px}
+.panel{background:#12162a;border:1px solid #222633;border-radius:10px;padding:14px}
+input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #2a2f55;background:#0b0d12;color:#e6e8ee;font-family:ui-monospace,monospace}
+textarea{min-height:32vh;line-height:1.4}
+.btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:#1a2150;border:1px solid #2a2f55;color:#fff}
 </style>
 </head>
 <body>
@@ -32,8 +36,15 @@ main{padding:24px}
 </nav>
 
 <main>
-<h2>Source</h2>
-<p>Creation, composition, and origin tools.</p>
+<h2>Post</h2>
+<p>Publish statements into the public record (mock).</p>
+
+<div class="panel">
+  <input placeholder="Title"/>
+  <br/><br/>
+  <textarea placeholder="Write your post…"></textarea>
+  <div class="btn">Commit (mock)</div>
+</div>
 </main>
 
 </body>

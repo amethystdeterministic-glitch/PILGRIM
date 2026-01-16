@@ -13,6 +13,10 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
 main{padding:24px}
+.panel{background:#12162a;border:1px solid #222633;border-radius:10px;padding:18px;max-width:760px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222633}
+.row:last-child{border-bottom:none}
+.label{color:#b7bbd6}
 </style>
 </head>
 <body>
@@ -32,8 +36,14 @@ main{padding:24px}
 </nav>
 
 <main>
-<h2>Source</h2>
-<p>Creation, composition, and origin tools.</p>
+<h2>Mundo</h2>
+<p>Systems, data, flow.</p>
+
+<div class="panel">
+  <div class="row"><div class="label">World State</div><div>ACTIVE</div></div>
+  <div class="row"><div class="label">Runtime</div><div>Pilgrim (mock)</div></div>
+  <div class="row"><div class="label">Deterministic Proof™</div><div>ENABLED (mock)</div></div>
+</div>
 </main>
 
 </body>

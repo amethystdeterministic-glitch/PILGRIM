@@ -13,6 +13,8 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
 main{padding:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px}
+.card{background:#12162a;border:1px solid #222633;border-radius:10px;padding:18px;text-align:center}
 </style>
 </head>
 <body>
@@ -32,8 +34,15 @@ main{padding:24px}
 </nav>
 
 <main>
-<h2>Source</h2>
-<p>Creation, composition, and origin tools.</p>
+<h2>Matrix</h2>
+<p>Structure, logic, relationships.</p>
+
+<div class="grid">
+  <div class="card">Schema Map</div>
+  <div class="card">Logic Graph</div>
+  <div class="card">Dependencies</div>
+  <div class="card">Version State</div>
+</div>
 </main>
 
 </body>

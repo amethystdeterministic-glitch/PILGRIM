@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>PIPELINE — Amethyst</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AMETHYST</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
+.topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
+.brand{font-weight:600;color:#c9ccff}
+.search{flex:1}
+.search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
+nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
+nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
+main{padding:24px}
+.card{background:#12162a;border:1px solid #222633;border-radius:10px;padding:16px;margin-bottom:12px}
+.card a{color:#fff;text-decoration:none}
+</style>
 </head>
 <body>
-  <h1>PIPELINE</h1>
-  <p>This pipeline is present.</p>
-  <p>Status: GREEN</p>
+
+<header class="topbar">
+  <div class="brand">Amethyst</div>
+  <div class="search">
+    <input placeholder="Aether — SCRY, search, navigate, invoke…" />
+  </div>
+</header>
+
+<nav>
+  <a href="/source/">SOURCE</a>
+  <a href="/pipeline/">PIPELINE</a>
+  <a href="/guards/">GUARDS</a>
+  <a href="/settings/">SETTINGS</a>
+</nav>
+
+<main>
+<h2>Pipeline</h2>
+<p>Application flow and orchestration.</p>
+
+<div class="card"><a href="/write/">WRITE →</a></div>
+<div class="card"><a href="/matrix/">MATRIX →</a></div>
+<div class="card"><a href="/post/">POST →</a></div>
+<div class="card"><a href="/mundo/">MUNDO →</a></div>
+<div class="card"><a href="/forge/">FORGE →</a></div>
+</main>
+
 </body>
 </html>
