@@ -44,3 +44,4 @@ It is a **restore point**, not a suggestion.
 ## Restore command
 
 git checkout portal-freeze-2026-01-13
+AMETHYST PORTAL v1 — FROZEN Fri Jan 16 15:59:11 GMT 2026 — Source, Builder, Portal skeleton confirmed
