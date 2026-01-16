@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AMETHYST</title>
+<title>AMETHYST · MUNDO</title>
 <style>
 body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .topbar{display:flex;gap:12px;padding:10px 14px;background:#0f1220;border-bottom:1px solid #222633}
@@ -12,11 +12,11 @@ body{margin:0;font-family:system-ui;background:#0b0d12;color:#e6e8ee}
 .search input{width:100%;padding:8px;border-radius:6px;border:1px solid #2a2f55;background:#12162a;color:#e6e8ee}
 nav{display:flex;gap:18px;padding:10px 14px;background:#12162a;border-bottom:1px solid #222633}
 nav a{color:#b7bbd6;text-decoration:none;font-size:13px}
-main{padding:24px}
-.panel{background:#12162a;border:1px solid #222633;border-radius:10px;padding:18px;max-width:760px}
-.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222633}
-.row:last-child{border-bottom:none}
-.label{color:#b7bbd6}
+main{padding:24px;max-width:1100px;margin:0 auto}
+.section{border:1px solid #222633;border-radius:12px;padding:16px;margin-bottom:14px;background:#12162a}
+.section h3{margin:0 0 8px}
+.kv{display:grid;grid-template-columns:200px 1fr;gap:8px;font-size:14px}
+.badge{display:inline-block;font-size:11px;padding:3px 8px;border:1px solid #2a2f55;border-radius:999px;color:#9aa0ff}
 </style>
 </head>
 <body>
@@ -37,13 +37,36 @@ main{padding:24px}
 
 <main>
 <h2>Mundo</h2>
-<p>Systems, data, flow.</p>
+<p>Read-only world and system state view.</p>
 
-<div class="panel">
-  <div class="row"><div class="label">World State</div><div>ACTIVE</div></div>
-  <div class="row"><div class="label">Runtime</div><div>Pilgrim (mock)</div></div>
-  <div class="row"><div class="label">Deterministic Proof™</div><div>ENABLED (mock)</div></div>
+<div class="section">
+  <h3>System</h3>
+  <div class="kv">
+    <div>Build</div><div><span class="badge">Amethyst HUE v0.3</span></div>
+    <div>Runtime</div><div>Static · Deterministic</div>
+    <div>SCRY</div><div>Client-side routing (stable)</div>
+  </div>
 </div>
+
+<div class="section">
+  <h3>Applications</h3>
+  <div class="kv">
+    <div>WRITE</div><div>Gold Standard · Draft → Freeze → Version</div>
+    <div>POST</div><div>Publish from Frozen</div>
+    <div>MATRIX</div><div>Structured Blocks</div>
+    <div>MUNDO</div><div>Read-only State</div>
+    <div>FORGE</div><div>Composition (pending)</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Guards</h3>
+  <div class="kv">
+    <div>Pro</div><div>FamilyGuard</div>
+    <div>Enterprise</div><div>17 Guards (full inventory)</div>
+  </div>
+</div>
+
 </main>
 
 <script src="/ui/scry.js"></script>
