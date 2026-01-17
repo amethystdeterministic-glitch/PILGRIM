@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Your Sources — Amethyst</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0b0d12;
+      color: #e6e6eb;
+    }
+    header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #1e2230;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: #7c6cff;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: 500;
+    }
+    main {
+      padding: 2rem 1.25rem;
+      max-width: 720px;
+    }
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2rem;
+    }
+    .subtitle {
+      color: #9aa0b4;
+      margin-bottom: 2rem;
+    }
+    .sources {
+      display: grid;
+      gap: 1rem;
+    }
+    .source-card {
+      border: 1px solid #1e2230;
+      border-radius: 12px;
+      padding: 1rem;
+      background: #111421;
+    }
+    .source-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .source-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #cfd2ff;
+    }
+    .source-meta {
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+      color: #9aa0b4;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #7a8295;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>Amethyst</div>
+  <nav>
+    <a href="/sources">Sources</a>
+    <a href="/tiers">Tiers</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Your Sources</h1>
+  <div class="subtitle">
+    Each Source is a deterministic public record. Changes create versions. Originals remain intact.
+  </div>
+
+  <section class="sources">
+
+    <div class="source-card">
+      <a href="/sources/amethyst/">
+        <div class="source-name">amethyst</div>
+        <div class="source-meta">Primary source</div>
+      </a>
+    </div>
+
+    <div class="source-card">
+      <a href="/sources/beth/">
+        <div class="source-name">beth</div>
+        <div class="source-meta">Personal source</div>
+      </a>
+    </div>
+
+    <div class="source-card">
+      <a href="/sources/first-source/">
+        <div class="source-name">first-source</div>
+        <div class="source-meta">Initial public record</div>
+      </a>
+    </div>
+
+    <div class="source-card">
+      <a href="/sources/v1/">
+        <div class="source-name">v1</div>
+        <div class="source-meta">Versioned snapshot</div>
+      </a>
+    </div>
+
+  </section>
+
+  <footer>
+    Stored as-is via Amethyst Deterministic.
+  </footer>
+</main>
+
+</body>
+</html>

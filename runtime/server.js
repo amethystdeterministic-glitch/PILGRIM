@@ -1,59 +1,70 @@
 #!/usr/bin/env node
 "use strict";
 
-/*
- AMETHYST DETERMINISTIC STATIC RUNTIME
- - ONE runtime
- - ONE port (9191)
- - Static only
- - Repo root as filesystem root
- - Portal fully removed
-*/
+import http from "http";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
-
-const PORT = 9191;
-const HOST = "127.0.0.1";
+const PORT = Number(process.env.SCRY_PORT || 9191);
 const ROOT = process.cwd();
 
-const MIME = {
-  ".html": "text/html",
-  ".css": "text/css",
-  ".js": "application/javascript",
-  ".json": "application/json",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-http.createServer((req, res) => {
-  let p = decodeURIComponent(req.url.split("?")[0]);
+function send(res, status, body, type = "text/plain") {
+  res.writeHead(status, { "Content-Type": type });
+  res.end(body);
+}
 
-  if (p.endsWith("/")) p += "index.html";
-
-  const file = path.join(ROOT, p);
-
-  if (!file.startsWith(ROOT)) {
-    res.writeHead(403);
-    return res.end("Forbidden");
+function serveFile(res, filePath) {
+  if (!fs.existsSync(filePath)) {
+    send(res, 404, "Not Found");
+    return;
   }
 
-  fs.readFile(file, (err, data) => {
-    if (err) {
-      res.writeHead(err.code === "ENOENT" ? 404 : 500);
-      return res.end("Not Found");
+  // 🔒 DIRECTORY GUARD (THE FIX)
+  const stat = fs.statSync(filePath);
+  if (stat.isDirectory()) {
+    const indexFile = path.join(filePath, "index.html");
+    if (!fs.existsSync(indexFile)) {
+      send(res, 404, "Not Found");
+      return;
     }
+    filePath = indexFile;
+  }
 
-    const ext = path.extname(file);
-    res.writeHead(200, {
-      "Content-Type": MIME[ext] || "text/plain"
-    });
-    res.end(data);
-  });
-}).listen(PORT, HOST, () => {
+  const ext = path.extname(filePath);
+  const type =
+    ext === ".html" ? "text/html" :
+    ext === ".css"  ? "text/css"  :
+    "text/plain";
+
+  send(res, 200, fs.readFileSync(filePath), type);
+}
+
+const server = http.createServer((req, res) => {
+  const url = req.url.replace(/\/+$/, "") || "/";
+
+  // Sources index
+  if (url === "/sources") {
+    return serveFile(res, path.join(ROOT, "sources"));
+  }
+
+  // Individual sources
+  if (url.startsWith("/sources/")) {
+    return serveFile(res, path.join(ROOT, url));
+  }
+
+  // Tiers page
+  if (url === "/tiers") {
+    return serveFile(res, path.join(ROOT, "public", "tiers"));
+  }
+
+  send(res, 404, "Not Found");
+});
+
+server.listen(PORT, "127.0.0.1", () => {
   console.log("GREEN");
   console.log(`Runtime listening at http://127.0.0.1:${PORT}`);
   console.log("Mode: Static only | Portal removed");
