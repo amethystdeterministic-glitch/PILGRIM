@@ -1,4 +1,5 @@
 [workspace]
 members = [
-  "core/ail"
+    "lopez_lab/amethyst_kernel"
 ]
+resolver = "2"

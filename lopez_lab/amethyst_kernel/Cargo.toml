@@ -1,0 +1,14 @@
+[package]
+name = "amethyst_kernel"
+version = "0.1.0"
+edition = "2021"
+license = "Proprietary"
+description = "Amethyst Kernel v8.2.2 — Quartz Polished LTS (Deterministic Safety Routing)"
+authors = ["Mister Seventy Six <tito@example.com>"]
+
+[lib]
+crate-type = ["rlib", "cdylib", "staticlib"]
+
+[dependencies]
+
+[dev-dependencies]
