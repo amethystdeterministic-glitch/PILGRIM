@@ -1,0 +1,29 @@
+# Rust
+/target/
+/target_termux/
+/.cargo/
+
+# Runtime state
+*.db
+*ledger*.json
+
+# Environment
+.env
+.env.*
+*_KEYS_*.sh
+
+# Local scripts (temporary)
+env_fix.sh
+hard_reset.sh
+run_once.sh
+normalize.sh
+stop_engine.sh
+make_cargo_dir.sh
+
+# Node / runtime
+runtime/
+public/portal/
+
+# OS / editor
+.DS_Store
+*.swp
