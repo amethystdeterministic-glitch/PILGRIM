@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Amethyst Stack: Deterministic Runtime Enforcement</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f8f9ff; }
+        
+        .header { 
+            background: linear-gradient(135deg, #6b5b95 0%, #9b8bc5 100%); 
+            color: white; 
+            padding: 2rem 1rem; 
+            text-align: center; 
+        }
+        .logo { font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .logo span { color: #d4af37; }
+        
+        .section { 
+            padding: 2rem 1rem; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+        
+        h1 { color: #2c3e50; margin: 1rem 0; }
+        h2 { color: #6b5b95; margin: 1.5rem 0 1rem; }
+        h3 { color: #9b8bc5; margin: 0.5rem 0; }
+        
+        .problem { background: #fff5f5; border-left: 4px solid #ff6b6b; }
+        .solution { background: #f5fff7; border-left: 4px solid #51cf66; }
+        .architecture { background: #f5f9ff; border-left: 4px solid #4d96ff; }
+        .component { background: #fff9f5; border-left: 4px solid #ffa94d; }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #6b5b95, #9b8bc5);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .stack-diagram {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(107, 91, 149, 0.1);
+            text-align: center;
+        }
+        
+        .layer {
+            background: #f0f4ff;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #6b5b95;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .pill {
+            display: inline-block;
+            background: #e9ecef;
+            color: #6b5b95;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 0.25rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">The <span>Amethyst</span> Stack</div>
+        <p>Deterministic Runtime Enforcement as a Structural Alternative to Probabilistic Mitigation</p>
+    </div>
+    
+    <!-- Video Section -->
+    <div class="section">
+        <h2>The Amethyst Stack — Overview</h2>
+        <div class="card" style="text-align:center;">
+            <video
+                controls
+                preload="metadata"
+                style="width:100%; max-width:800px; border-radius:12px;"
+            >
+                <source src="./media/amethyst-stack.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p style="margin-top:1rem; font-size:0.9rem; color:#555;">
+                A concise visual overview of the Amethyst Deterministic Stack and its architectural intent.
+            </p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h1>Beyond Probabilistic Systems</h1>
+        <p>Modern computational systems increasingly underpin decisions where error, opacity, and non-reproducibility carry material consequences. Yet they remain probabilistic and heuristic by design, evaluated through statistical confidence rather than guarantees enforced at execution.</p>
+    </div>
+    
+    <div class="section">
+        <h2>The Problem: Structural Weaknesses</h2>
+        <div class="card problem">
+            <h3>Non-Repeatable Behaviour</h3>
+            <p>Identical inputs may yield divergent outputs without clear causal explanation.</p>
+        </div>
+        <div class="card problem">
+            <h3>Compromised Auditability</h3>
+            <p>Internal state transitions are opaque, emergent, or reconstructed only after execution.</p>
+        </div>
+        <div class="card problem">
+            <h3>Reactive Governance</h3>
+            <p>Harm must occur before it can be addressed. Failure is managed, not prevented.</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>The Solution: Deterministic Runtime Enforcement</h2>
+        <div class="card solution">
+            <h3>Fail-Closed Execution</h3>
+            <p>When confronted with ambiguity, execution halts. No unlawful output is produced.</p>
+        </div>
+        <div class="card solution">
+            <h3>Structural Interdiction</h3>
+            <p>Unlawful execution paths are removed from the execution space before materialization.</p>
+        </div>
+        <div class="card solution">
+            <h3>Governance at Runtime</h3>
+            <p>Obligations are not merely declared; they are enforced at the point of execution.</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>The Amethyst Architecture</h2>
+        <div class="stack-diagram">
+            <h3 style="color: #6b5b95;">The Deterministic Stack</h3>
+            <div class="layer"><strong>Deterministic Artifact Generator (DAG)</strong><br>Emits proven lawful outputs</div>
+            <div class="layer"><strong>Deterministic Proof Generator (DPG)</strong><br>Produces verifiable compliance proofs</div>
+            <div class="layer"><strong>Runtime Compliance Recorder (RCR)</strong><br>Records lawful execution events</div>
+            <div class="layer"><strong>Pre-Execution Constraint Filter (PECF)</strong><br>Removes unlawful paths entirely</div>
+            <div class="layer"><strong>Deterministic Enforcement Engine (DEE)</strong><br>Evaluates admissibility prior to execution</div>
+            <div class="layer"><strong>Invariant Definition Kernel (IDK)</strong><br>Defines closed set of admissible invariants</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Core Components</h2>
+        <div class="card component">
+            <h3>Invariant Definition Kernel</h3>
+            <p>Defines what states may exist and which transitions are even theoretically possible. Immutable at runtime.</p>
+        </div>
+        <div class="card component">
+            <h3>Deterministic Enforcement Engine</h3>
+            <p>Binary evaluation: admissible or inadmissible. No fallback logic or probabilistic tolerance.</p>
+        </div>
+        <div class="card component">
+            <h3>Pre-Execution Constraint Filter</h3>
+            <p>Silently removes unlawful execution paths from the execution space entirely.</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Key Differentiators</h2>
+        <div style="text-align: center; margin: 1rem 0;">
+            <span class="pill">Admissibility Guarantee</span>
+            <span class="pill">Fail-Closed</span>
+            <span class="pill">Versioned Evolution</span>
+            <span class="pill">Native Auditability</span>
+            <span class="pill">No Discretion</span>
+            <span class="pill">Law vs Policy</span>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem;">
+            Unlike probabilistic systems that <em>optimize likelihood</em>, deterministic runtime systems <strong>enforce lawfulness</strong>.
+        </p>
+    </div>
+    
+    <div class="section" style="text-align: center;">
+        <h2>Where It Matters</h2>
+        <p>Financial execution systems • Access control and identity • Regulated decision pipelines • Safety-critical infrastructure • Governance-aligned computation</p>
+        <button class="cta-button">Learn More About Implementation</button>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Research by Ernesto Lopez, Director - Amethyst Deterministic Ltd</p>
+    </div>
+    
+    <div class="footer">
+        <p>"If a system is architected to permit unlawful execution states, no amount of monitoring can fully prevent those states from occurring."</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">© Amethyst Deterministic Ltd. Cardiff, Wales, UK.</p>
+    </div>
+
+    <script>
+        // Simple interaction
+        document.querySelector('.cta-button').addEventListener('click', function() {
+            alert('For technical specifications, research papers, or implementation details, please contact research@amethyst.deterministic.uk');
+        });
+        
+        // Add subtle animation to layers
+        document.querySelectorAll('.layer').forEach((layer, index) => {
+            layer.style.transition = 'transform 0.3s ease';
+            layer.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px)';
+            });
+            layer.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>

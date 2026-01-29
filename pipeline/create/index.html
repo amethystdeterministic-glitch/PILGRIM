@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Create Pipeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background:#000; color:#eee; font-family:system-ui; padding:2rem; }
+    h1 { color:#7fd1ff; }
+    label { display:block; margin-top:1rem; }
+    input, textarea {
+      width:100%;
+      background:#111;
+      color:#fff;
+      border:1px solid #333;
+      border-radius:6px;
+      padding:0.5rem;
+    }
+    button {
+      margin-top:1.5rem;
+      padding:0.5rem 1.2rem;
+      background:#1e2a3a;
+      color:#fff;
+      border:none;
+      border-radius:999px;
+    }
+    .preview {
+      margin-top:2rem;
+      background:#111;
+      padding:1rem;
+      border-radius:10px;
+      color:#aaa;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Create Pipeline</h1>
+<p>A pipeline is a deterministic sequence of actions.</p>
+
+<form onsubmit="preview(event)">
+  <label>
+    Pipeline Name
+    <input id="name" required>
+  </label>
+
+  <label>
+    Steps (plain language)
+    <textarea id="steps"></textarea>
+  </label>
+
+  <button>Create Preview</button>
+</form>
+
+<div id="preview" class="preview" style="display:none;"></div>
+
+<a href="/pipeline/" style="color:#aaa;margin-top:2rem;display:inline-block;">← Back</a>
+
+<script>
+function preview(e){
+  e.preventDefault();
+  const name = nameInput.value;
+  const steps = stepsInput.value || "No steps defined.";
+  previewBox.style.display="block";
+  previewBox.innerHTML = `
+    <b>${name}</b><br><br>
+    ${steps}<br><br>
+    <em>Status: Not executed</em>
+  `;
+}
+const nameInput = document.getElementById('name');
+const stepsInput = document.getElementById('steps');
+const previewBox = document.getElementById('preview');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Cymatics — Deterministic Harmonics</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  body{
+    margin:0;
+    background:#0a0a0f;
+    color:#fff;
+    font-family:system-ui,sans-serif;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+  }
+  header{
+    padding:1rem;
+    border-bottom:1px solid #333;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  canvas{
+    flex:1;
+    background:#000;
+  }
+  .controls{
+    display:flex;
+    gap:1rem;
+    padding:1rem;
+    border-top:1px solid #333;
+  }
+  label{
+    font-size:.8rem;
+    color:#aaa;
+  }
+  input{
+    width:120px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <strong>CYMATICS</strong>
+  <span id="seed">Seed: 1337</span>
+</header>
+
+<main>
+  <canvas id="c"></canvas>
+  <div class="controls">
+    <label>Frequency<br><input type="range" id="freq" min="1" max="20" value="7"></label>
+    <label>Amplitude<br><input type="range" id="amp" min="10" max="200" value="80"></label>
+    <button onclick="reset()">RESET</button>
+  </div>
+</main>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let seed = 1337;
+let freq = 7;
+let amp = 80;
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 140;
+}
+window.onresize = resize;
+resize();
+
+function rand(){
+  seed = (seed * 16807) % 2147483647;
+  return seed / 2147483647;
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle = '#7a3cff';
+  ctx.beginPath();
+
+  for(let x=0;x<canvas.width;x++){
+    const t = x / canvas.width * Math.PI * 2 * freq;
+    const y = Math.sin(t) * amp * rand();
+    ctx.lineTo(x, canvas.height/2 + y);
+  }
+  ctx.stroke();
+}
+
+function reset(){
+  seed = 1337;
+  document.getElementById('seed').textContent = "Seed: " + seed;
+  draw();
+}
+
+document.getElementById('freq').oninput = e=>{
+  freq = +e.target.value;
+  draw();
+};
+document.getElementById('amp').oninput = e=>{
+  amp = +e.target.value;
+  draw();
+};
+
+draw();
+</script>
+</body>
+</html>

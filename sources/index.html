@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background:#0b0b0e;
+      color:#e5e7eb;
+      font-family:system-ui;
+      margin:0;
+      padding:2rem;
+    }
+    h1 { font-size:2rem; }
+    .card {
+      background:#111;
+      padding:1.5rem;
+      border-radius:16px;
+      margin-bottom:1.25rem;
+      border:1px solid #1f2937;
+    }
+    button {
+      background:#1f2937;
+      color:#e5e7eb;
+      border:0;
+      padding:0.6rem 1.2rem;
+      border-radius:999px;
+      cursor:pointer;
+    }
+    button:hover { background:#374151; }
+    small { color:#9ca3af; }
+  </style>
+</head>
+<body>
+
+<h1>SOURCES</h1>
+<p>Your sovereign web presence. No hosting. No platforms. No gatekeepers.</p>
+
+<div class="card">
+  <h2>Create Source</h2>
+  <p>
+    Free tier includes <strong>1 full Source Box</strong>.<br>
+    Each Source supports unlimited pages, media, and structure.
+  </p>
+  <button onclick="createSource()">Create Source</button>
+</div>
+
+<div class="card">
+  <h2>Go Pro</h2>
+  <p>
+    Pro unlocks <strong>up to 6 Source Boxes</strong>.<br>
+    Ideal for businesses, projects, or distinct identities.
+  </p>
+  <a href="https://buy.stripe.com/14A7sKcz5dAlfh9dW97Zu01" target="_blank">
+    <button>£5 / month — Upgrade</button>
+  </a>
+  <small>Handled by Stripe. Cancel anytime.</small>
+</div>
+
+<p style="margin-top:2rem;">
+  <a href="/portal/">← Back to Portal</a>
+</p>
+
+<script>
+async function createSource() {
+  const name = prompt("Source name (letters, numbers, dashes):");
+  if (!name) return;
+
+  const res = await fetch("/api/source/create", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name })
+  });
+
+  if (res.ok) {
+    location.href = "/sources/" + name + "/";
+  } else {
+    alert("Source creation failed");
+  }
+}
+</script>
+
+</body>
+</html>

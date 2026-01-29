@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Amethyst Chess</title>
+<style>
+:root{
+  --bg:#0a0a0f;
+  --card:#11111f;
+  --text:#ffffff;
+  --muted:#b0b0d0;
+  --accent:#7a3cff;
+  --border:rgba(122,60,255,.25);
+  --sqDark:rgba(255,255,255,.06);
+  --sqLight:rgba(255,255,255,.02);
+  --ui:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"Courier New",monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);font-family:var(--ui);
+  min-height:100vh;
+}
+header{
+  position:sticky;top:0;z-index:5;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;
+  background:rgba(10,10,15,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand b{letter-spacing:.14em;color:var(--accent)}
+.pill{
+  font-size:.75rem;color:var(--muted);
+  border:1px solid var(--border);border-radius:999px;
+  padding:.32rem .58rem;background:rgba(122,60,255,.08);
+  letter-spacing:.12em
+}
+.hud{
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end
+}
+.dtnBtn{
+  border:1px solid var(--border);
+  background:rgba(122,60,255,.10);
+  color:var(--text);
+  padding:.55rem .75rem;border-radius:.6rem;
+  cursor:pointer;font-weight:800;letter-spacing:.08em;font-size:.78rem;
+}
+.dtnBtn.ghost{background:transparent}
+select.dtnBtn{padding:.52rem .6rem}
+a.dtnBtn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{
+  display:grid;grid-template-columns: 1fr 360px;gap:14px;align-items:start
+}
+@media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
+}
+.metaRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.k{
+  padding:10px 12px;border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;background:rgba(255,255,255,.02);
+}
+.k .label{color:var(--muted);font-size:.78rem;letter-spacing:.12em}
+.k .val{font-weight:900;letter-spacing:.10em;margin-top:2px}
+#pgn{
+  white-space:pre-wrap;word-wrap:break-word;
+  font-family:var(--mono);font-size:.85rem;color:#eaeaff;
+  line-height:1.45;
+}
+.foot{
+  margin-top:12px;color:var(--muted);font-size:.76rem;letter-spacing:.10em;
+  text-transform:uppercase
+}
+.pieceGlyph{font-size:28px;line-height:1}
+
+/* =========================
+   DTN CHESS — Piece Identity
+   ========================= */
+.piece{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  letter-spacing:.05em;
+  border-radius:12%;
+  user-select:none;
+}
+.piece.W{ color:#f5f2ff; }
+.piece.B{ color:#1b102f; }
+
+.piece.P{ background:linear-gradient(135deg,#7a3cff,#9d6bff); }
+.piece.R{ background:linear-gradient(135deg,#4c1d95,#6d28d9); }
+.piece.N{ background:linear-gradient(135deg,#5b21b6,#7c3aed); }
+.piece.B{ background:linear-gradient(135deg,#6b21a8,#8b5cf6); }
+.piece.Q{ background:linear-gradient(135deg,#581c87,#a855f7); }
+.piece.K{ background:linear-gradient(135deg,#3b0764,#9333ea); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <b>CHESS</b>
+    <span class="pill">DETERMINISTIC</span>
+  </div>
+  <div class="hud" id="hud">
+    <a class="dtnBtn ghost" href="/portal" title="Back to Portal">PORTAL</a>
+
+    <select id="skinSel" class="dtnBtn ghost" title="Piece Skin">
+      <option value="AMETHYST">AMETHYST</option>
+      <option value="CLASSIC">CLASSIC</option>
+    </select>
+
+    <select id="themeSel" class="dtnBtn ghost" title="Theme">
+      <option value="AMETHYST_DARK">AMETHYST_DARK</option>
+      <option value="MONO">MONO</option>
+      <option value="PAPER">PAPER</option>
+    </select>
+
+    <button class="dtnBtn ghost" id="btnNew">NEW</button>
+    <button class="dtnBtn ghost" id="btnUndo">UNDO</button>
+    <button class="dtnBtn ghost" id="btnShare">COPY LINK</button>
+    <button class="dtnBtn ghost" id="btnImport">IMPORT</button>
+    <button class="dtnBtn" id="btnExport">EXPORT</button>
+    <button class="dtnBtn ghost" id="btnReset">RESET</button>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <section class="card" aria-label="Board">
+      <div id="board"></div>
+      <div class="foot">legal moves • check / mate • undo • export</div>
+    </section>
+
+    <aside class="card" aria-label="Status">
+      <div class="metaRow">
+        <div class="k">
+          <div class="label">TURN</div>
+          <div class="val" id="turn">—</div>
+        </div>
+        <div class="k">
+          <div class="label">STATUS</div>
+          <div class="val" id="status">—</div>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div class="k">
+        <div class="label">PGN (SIMPLE)</div>
+        <div id="pgn">—</div>
+      </div>
+
+      <div class="foot">v1 engine — no castling/en-passant yet (v2)</div>
+    </aside>
+  </div>
+</main>
+
+<script type="module" src="/apps/chess/app.js"></script>
+</body>
+</html>

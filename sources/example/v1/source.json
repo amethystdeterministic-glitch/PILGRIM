@@ -1,0 +1,20 @@
+{
+  "source": "example",
+  "version": "1.0.0",
+  "default_page": "home",
+  "pages": {
+    "home": {
+      "title": "Example Source",
+      "blocks": [
+        "intro",
+        "media"
+      ]
+    },
+    "about": {
+      "title": "About This Source",
+      "blocks": [
+        "about"
+      ]
+    }
+  }
+}

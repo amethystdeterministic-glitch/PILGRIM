@@ -1,0 +1,36 @@
+{
+  "version": "1.2.1",
+  "sources": [
+    {
+      "id": "amethyst",
+      "title": "Amethyst",
+      "description": "Deterministic Runtime Platform and Sovereign Source System",
+      "order": 0,
+      "path": "/sources/amethyst/"
+    }
+    ,
+    {
+      "id": "amethyst-cos",
+      "title": "Amethyst cOS",
+      "description": "Sovereign deterministic operating system and runtime.",
+      "order": 1,
+      "path": "/sources/amethyst-cos/"
+    }
+    ,
+    {
+      "id": "example",
+      "title": "Example Source",
+      "description": "A demonstration of deterministic Source Boxes with media.",
+      "order": 1,
+      "path": "/sources/example/"
+    }
+    ,
+    {
+      "id": "mister-seventy-six",
+      "title": "Mister Seventy Six",
+      "description": "Independent writings and expressions by Mister Seventy Six.",
+      "order": 2,
+      "path": "/sources/mister-seventy-six/"
+    }
+  ]
+}

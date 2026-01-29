@@ -1,0 +1,11 @@
+{
+  "module": "chess.multiplayer",
+  "version": "1.0.0",
+  "deterministic": true,
+  "network": false,
+  "notes": [
+    "No transport yet",
+    "Pure match state",
+    "Authoritative turn enforcement"
+  ]
+}

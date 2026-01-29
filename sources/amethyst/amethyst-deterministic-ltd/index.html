@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source: Amethyst Deterministic Ltd | Amethyst Runtime</title>
+    <style>
+        /* Amethyst Design Ethos - Clean Core */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header - Clean and Minimal */
+        .header {
+            padding: 2.5rem 0 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #ddd6fe;
+        }
+        
+        /* Content Cards - The Core of Clean Design */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .definition-card {
+            border-left: 5px solid #10b981;
+            background: linear-gradient(to right, #f0fdf4, white);
+        }
+        
+        .exclusion-card {
+            border-left: 5px solid #dc2626;
+            background: linear-gradient(to right, #fef2f2, white);
+        }
+        
+        .authority-card {
+            border-left: 5px solid #0ea5e9;
+            background: linear-gradient(to right, #f0f9ff, white);
+        }
+        
+        /* Typography Hierarchy - Clear and Purposeful */
+        h1 {
+            font-size: 2.2rem;
+            color: #1e1b4b;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            color: #1e1b4b;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            color: #7c3aed;
+            margin: 0 0 0.75rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: #475569;
+        }
+        
+        /* Grid System - Clean and Responsive */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .grid-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);
+        }
+        
+        .grid-item-title {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #059669;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        /* Exclusion List */
+        .exclusion-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .exclusion-item {
+            padding: 0.85rem;
+            background: #fef2f2;
+            border-radius: 8px;
+            border-left: 3px solid #dc2626;
+            color: #7f1d1d;
+            font-size: 0.9rem;
+        }
+        
+        /* Authority Principles */
+        .authority-principle {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 3px solid #0ea5e9;
+        }
+        
+        .authority-principle h4 {
+            color: #0ea5e9;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #475569;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .nav-link {
+            padding: 0.85rem 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        
+        .build-info {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .exclusion-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Clean and Minimal -->
+        <header class="header">
+            <div class="logo">Amethyst</div>
+            <div class="source-badge">source: amethyst-deterministic-ltd</div>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <h1>Source: Amethyst Deterministic Ltd</h1>
+            <p class="subtitle" style="color: #64748b; margin-bottom: 2rem; font-size: 1.1rem;">
+                Formal entity responsible for specification, enforcement, and stewardship of deterministic systems within the Amethyst runtime environment.
+            </p>
+            
+            <!-- Core Definition -->
+            <div class="card definition-card">
+                <h3>Core Definition</h3>
+                <p>
+                    <strong>Amethyst Deterministic Ltd</strong> is a formal entity established to maintain deterministic integrity across systems, specifications, and runtime environments.
+                </p>
+                <p>
+                    This entity exists to govern standards, not opinions; to enforce constraints, not preferences; and to preserve coherence, not narratives.
+                </p>
+            </div>
+            
+            <!-- Why This Entity Exists -->
+            <h2>Why This Entity Exists</h2>
+            <p>
+                Deterministic systems fail without explicit enforcement. Informal governance allows drift, narrative overrides law, and coherence decays through unacknowledged exception.
+            </p>
+            <p>
+                This entity exists because:
+            </p>
+            
+            <div class="grid-3">
+                <div class="grid-item">
+                    <span class="grid-item-title">Enforcement Necessity</span>
+                    <p>Without formal authority to enforce deterministic law, systems inevitably tolerate drift until collapse.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Standard Preservation</span>
+                    <p>Specifications require custodianship to prevent interpretation from substituting for law.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Integrity Verification</span>
+                    <p>Deterministic systems require verifiable integrity proofs that cannot be self-attested.</p>
+                </div>
+            </div>
+            
+            <!-- What It Does -->
+            <h2>What Amethyst Deterministic Ltd Does</h2>
+            <p>
+                Clear, bounded responsibilities executed under deterministic law:
+            </p>
+            
+            <div class="grid-3">
+                <div class="grid-item">
+                    <span class="grid-item-title">Specification Authorship</span>
+                    <p>Author and maintain formal specifications for deterministic systems, interfaces, and protocols.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Runtime Reference Integrity</span>
+                    <p>Maintain reference implementations that serve as verifiable integrity baselines.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Guard Definition & Validation</span>
+                    <p>Define guard specifications and validate implementations against deterministic requirements.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Deterministic Law Preservation</span>
+                    <p>Ensure all governed systems operate within established deterministic law boundaries.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Versioning Authority</span>
+                    <p>Authorise and document versioned state transitions for governed systems.</p>
+                </div>
+                
+                <div class="grid-item">
+                    <span class="grid-item-title">Integrity Attestation</span>
+                    <p>Provide cryptographic attestation for system states meeting deterministic requirements.</p>
+                </div>
+            </div>
+            
+            <!-- What It Does NOT Do -->
+            <div class="card exclusion-card">
+                <h3>What It Explicitly Does NOT Do</h3>
+                <p>
+                    Amethyst Deterministic Ltd exists within strict exclusion boundaries. These are not preferences—they are structural constraints.
+                </p>
+                
+                <div class="exclusion-list">
+                    <div class="exclusion-item">No data harvesting or collection</div>
+                    <div class="exclusion-item">No analytics or telemetry</div>
+                    <div class="exclusion-item">No advertising or promotion</div>
+                    <div class="exclusion-item">No user profiling or behavior tracking</div>
+                    <div class="exclusion-item">No cloud coercion or forced updates</div>
+                    <div class="exclusion-item">No behavior shaping or manipulation</div>
+                    <div class="exclusion-item">No opinion enforcement or censorship</div>
+                    <div class="exclusion-item">No speculative development</div>
+                    <div class="exclusion-item">No narrative governance</div>
+                    <div class="exclusion-item">No informal policy exceptions</div>
+                </div>
+            </div>
+            
+            <!-- Relationship to Other Sources -->
+            <h2>Relationship to Other Sources</h2>
+            <p>
+                Amethyst Deterministic Ltd exists within a defined hierarchy of sources, each with specific jurisdiction and authority.
+            </p>
+            
+            <div class="card authority-card">
+                <div class="authority-principle">
+                    <h4>To Deterministic Law</h4>
+                    <p>This entity executes <em>within</em> deterministic law—it does not create or modify it. The law governs the entity, not the reverse.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>To Amethyst Portal</h4>
+                    <p>Specifies Portal requirements and validates implementations. Does not operate or control individual Portal instances.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>To Guards (e.g., FamilyGuard)</h4>
+                    <p>Defines guard specifications and validation protocols. Does not execute guard functions on user systems.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>To Sources Generally</h4>
+                    <p>Governs source specification and integrity verification. Does not control source creation or deployment.</p>
+                </div>
+            </div>
+            
+            <!-- Deterministic Authority Model -->
+            <h2>Deterministic Authority Model</h2>
+            <p>
+                Authority in deterministic systems is explicit, bounded, and versioned—never implicit, expanding, or negotiable.
+            </p>
+            
+            <div class="card">
+                <h3>Authority Principles</h3>
+                
+                <div class="authority-principle">
+                    <h4>Explicit Definition</h4>
+                    <p>All authority is documented in specifications. No authority exists outside formal definition.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>Bounded Scope</h4>
+                    <p>Authority is limited to specific domains. No general or expanding authority is permitted.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>Versioned Grant</h4>
+                    <p>Authority changes occur through explicit versioning, preventing silent permission creep.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>Verifiable Exercise</h4>
+                    <p>All authority exercises produce verifiable proofs, preventing undocumented action.</p>
+                </div>
+                
+                <div class="authority-principle">
+                    <h4>Non-Transferable</h4>
+                    <p>Authority cannot be delegated, shared, or transferred without explicit versioning.</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem; padding: 1.5rem; background: #f1f5f9; border-radius: 8px; color: #475569;">
+                This authority model ensures that Amethyst Deterministic Ltd cannot silently expand its jurisdiction, violate deterministic law, or govern systems without explicit, versioned consent.
+            </p>
+            
+            <!-- Navigation -->
+            <div class="nav-links">
+                <a href="/sources/" class="nav-link">← Sources Index</a>
+                <a href="/sources/deterministic-law/" class="nav-link">Deterministic Law →</a>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Static Source | Deterministic Runtime Interface</p>
+            <p class="build-info">AMETHYST DETERMINISTIC LTD BUILD: RUNTIME_STABLE_V1</p>
+        </footer>
+    </div>
+</body>
+</html>
+<!-- PAGE: amethyst / amethyst-deterministic-ltd -->

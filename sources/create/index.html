@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Create Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background:#000;
+      color:#eee;
+      font-family:system-ui;
+      padding:2rem;
+    }
+    h1 { color:#b7a7ff; }
+    label { display:block; margin-top:1rem; }
+    input, textarea {
+      width:100%;
+      padding:0.6rem;
+      margin-top:0.3rem;
+      background:#111;
+      color:#fff;
+      border:1px solid #333;
+      border-radius:6px;
+    }
+    button {
+      margin-top:1.5rem;
+      padding:0.6rem 1.2rem;
+      background:#2a2a3a;
+      color:#fff;
+      border:none;
+      border-radius:999px;
+    }
+    .preview {
+      margin-top:2rem;
+      padding:1rem;
+      background:#111;
+      border-radius:10px;
+      color:#aaa;
+    }
+    a { color:#aaa; display:inline-block; margin-top:1.5rem; }
+  </style>
+</head>
+<body>
+
+<h1>Create Source</h1>
+<p>A Source is a sovereign page. You own it completely.</p>
+
+<form onsubmit="previewSource(event)">
+  <label>
+    Source Name
+    <input id="name" required />
+  </label>
+
+  <label>
+    Description
+    <textarea id="desc"></textarea>
+  </label>
+
+  <button type="submit">Preview Source</button>
+</form>
+
+<div id="preview" class="preview" style="display:none;"></div>
+
+<a href="/sources/">← Back</a>
+
+<script>
+function previewSource(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const desc = document.getElementById('desc').value;
+  const box = document.getElementById('preview');
+  box.style.display = 'block';
+  box.innerHTML = `
+    <strong>Preview</strong><br><br>
+    <b>${name}</b><br>
+    ${desc || "(no description)"}<br><br>
+    <em>This Source is not yet published.</em>
+  `;
+}
+</script>
+
+</body>
+</html>

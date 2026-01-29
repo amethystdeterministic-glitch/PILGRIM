@@ -1,0 +1,9 @@
+4|/data/data/com.termux/files/home/amethyst/freezes/LAUNCH_PREP_20260124_224229/blueprints/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/freezes/LAUNCH_PREP_20260124_224229/runtime/backups/RECOVER_20260123_201513/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/freezes/LAUNCH_PREP_20260124_224229/runtime/backups/FREEZE_LAUNCH_20260124_131329/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/freezes/LAUNCH_PREP_20260124_224229/runtime/apps/fun/cymatics
+14|/data/data/com.termux/files/home/amethyst/runtime_overreach_experiment/public/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/runtime_backup_1769305055/backups/RECOVER_20260123_201513/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/runtime_backup_1769305055/backups/FREEZE_LAUNCH_20260124_131329/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/runtime_backup_1769305055/backups/FREEZE_LAUNCH_20260124_231934/apps/fun/cymatics
+15|/data/data/com.termux/files/home/amethyst/runtime_backup_1769305055/apps/fun/cymatics

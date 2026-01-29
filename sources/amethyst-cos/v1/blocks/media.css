@@ -1,0 +1,13 @@
+
+.cos-nav {
+  margin: 1.5rem 0 2rem;
+  font-size: 0.95rem;
+}
+.cos-nav a {
+  color: #9ae6ff;
+  text-decoration: underline;
+}
+.cos-nav span {
+  margin: 0 0.4rem;
+  opacity: 0.5;
+}

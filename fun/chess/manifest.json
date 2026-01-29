@@ -1,0 +1,27 @@
+{
+  "module_id": "com.amethyst.chess",
+  "name": "Amethyst Chess",
+  "version": "1.0.0",
+  "type": "pipeline_app",
+  "deterministic": true,
+  "multiplayer": {
+    "mode": "deterministic_turn_based",
+    "networking": "disabled_v1",
+    "mundo_ready": true
+  },
+  "identity": {
+    "binding": "ghostpass",
+    "match_scope": "private_or_public"
+  },
+  "principles": {
+    "no_rng": true,
+    "replayable": true,
+    "audit_ready": true,
+    "forward_only": true
+  },
+  "notes": [
+    "Chess rules are immutable.",
+    "All matches replay deterministically.",
+    "Realtime networking deferred to v2."
+  ]
+}

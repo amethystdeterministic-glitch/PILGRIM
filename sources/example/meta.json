@@ -1,0 +1,9 @@
+{
+  "title": "Example Source",
+  "description": "A demonstration of deterministic Source Boxes with media.",
+  "tags": ["demo", "blocks", "media"],
+  "visibility": "public",
+  "order": 1,
+  "created": "local",
+  "updated": "local"
+}

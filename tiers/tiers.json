@@ -1,0 +1,11 @@
+{
+  "free": {
+    "sources": 1,
+    "description": "One full Source Box. Unlimited pages. Your data, your runtime."
+  },
+  "pro": {
+    "sources": 6,
+    "price": "£5 / month",
+    "description": "Six full Source Boxes. Advanced layouts. Priority builder features."
+  }
+}

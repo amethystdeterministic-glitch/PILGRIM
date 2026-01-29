@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source: Tiers | Amethyst Runtime</title>
+    <style>
+        /* Amethyst Design Ethos - Clean Core */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header - Clean and Minimal */
+        .header {
+            padding: 2.5rem 0 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-subtitle {
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #ddd6fe;
+        }
+        
+        /* Typography Hierarchy - Clear and Purposeful */
+        h1 {
+            font-size: 2.2rem;
+            color: #1e1b4b;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .plain-intro {
+            font-size: 1.2rem;
+            color: #7c3aed;
+            margin: 0 0 3rem;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 700px;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            color: #1e1b4b;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: #475569;
+        }
+        
+        /* Tiers Grid - Clean Card System */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Tier Color Coding */
+        .tier-card.free {
+            border-top: 5px solid #10b981;
+        }
+        
+        .tier-card.pro {
+            border-top: 5px solid #7c3aed;
+        }
+        
+        .tier-card.enterprise {
+            border-top: 5px solid #f59e0b;
+        }
+        
+        /* Tier Headers */
+        .tier-label {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tier-card.free .tier-label {
+            color: #10b981;
+        }
+        
+        .tier-card.pro .tier-label {
+            color: #7c3aed;
+        }
+        
+        .tier-card.enterprise .tier-label {
+            color: #f59e0b;
+        }
+        
+        .tier-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e1b4b;
+        }
+        
+        /* Tier Content */
+        .tier-includes {
+            margin: 1.5rem 0;
+        }
+        
+        .tier-includes h4 {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .tier-includes ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .tier-includes li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #475569;
+        }
+        
+        .tier-includes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .tier-card.free .tier-includes li::before {
+            color: #10b981;
+        }
+        
+        .tier-card.pro .tier-includes li::before {
+            color: #7c3aed;
+        }
+        
+        .tier-card.enterprise .tier-includes li::before {
+            color: #f59e0b;
+        }
+        
+        /* Tier Rules */
+        .tier-rules {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .tier-for {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 3px solid #cbd5e1;
+        }
+        
+        .tier-for strong {
+            color: #475569;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        /* Clarifications */
+        .clarifications {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .clarifications h3 {
+            color: #1e1b4b;
+            margin: 0 0 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .clarifications ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .clarifications li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #475569;
+        }
+        
+        .clarifications li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #7c3aed;
+            font-size: 1.2rem;
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .nav-link {
+            padding: 0.85rem 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        
+        .build-info {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 1.9rem;
+            }
+            
+            .plain-intro {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .tiers-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .tier-card {
+                padding: 1.75rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .tiers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Clean and Minimal -->
+        <header class="header">
+            <div class="logo">Amethyst</div>
+            <div class="page-subtitle">Access & Usage Tiers</div>
+            <div class="source-badge" style="margin-top: 0.5rem;">source: tiers</div>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <h1>Source: Tiers</h1>
+            <p class="plain-intro">
+                These tiers describe how you can use Amethyst. There is no lock-in, no platform ownership, and no hidden restrictions.
+            </p>
+            
+            <!-- Tiers -->
+            <h2>Choose How You Use Amethyst</h2>
+            
+            <div class="tiers-grid">
+                <!-- Free Tier -->
+                <div class="tier-card free">
+                    <div class="tier-label">FREE</div>
+                    <div class="tier-price">£0</div>
+                    
+                    <div class="tier-includes">
+                        <h4>Includes:</h4>
+                        <ul>
+                            <li>1 Source page</li>
+                            <li>All PIPELINE launch apps: Write, Matrix, Studio, Mundo</li>
+                            <li>Identity Capsule with GhostPass</li>
+                            <li>Access to FUN apps (more coming)</li>
+                            <li>Optional donation button</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tier-for">
+                        <strong>Who it's for:</strong>
+                        <p>Anyone who wants to start using Amethyst. This is fully usable. No tricks.</p>
+                    </div>
+                </div>
+                
+                <!-- Pro Tier -->
+                <div class="tier-card pro">
+                    <div class="tier-label">PRO</div>
+                    <div class="tier-price">£5 per month</div>
+                    
+                    <div class="tier-includes">
+                        <h4>Includes everything in FREE, plus:</h4>
+                        <ul>
+                            <li>5 additional Source pages</li>
+                            <li>Access to upcoming Pro apps</li>
+                            <li>FamilyGuard</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tier-rules">
+                        <strong>Rules:</strong> No subscription lock-in. Cancel anytime.
+                    </div>
+                    
+                    <div class="tier-for">
+                        <strong>Who it's for:</strong>
+                        <p>People who want more control, not obligation. This is for growing usage.</p>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Tier -->
+                <div class="tier-card enterprise">
+                    <div class="tier-label">ENTERPRISE</div>
+                    <div class="tier-price">Licensed</div>
+                    
+                    <div class="tier-includes">
+                        <h4>Includes everything in PRO, plus:</h4>
+                        <ul>
+                            <li>Licensed Guards</li>
+                            <li>Enhanced Enterprise Identity Capsule management</li>
+                            <li>Multi-user and organisational control</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tier-for">
+                        <strong>Who it's for:</strong>
+                        <p>Organisations and teams. Serious, professional use.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Clarifications -->
+            <div class="clarifications">
+                <h3>Important Clarifications</h3>
+                <ul>
+                    <li>Amethyst does not host your content</li>
+                    <li>Amethyst does not take ownership of what you create</li>
+                    <li>Amethyst does not sell data</li>
+                    <li>These tiers control capability, not permission</li>
+                    <li>You always own what you make</li>
+                    <li>You can leave at any time</li>
+                </ul>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="nav-links">
+                <a href="/sources/" class="nav-link">← Back to Sources</a>
+                <a href="/sources/portal/" class="nav-link">Portal →</a>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Static Source | Deterministic Runtime Interface</p>
+            <p class="build-info">AMETHYST DETERMINISTIC LTD</p>
+        </footer>
+    </div>
+</body>
+</html>

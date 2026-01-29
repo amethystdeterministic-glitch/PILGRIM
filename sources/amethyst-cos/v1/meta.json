@@ -1,0 +1,8 @@
+{
+  "title": "Amethyst cOS",
+  "description": "Sovereign deterministic operating system and runtime.",
+  "visibility": "public",
+  "order": 1,
+  "created": "local",
+  "updated": "local"
+}

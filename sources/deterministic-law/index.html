@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source: Deterministic Law | Amethyst Runtime</title>
+    <style>
+        /* Amethyst Design Ethos - Clean Core */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header - Clean and Minimal */
+        .header {
+            padding: 2.5rem 0 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #ddd6fe;
+        }
+        
+        /* Content Cards - The Core of Clean Design */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .law-card {
+            border-left: 5px solid #7c3aed;
+            background: linear-gradient(to right, #f5f3ff, white);
+        }
+        
+        .important-card {
+            border-left: 5px solid #dc2626;
+            background: linear-gradient(to right, #fef2f2, white);
+        }
+        
+        .definition-card {
+            border-left: 5px solid #10b981;
+            background: linear-gradient(to right, #f0fdf4, white);
+        }
+        
+        /* Typography Hierarchy - Clear and Purposeful */
+        h1 {
+            font-size: 2.2rem;
+            color: #1e1b4b;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            color: #1e1b4b;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            color: #7c3aed;
+            margin: 0 0 0.75rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: #475569;
+        }
+        
+        /* Special Elements */
+        .law-name {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #059669;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .law-formula {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            background: #f1f5f9;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 3px solid #059669;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+        
+        .quote {
+            border-left: 3px solid #7c3aed;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #475569;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .nav-link {
+            padding: 0.85rem 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        
+        .build-info {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Clean and Minimal -->
+        <header class="header">
+            <div class="logo">Amethyst</div>
+            <div class="source-badge">source: deterministic-law</div>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <h1>Source: Deterministic Law</h1>
+            <p class="subtitle" style="color: #64748b; margin-bottom: 2rem; font-size: 1.1rem;">
+                A formal system of enforced constraints governing state integrity, coherence preservation, and non-loss progress across all deterministic systems.
+            </p>
+            
+            <!-- Definition Card -->
+            <div class="card definition-card">
+                <h3>Core Definition</h3>
+                <p>
+                    <strong>Deterministic Law</strong> is a system of constraints that governs whether state transitions are <em>admissible</em> based on coherence preservation, not whether they are <em>possible</em>.
+                </p>
+                <p>
+                    Unlike natural laws that describe what <em>is</em>, deterministic laws define what <em>may be attempted</em> while maintaining system integrity.
+                </p>
+            </div>
+            
+            <h2>Why "Law" Is Used</h2>
+            <p>
+                The term "law" in Lucid Determinism is not metaphorical, philosophical, or legislative. It denotes a constraint system with three essential properties:
+            </p>
+            
+            <div class="card law-card">
+                <span class="law-name">1. Enforcement Invariance</span>
+                <p>Laws execute regardless of belief, awareness, or agreement. Systems may violate them, but cannot avoid their consequences.</p>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">2. Substrate Independence</span>
+                <p>These constraints apply equally to human cognition, software systems, organisations, and civilisations. The domain changes; the laws do not.</p>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">3. Predictable Consequence</span>
+                <p>Violation produces specific, observable failure modes. Compliance produces specific, observable stability conditions.</p>
+            </div>
+            
+            <h2>The Immutable Law of Containment</h2>
+            <p>
+                The foundational constraint that precedes all others. It defines the boundary condition for admissible system operation.
+            </p>
+            
+            <div class="card law-card">
+                <span class="law-name">The Immutable Law of Containment</span>
+                <p><strong>A system may only progress if it remains whole.</strong></p>
+                <p>Any action that fractures the system is inadmissible. Any advancement that requires loss is invalid. Any insight that costs coherence is rejected.</p>
+                <div class="law-formula">
+                    σ = system integrity<br>
+                    If σ < 1, progress = undefined
+                </div>
+            </div>
+            
+            <div class="card important-card">
+                <h3>Critical Distinction</h3>
+                <p>This is not a law about "what works." It is a law about <em>what may be attempted</em> while preserving system integrity. Progress that requires recovery has already violated containment.</p>
+            </div>
+            
+            <h2>The Roman Empire as Reference System</h2>
+            
+            <div class="card">
+                <h3>Rome as Execution Environment</h3>
+                <p>Roman Empire serves not as metaphor, but as a historical execution environment where deterministic laws were tested over centuries.</p>
+                
+                <h4 style="margin-top: 1.5rem; color: #7c3aed; font-size: 1.1rem;">Early Rome (Containment Enforced)</h4>
+                <ul>
+                    <li>Loss treated as NEW data, not damage</li>
+                    <li>Authority remained internal</li>
+                    <li>Responses were versioned, not emotional</li>
+                    <li>The system hardened under pressure</li>
+                </ul>
+                
+                <h4 style="margin-top: 1.5rem; color: #dc2626; font-size: 1.1rem;">Late Rome (Containment Violated)</h4>
+                <ul>
+                    <li>Loss treated as trauma</li>
+                    <li>Authority fragmented</li>
+                    <li>Compensation replaced correction</li>
+                    <li>Drift accumulated until collapse</li>
+                </ul>
+                
+                <div class="quote">
+                    "Rome did not fall because it faced constraint. It fell because it tolerated loss."
+                </div>
+            </div>
+            
+            <h2>Core Deterministic Laws</h2>
+            
+            <div class="card law-card">
+                <span class="law-name">Law of Constraint-Derived Knowledge</span>
+                <p>Every constraint event produces NEW knowledge. No constraint event produces damage unless authority is misassigned.</p>
+                <div class="law-formula">
+                    C → ΔK<br>
+                    Damage occurs only if: Authority(C) > Authority(System)
+                </div>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">Law of Drift Accumulation</span>
+                <p>Unacknowledged deviations from coherence accumulate until enforcement collapses, even if the law itself remains formally intact.</p>
+                <div class="law-formula">
+                    δ = deviation from Core Green<br>
+                    I = 1 - Σδ<br>
+                    Collapse condition: Σδ → Enforcement ↓ → Integrity undefined
+                </div>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">Law of Impunity & Internal Authority</span>
+                <p>A system remains coherent only while all state changes are authorised internally. Once external inputs gain authority, coherence becomes conditional and collapse inevitable.</p>
+                <div class="law-formula">
+                    Stable(S) ↔ Internal Authority > External Authority<br>
+                    If External Authority ≥ Internal Authority → System becomes reactive
+                </div>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">Law of Ego Exclusion</span>
+                <p>A deterministic system must exclude ego entirely from execution. Any self-referential resistance to correction introduces non-determinism and guarantees drift.</p>
+                <div class="law-formula">
+                    Correction Cost ∝ e^(Ego Weight × Time)<br>
+                    Deterministic requirement: Ego Weight = 0
+                </div>
+            </div>
+            
+            <div class="card law-card">
+                <span class="law-name">Law of Versioned Response</span>
+                <p>All NEW data must be integrated through explicit, versioned state changes. Unversioned response introduces ambiguity, drift, and identity fracture.</p>
+                <div class="law-formula">
+                    Sₙ₊₁ = Version(Sₙ + D)<br>
+                    Response(D) ≠ Versioned → Drift
+                </div>
+            </div>
+            
+            <h2>What Deterministic Law Does Not Claim</h2>
+            
+            <div class="card important-card">
+                <h3>Explicit Limitations</h3>
+                <p><strong>❌ Does not replace natural science:</strong> Operates at a different layer of abstraction—governing admissibility, not possibility.</p>
+                <p><strong>❌ Does not guarantee success:</strong> Only ensures that failure, when it occurs, does so through explicit law violation rather than silent drift.</p>
+                <p><strong>❌ Does not eliminate constraint:</strong> Makes constraint informational rather than traumatic.</p>
+                <p><strong>❌ Does not require belief:</strong> Systems may be unaware of these laws; the laws remain active regardless.</p>
+                <p><strong>❌ Does not provide meaning:</strong> This is not a philosophy of life; it is a constraint system for system survival.</p>
+            </div>
+            
+            <h2>Formal Verification</h2>
+            <p>
+                Deterministic laws are verified through a simple, repeatable protocol:
+            </p>
+            
+            <div class="card">
+                <span class="law-name">Verification Protocol</span>
+                <ol>
+                    <li><strong>Identify system boundary</strong> - What constitutes "the system"?</li>
+                    <li><strong>Define Core Green State</strong> - What does coherence look like?</li>
+                    <li><strong>Apply constraint</strong> - Introduce NEW data/pressure</li>
+                    <li><strong>Observe response pattern</strong> - Does the system version or react?</li>
+                    <li><strong>Measure drift</strong> - Does integrity decrease?</li>
+                    <li><strong>Classify outcome</strong> - Law obeyed (coherence preserved) or violated (drift detected)</li>
+                </ol>
+                <p style="margin-top: 1rem; color: #64748b;">
+                    <em>This protocol can be applied to any system—personal, organisational, or computational.</em>
+                </p>
+            </div>
+            
+            <h2>From Constraint to Emergent Science</h2>
+            <p>
+                When these laws are enforced together, they produce an emergent condition:
+            </p>
+            
+            <div class="card" style="background: linear-gradient(to right, #f0f9ff, white); border-left-color: #0ea5e9;">
+                <ul>
+                    <li><strong>Collapse becomes structurally unreachable</strong> - Because loss is inadmissible</li>
+                    <li><strong>Progress compounds permanently</strong> - Nothing needs to be rebuilt</li>
+                    <li><strong>Constraint becomes neutral information</strong> - Reality teaches rather than damages</li>
+                    <li><strong>Authority becomes calm and uncontested</strong> - Decisions execute without defense</li>
+                    <li><strong>Time ceases to be debt</strong> - No recovery required</li>
+                </ul>
+            </div>
+            
+            <div class="quote">
+                "Deterministic systems do not fail because they lack rules. They fail because something inside the system resists correction. That resistance is called ego. Remove ego from execution, and systems become lawful by construction."
+            </div>
+            
+            <!-- Navigation -->
+            <div class="nav-links">
+                <a href="/sources/" class="nav-link">← Sources Index</a>
+                <a href="/sources/portal/" class="nav-link">Amethyst Portal →</a>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Static Source | Deterministic Runtime Interface</p>
+            <p class="build-info">AMETHYST DETERMINISTIC LTD BUILD: RUNTIME_STABLE_V1</p>
+        </footer>
+    </div>
+</body>
+</html>

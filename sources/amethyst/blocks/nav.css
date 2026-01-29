@@ -1,0 +1,13 @@
+.amethyst-nav {
+  margin: 1.5rem 0 2.5rem 0;
+  font-size: 0.95rem;
+}
+.amethyst-nav a {
+  color: #7c3aed;
+  text-decoration: underline;
+  font-weight: 500;
+}
+.amethyst-nav span {
+  margin: 0 0.5rem;
+  opacity: 0.4;
+}

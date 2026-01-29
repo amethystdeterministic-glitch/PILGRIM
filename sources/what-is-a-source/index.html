@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source: What is a Source? | Amethyst Runtime</title>
+    <style>
+        /* Amethyst Design Ethos - Clean Core */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header - Clean and Minimal */
+        .header {
+            padding: 2.5rem 0 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #ddd6fe;
+        }
+        
+        /* Content Cards - The Core of Clean Design */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .hero-card {
+            border-left: 5px solid #7c3aed;
+            background: linear-gradient(to right, #f5f3ff, white);
+        }
+        
+        .definition-card {
+            border-left: 5px solid #10b981;
+            background: linear-gradient(to right, #f0fdf4, white);
+        }
+        
+        .not-card {
+            border-left: 5px solid #dc2626;
+            background: linear-gradient(to right, #fef2f2, white);
+        }
+        
+        /* Typography Hierarchy - Clear and Purposeful */
+        h1 {
+            font-size: 2.4rem;
+            color: #1e1b4b;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #7c3aed;
+            margin: 0 0 2rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            color: #1e1b4b;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .hero-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #475569;
+        }
+        
+        /* Examples Grid */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+        
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);
+            border-color: #ddd6fe;
+        }
+        
+        .example-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1e1b4b;
+            font-size: 1.1rem;
+        }
+        
+        .example-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        /* Not List */
+        .not-list {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .not-list ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .not-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: #475569;
+        }
+        
+        .not-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        /* Final Statement */
+        .final-statement {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to right, #f0f9ff, #f5f3ff);
+            border-radius: 12px;
+            margin: 2.5rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .final-statement p {
+            font-size: 1.3rem;
+            color: #7c3aed;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .nav-link {
+            padding: 0.85rem 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        
+        .build-info {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .card {
+                padding: 1.75rem;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Clean and Minimal -->
+        <header class="header">
+            <div class="logo">Amethyst</div>
+            <div class="source-badge">source: what-is-a-source</div>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <h1>Source: What is a Source?</h1>
+            <p class="subtitle">
+                A Source is a web page you own and control. It's your online property — without the landlord.
+            </p>
+            
+            <!-- Plain English Section -->
+            <div class="card hero-card">
+                <p class="hero-text">
+                    Imagine a web page that's truly yours. No hosting accounts, no platforms changing the rules, 
+                    no throttling, no takedowns because someone decided they don't like what you're saying.
+                </p>
+                <p class="hero-text">
+                    That's a Source. It's a page you can give to the world that doesn't come with gatekeeping. 
+                    It doesn't get taken down. It doesn't require permission.
+                </p>
+                <p class="hero-text">
+                    We're giving the world free web pages. No hosting. No gatekeeping. No platform landlord.
+                </p>
+                <p style="margin-top: 2rem; font-style: italic; color: #7c3aed; padding: 1rem; background: #f5f3ff; border-radius: 8px;">
+                    Here. This is yours. Put your truth here. It stays yours.
+                </p>
+            </div>
+            
+            <!-- What You Can Use It For -->
+            <h2>What you can use it for</h2>
+            <p>
+                A Source is whatever you need it to be. Here are some real examples people are using them for:
+            </p>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-icon">🏠</div>
+                    <div class="example-title">Personal Page</div>
+                    <div class="example-desc">Your digital home on the web. Who you are, what you care about, how to reach you.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">🚀</div>
+                    <div class="example-title">Project Page</div>
+                    <div class="example-desc">Showcase your work, share what you're building, gather feedback from people who care.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">📝</div>
+                    <div class="example-title">Public Statement</div>
+                    <div class="example-desc">Put important information on record. Say what needs to be said without filters or edits.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">📚</div>
+                    <div class="example-title">Guide or Instructions</div>
+                    <div class="example-desc">Share knowledge that helps others. Tutorials, how-tos, things you've learned.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">💼</div>
+                    <div class="example-title">Business Page</div>
+                    <div class="example-desc">What you offer, how you work, why you're different. No middlemen taking cuts.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">⬇️</div>
+                    <div class="example-title">Download Page</div>
+                    <div class="example-desc">Share files, software, resources. People get what you're giving, directly from you.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">🎨</div>
+                    <div class="example-title">Portfolio</div>
+                    <div class="example-desc">Show your work. Your art, writing, photography, code—whatever you create.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">👨‍👩‍👧‍👦</div>
+                    <div class="example-title">Family Safety Page</div>
+                    <div class="example-desc">Important information for your family. Emergency contacts, procedures, vital details.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">📢</div>
+                    <div class="example-title">Announcement Page</div>
+                    <div class="example-desc">Share news, updates, changes. Everyone gets the same information, directly from you.</div>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">🔐</div>
+                    <div class="example-title">Verification Page</div>
+                    <div class="example-desc">Prove something is authentic. Show certificates, credentials, verification codes.</div>
+                </div>
+            </div>
+            
+            <!-- What It's Not -->
+            <h2>What it's not</h2>
+            
+            <div class="card not-card">
+                <div class="not-list">
+                    <ul>
+                        <li>Not social media. No algorithms deciding who sees your content.</li>
+                        <li>Not a blog platform. No monthly fees, no feature restrictions.</li>
+                        <li>Not a place where strangers control your reach. You decide who sees it.</li>
+                        <li>Not something you rent. You own it, period.</li>
+                        <li>Not temporary. Once it's out there, it stays available.</li>
+                        <li>Not complicated. No technical skills needed to use it.</li>
+                        <li>Not locked away. Anyone with the link can access it.</li>
+                        <li>Not going anywhere. No company can decide to shut it down.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Final Statement -->
+            <div class="final-statement">
+                <p>A Source is simply a page that's yours. That's it. That's the whole idea.</p>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="nav-links">
+                <a href="/sources/" class="nav-link">← Sources Index</a>
+                <a href="/sources/portal/" class="nav-link">Amethyst Portal →</a>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Static Source | Amethyst Runtime</p>
+            <p class="build-info">Simple. Yours. Always.</p>
+        </footer>
+    </div>
+</body>
+</html>

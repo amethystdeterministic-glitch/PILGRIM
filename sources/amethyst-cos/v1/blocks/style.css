@@ -1,0 +1,10 @@
+body {
+  background:#0b0b0e;
+  color:#e5e7eb;
+  font-family:system-ui;
+  margin:0;
+  padding:2rem;
+}
+a { color:#9ae6ff; }
+.source-nav { margin:1rem 0 2rem 0; }
+.source-nav span { opacity:0.5; margin:0 0.4rem; }

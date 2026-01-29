@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amethyst | Deterministic Runtime Environment</title>
+    <style>
+        /* Amethyst Design Ethos - Clean Core */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header - Clean and Minimal */
+        .header {
+            padding: 2rem 0 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .source-badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #7c3aed;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #ddd6fe;
+        }
+        
+        /* Typography Hierarchy */
+        h1 {
+            font-size: 3.5rem;
+            color: #1e1b4b;
+            margin: 3rem 0 1.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #1e1b4b;
+            margin: 4rem 0 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #1e1b4b;
+            margin: 0 0 1rem;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin: 2rem 0 4rem;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #7c3aed;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .checksum {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 1rem;
+            color: #059669;
+            background: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #86efac;
+            display: inline-block;
+            margin: 2rem 0;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        /* Content Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.1);
+            border-color: #ddd6fe;
+        }
+        
+        .card-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ede9fe;
+            margin-bottom: -1.5rem;
+            line-height: 1;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #7c3aed;
+        }
+        
+        .card ul {
+            list-style: none;
+            margin-left: 0;
+            margin-top: 1.5rem;
+        }
+        
+        .card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #475569;
+        }
+        
+        .card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        /* Terminal Panel */
+        .terminal-section {
+            margin: 4rem 0;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .terminal-title {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #059669;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot.red { background: #ef4444; }
+        .terminal-dot.yellow { background: #f59e0b; }
+        .terminal-dot.green { background: #10b981; }
+        
+        .terminal-panel {
+            background: #1e1b4b;
+            border-radius: 12px;
+            padding: 2.5rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #e5e7eb;
+            border: 1px solid #2d1b69;
+            overflow-x: auto;
+        }
+        
+        .terminal-line {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-prompt {
+            color: #10b981;
+            flex-shrink: 0;
+        }
+        
+        .terminal-command {
+            color: white;
+        }
+        
+        .terminal-output {
+            color: #9ca3af;
+            padding-left: 1.5rem;
+        }
+        
+        .terminal-status {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2d1b69;
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #8b5cf6;
+        }
+        
+        /* Features Section */
+        .features-section {
+            margin: 4rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: #ddd6fe;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.08);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #7c3aed;
+        }
+        
+        .feature-card h4 {
+            color: #1e1b4b;
+            margin-bottom: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            background: linear-gradient(135deg, #f5f3ff, #f0f9ff);
+            border-radius: 16px;
+            border: 1px solid #ddd6fe;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
+        }
+        
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .badge {
+            padding: 0.5rem 1.2rem;
+            background: #f5f3ff;
+            border: 1px solid #ddd6fe;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #7c3aed;
+        }
+        
+        .build-info {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .card {
+                padding: 2rem;
+            }
+            
+            .terminal-panel {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Clean and Minimal -->
+        <header class="header">
+            <div class="logo">Amethyst</div>
+            <div class="tagline">The high-integrity gateway to deterministic runtime environments</div>
+            <div class="source-badge">127.0.0.1:9192/source</div>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Amethyst</h1>
+            <p>A quantum leap in trusted computation</p>
+            <div class="checksum">
+                SHA-256: 7e8910a3b5c8d2f4e6b9a1c7d8f2b011a3c5e7f9d1b35a5c7e9
+            </div>
+        </section>
+        
+        <!-- Content Cards -->
+        <section class="content-grid">
+            <div class="card">
+                <div class="card-number">01</div>
+                <div class="card-icon">⟠</div>
+                <h3>The Deterministic Gateway</h3>
+                <p>The Amethyst Portal serves as the primary interface between your local hardware and the deterministic execution layers. Every interaction is mathematically verified, every state change is cryptographically guaranteed.</p>
+                <ul>
+                    <li>Zero-trust architecture</li>
+                    <li>Deterministic state verification</li>
+                    <li>Local orchestration engine</li>
+                    <li>Guarded pipeline authentication</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-number">02</div>
+                <div class="card-icon">⚡</div>
+                <h3>Architectural Integrity</h3>
+                <p>Built on principles of non-interference and mathematical certainty. No telemetry, no dynamic fetching, no external dependencies.</p>
+                <ul>
+                    <li>Static source verification</li>
+                    <li>Hash-based asset validation</li>
+                    <li>Zero third-party dependencies</li>
+                    <li>Deterministic execution guarantee</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Terminal Panel -->
+        <section class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-title">terminal — amethyst-runtime</div>
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+            </div>
+            <div class="terminal-panel">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">amethyst verify --source localbox</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-output">✅ Source integrity verified: SHA-256 match</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">amethyst pipeline --guard auth</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-output">🔒 Pipeline secured: Deterministic execution guaranteed</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">amethyst status</span>
+                </div>
+                <div class="terminal-status">
+                    <span>🌌 Runtime active</span>
+                    <span>🔐 All assets verified</span>
+                    <span>📊 Zero telemetry</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>Core Principles</h2>
+            <p style="text-align: center; color: #64748b; max-width: 600px; margin: 0 auto 3rem;">
+                The foundation of every deterministic computation
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Mathematical Certainty</h4>
+                    <p>Every computation verified against cryptographic proofs</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h4>Local Orchestration</h4>
+                    <p>Full control over source boxes and pipelines</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h4>Zero Trust</h4>
+                    <p>No external dependencies, no telemetry</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h4>High Performance</h4>
+                    <p>Deterministic execution at native speeds</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 style="color: #1e1b4b;">Begin Your Deterministic Journey</h2>
+            <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
+                Download the Amethyst Portal and experience mathematically-verified computation
+            </p>
+            <button class="cta-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16L16 11H13V4H11V11H8L12 16Z" fill="currentColor"/>
+                    <path d="M20 18H4V11H2V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V11H20V18Z" fill="currentColor"/>
+                </svg>
+                Download Amethyst.bin
+            </button>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">
+                <div class="logo" style="font-size: 1.8rem;">Amethyst</div>
+            </div>
+            
+            <div class="footer-badges">
+                <span class="badge">Static Source</span>
+                <span class="badge">No Dynamic Assets</span>
+                <span class="badge">Zero Telemetry</span>
+                <span class="badge">Deterministic</span>
+            </div>
+            
+            <p style="color: #64748b; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                This interface is a static source designed for direct injection into deterministic runtime environments. 
+                Any deviation from the verified hash constitutes a pipeline violation.
+            </p>
+            
+            <div class="build-info">
+                AMETHYST DETERMINISTIC LTD BUILD: RUNTIME_STABLE_V1
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple terminal typing effect
+        const terminalLines = document.querySelectorAll('.terminal-line');
+        let currentLine = 0;
+        
+        function typeTerminal() {
+            if (currentLine < terminalLines.length) {
+                terminalLines[currentLine].style.opacity = '1';
+                terminalLines[currentLine].style.transition = 'opacity 0.5s ease';
+                currentLine++;
+                setTimeout(typeTerminal, 500);
+            }
+        }
+        
+        // Start typing effect when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial opacity
+            terminalLines.forEach(line => {
+                line.style.opacity = '0';
+            });
+            
+            // Start typing after a delay
+            setTimeout(typeTerminal, 1000);
+        });
+        
+        // CTA button interaction
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const originalHTML = this.innerHTML;
+            this.innerHTML = `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Verifying Integrity...
+            `;
+            this.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                this.innerHTML = originalHTML;
+                this.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    this.style.background = 'linear-gradient(135deg, #7c3aed, #6d28d9)';
+                    this.style.pointerEvents = 'auto';
+                }, 2000);
+            }, 1500);
+        });
+        
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe cards for fade-in effect
+        document.querySelectorAll('.card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+<!-- PAGE: amethyst / portal -->

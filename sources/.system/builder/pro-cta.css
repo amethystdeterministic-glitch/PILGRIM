@@ -1,0 +1,39 @@
+.pro-cta {
+  margin-top: 3rem;
+  padding: 1.75rem;
+  border-radius: 14px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+}
+
+.pro-cta h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  color: #e5e7eb;
+}
+
+.pro-cta p {
+  color: #9ca3af;
+  margin-bottom: 1.25rem;
+}
+
+.pro-button {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.pro-button:hover {
+  opacity: 0.9;
+}
+
+.pro-cta small {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}

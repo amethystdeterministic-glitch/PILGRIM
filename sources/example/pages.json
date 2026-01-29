@@ -1,0 +1,15 @@
+{
+  "default": "home",
+  "pages": [
+    {
+      "id": "home",
+      "title": "Home",
+      "path": "/sources/example/"
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "path": "/sources/example/about/"
+    }
+  ]
+}

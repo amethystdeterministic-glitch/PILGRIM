@@ -1,0 +1,9 @@
+{
+  "title": "Journal",
+  "description": "Personal notes, entries, and long-form thinking.",
+  "tags": ["writing", "notes"],
+  "visibility": "private",
+  "order": 2,
+  "created": "local",
+  "updated": "local"
+}

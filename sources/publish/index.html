@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Publish Source</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background:#000; color:#eee; font-family:system-ui; padding:2rem; }
+    h1 { color:#b7a7ff; }
+    button {
+      margin-top:1.5rem;
+      padding:0.6rem 1.2rem;
+      background:#2a2a3a;
+      color:#fff;
+      border:none;
+      border-radius:999px;
+    }
+    .notice {
+      margin-top:1.5rem;
+      background:#111;
+      padding:1rem;
+      border-radius:10px;
+      color:#aaa;
+    }
+    a { color:#aaa; display:inline-block; margin-top:2rem; }
+  </style>
+</head>
+<body>
+
+<h1>Publish Source</h1>
+<p>Publishing does not surrender control. It only enables visibility.</p>
+
+<button onclick="publish()">Publish Selected Source</button>
+
+<div id="msg" class="notice" style="display:none;">
+  Source marked as <b>Published</b>.<br>
+  (No data has been transmitted.)
+</div>
+
+<a href="/sources/">← Back</a>
+
+<script>
+function publish() {
+  document.getElementById('msg').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

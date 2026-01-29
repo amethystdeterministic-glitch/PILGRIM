@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background:#0b0b0e;
+      color:#e5e7eb;
+      font-family:system-ui;
+      margin:0;
+      padding:2rem;
+    }
+    h1 { font-size:1.8rem; }
+    .card {
+      background:#111;
+      border-radius:16px;
+      padding:1.25rem;
+      margin-bottom:1rem;
+      border:1px solid #1f2937;
+    }
+    button {
+      background:#1f2937;
+      color:#e5e7eb;
+      border:0;
+      padding:0.5rem 1rem;
+      border-radius:999px;
+      cursor:pointer;
+    }
+    button:hover { background:#374151; }
+    a { color:#9ae6ff; text-decoration:underline; }
+  </style>
+</head>
+<body>
+
+<h1>Pages</h1>
+<p>Each page lives inside this Source. Unlimited pages.</p>
+
+<div class="card">
+  <button onclick="createPage()">Create Page</button>
+</div>
+
+<div id="pages" class="card"></div>
+
+<p><a href="../">← Back to Source</a></p>
+
+<script>
+async function loadPages() {
+  const res = await fetch("../pages.json");
+  const data = await res.json();
+  const box = document.getElementById("pages");
+  box.innerHTML = "<h3>Existing Pages</h3>";
+
+  data.pages.forEach(p => {
+    const el = document.createElement("div");
+    el.innerHTML = `<a href="${p.path}">${p.title}</a>`;
+    box.appendChild(el);
+  });
+}
+
+async function createPage() {
+  const id = prompt("Page id (e.g. services):");
+  if (!id) return;
+
+  const title = prompt("Page title:");
+  if (!title) return;
+
+  const res = await fetch("/api/page/create", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      source: "example",
+      id,
+      title
+    })
+  });
+
+  if (res.ok) location.reload();
+  else alert("Failed to create page");
+}
+
+loadPages();
+</script>
+
+</body>
+</html>
